@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700;900&family=Scheherazade+New:wght@400;700&display=swap');
+
 :root {
-    --bg-parchment: #f5f1e3;
-    --gold-primary: #c5a059;
-    --gold-light: #f3e5ab;
+    --bg-dark-emerald: #071913;
+    --emerald-accent: #0f382c;
+    --parchment-bg: #f4eee1;
+    --parchment-radial: #fbf8f1;
+    --gold-bright: #ffe699;
+    --gold-primary: #d4af37;
+    --gold-metallic: #c5a059;
     --gold-dark: #8a6d3b;
-    --emerald-dark: #0f382c;
-    --text-dark: #2c221e;
+    --gold-shadow: #3e2723;
+    --text-dark: #231f20;
 }
 
 * {
@@ -14,7 +20,9 @@
 }
 
 body {
-    background-color: #0b1d17;
+    background-color: var(--bg-dark-emerald);
+    background-image: 
+        radial-gradient(circle at 50% 50%, #0d2a20 0%, var(--bg-dark-emerald) 100%);
     font-family: 'Cinzel', serif;
     display: flex;
     justify-content: center;
@@ -23,66 +31,92 @@ body {
     padding: 15px;
 }
 
+/* Container Utama Berbingkai Emas Timbul */
 .quran-container {
     width: 100%;
-    max-width: 500px;
-    background: var(--bg-parchment);
-    border: 10px solid var(--emerald-dark);
-    border-image: linear-gradient(135deg, var(--gold-primary), var(--emerald-dark), var(--gold-dark)) 1;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 15px rgba(197, 160, 89, 0.3);
-    border-radius: 12px;
+    max-width: 480px;
+    background: var(--parchment-bg);
+    border: 12px solid var(--emerald-accent);
+    border-image: linear-gradient(135deg, var(--gold-primary), #f3e5ab, var(--gold-dark), var(--gold-primary)) 1;
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.9),
+        inset 0 0 25px rgba(138, 109, 59, 0.4);
+    border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 92vh;
+    position: relative;
 }
 
+/* Frame Ukiran Arabesque Kertas Kuno */
 .inner-border {
-    border: 2px solid var(--gold-primary);
+    border: 3px solid var(--gold-primary);
+    outline: 2px solid var(--gold-dark);
+    outline-offset: -7px;
     margin: 8px;
-    padding: 16px;
+    padding: 18px 14px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     position: relative;
-    background: radial-gradient(circle, #fbf9f1 0%, var(--bg-parchment) 100%);
+    background: radial-gradient(circle, var(--parchment-radial) 30%, var(--parchment-bg) 100%);
+    box-shadow: inset 0 0 15px rgba(197, 160, 89, 0.3);
 }
 
+/* Header Kaligrafi Mewah */
 .header {
     text-align: center;
-    border-bottom: 2px dashed var(--gold-primary);
-    padding-bottom: 12px;
+    padding-bottom: 14px;
     margin-bottom: 15px;
+    border-bottom: 2px solid var(--gold-primary);
+    position: relative;
+}
+
+.header::after {
+    content: "❖";
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--parchment-bg);
+    padding: 0 8px;
+    color: var(--gold-primary);
+    font-size: 0.9rem;
 }
 
 .surah-title-ar {
     font-family: 'Amiri', serif;
-    font-size: 2.4rem;
-    color: var(--emerald-dark);
-    text-shadow: 1px 1px 2px var(--gold-light);
+    font-size: 2.8rem;
+    color: var(--emerald-accent);
+    text-shadow: 2px 2px 4px rgba(197, 160, 89, 0.4);
     font-weight: bold;
+    line-height: 1.2;
 }
 
 .surah-subtitle {
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
     color: var(--gold-dark);
-    margin-top: 4px;
+    margin-top: 6px;
     text-transform: uppercase;
+    font-weight: 700;
 }
 
+/* Panel Kontrol Navigasi & Toggle */
 .controls {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
-    background: rgba(197, 160, 89, 0.15);
-    padding: 10px;
+    background: rgba(197, 160, 89, 0.12);
+    padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid var(--gold-primary);
+    box-shadow: inset 0 0 5px rgba(197, 160, 89, 0.2);
 }
 
-.selector-wrapper {
+.selector-wrapper, .toggle-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,31 +125,29 @@ body {
 .control-label, .toggle-label {
     font-size: 0.75rem;
     font-weight: bold;
-    color: var(--emerald-dark);
+    color: var(--emerald-accent);
+    letter-spacing: 1px;
 }
 
 .surah-select {
-    background: var(--bg-parchment);
-    border: 1px solid var(--gold-dark);
-    padding: 4px 8px;
+    background: var(--parchment-radial);
+    border: 1px solid var(--gold-primary);
+    padding: 5px 10px;
     border-radius: 4px;
     font-family: 'Cinzel', serif;
     font-size: 0.8rem;
     color: var(--text-dark);
+    font-weight: bold;
     outline: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.toggle-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
+/* Switch Custom Emas */
 .switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 20px;
+    width: 44px;
+    height: 22px;
 }
 
 .switch input {
@@ -128,7 +160,7 @@ body {
     position: absolute;
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
+    background-color: #c2b69d;
     transition: .4s;
     border-radius: 20px;
     border: 1px solid var(--gold-dark);
@@ -137,116 +169,144 @@ body {
 .slider:before {
     position: absolute;
     content: "";
-    height: 14px;
-    width: 14px;
+    height: 16px;
+    width: 16px;
     left: 2px;
     bottom: 2px;
-    background-color: white;
+    background-color: #fff;
     transition: .4s;
     border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 input:checked + .slider {
-    background-color: var(--emerald-dark);
+    background-color: var(--emerald-accent);
 }
 
 input:checked + .slider:before {
-    transform: translateX(20px);
-    background-color: var(--gold-primary);
+    transform: translateX(22px);
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
 }
 
+/* Area Baca Ayat */
 .content-area {
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 5px;
-    max-height: 55vh;
+    padding-right: 6px;
+    max-height: 52vh;
+}
+
+/* Custom Scrollbar Emas */
+.content-area::-webkit-scrollbar {
+    width: 5px;
+}
+.content-area::-webkit-scrollbar-track {
+    background: rgba(197, 160, 89, 0.1);
+}
+.content-area::-webkit-scrollbar-thumb {
+    background: var(--gold-primary);
+    border-radius: 3px;
 }
 
 .ayat-card {
     border-bottom: 1px solid rgba(197, 160, 89, 0.4);
-    padding: 15px 0;
+    padding: 18px 0;
 }
 
 .ayat-arabic {
     font-family: 'Scheherazade New', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: right;
     direction: rtl;
-    color: #1a1a1a;
-    line-height: 2.3;
-    margin-bottom: 8px;
+    color: #111;
+    line-height: 2.4;
+    margin-bottom: 10px;
 }
 
+/* Penanda Nomor Ayat Lingkaran Emas Timbul */
 .ayat-number {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    background: radial-gradient(circle, var(--gold-light), var(--gold-primary));
-    color: var(--emerald-dark);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    background: radial-gradient(circle, var(--gold-bright) 0%, var(--gold-primary) 70%, var(--gold-dark) 100%);
+    color: var(--emerald-accent);
     border-radius: 50%;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: bold;
-    margin-left: 8px;
-    border: 1px solid var(--gold-dark);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-left: 10px;
+    border: 1px solid var(--gold-shadow);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 1px 2px #fff;
+    font-family: 'Cinzel', serif;
 }
 
 .ayat-translation {
-    font-size: 0.85rem;
-    color: #333;
-    line-height: 1.5;
+    font-size: 0.88rem;
+    color: #2b2b2b;
+    line-height: 1.6;
     text-align: left;
-    font-family: sans-serif;
-    margin-top: 6px;
-    padding-left: 10px;
-    border-left: 2px solid var(--gold-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 8px;
+    padding-left: 12px;
+    border-left: 3px solid var(--gold-primary);
 }
 
 .asbabun-nuzul-btn {
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
     color: #fff;
     border: none;
-    padding: 4px 8px;
-    font-size: 0.65rem;
+    padding: 5px 10px;
+    font-size: 0.68rem;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 10px;
     font-family: 'Cinzel', serif;
     font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .asbabun-nuzul-content {
     display: none;
-    font-size: 0.75rem;
-    font-family: sans-serif;
-    background: rgba(197, 160, 89, 0.1);
-    padding: 8px;
+    font-size: 0.78rem;
+    font-family: 'Segoe UI', sans-serif;
+    background: rgba(197, 160, 89, 0.15);
+    padding: 10px;
     border-radius: 4px;
-    margin-top: 6px;
-    color: #444;
-    font-style: italic;
+    margin-top: 8px;
+    color: #333;
+    border-left: 2px solid var(--emerald-accent);
 }
 
+/* Footer Logam Emas 3D */
 .footer {
     text-align: center;
-    padding: 12px 0;
-    margin: 15px -16px -16px -16px;
-    background: var(--emerald-dark);
+    padding: 14px 0;
+    margin: 15px -14px -18px -14px;
+    background: linear-gradient(180deg, var(--emerald-accent) 0%, var(--bg-dark-emerald) 100%);
     border-top: 2px solid var(--gold-primary);
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.5);
 }
 
 .metallic-gold-text {
     font-family: 'Cinzel', serif;
     font-weight: 900;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
     text-transform: lowercase;
-    background: linear-gradient(180deg, #ffe699 0%, #c5a059 45%, #8a6d3b 50%, #f3e5ab 100%);
+    background: linear-gradient(
+        180deg, 
+        #fff5cc 0%, 
+        #ffe699 25%, 
+        #c5a059 50%, 
+        #8a6d3b 75%, 
+        #f3e5ab 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.9))
+            drop-shadow(0px -1px 1px rgba(255, 255, 255, 0.3));
 }
 
 .hidden {
