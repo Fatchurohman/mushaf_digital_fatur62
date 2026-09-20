@@ -1,1 +1,21 @@
-kosong
+{
+  "number": 1,
+  "name": "سُورَةُ ٱلْفَاتِحَةِ",
+  "translation": "Al-Fatihah",
+  "revelation": "Makkiyah",
+  "numberOfAyahs": 7,
+  "verses": [
+    {
+      "number": 1,
+      "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+      "translation": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.",
+      "asbabunNuzul": null
+    },
+    {
+      "number": 2,
+      "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+      "translation": "Segala puji bagi Allah, Tuhan seluruh alam,",
+      "asbabunNuzul": null
+    }
+  ]
+}
