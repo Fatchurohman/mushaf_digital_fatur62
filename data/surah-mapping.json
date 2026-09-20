@@ -1,1 +1,15 @@
-kosong
+[
+  {
+    "number": 1,
+    "name": "Al-Fatihah",
+    "category": "Makkiyah",
+    "juz": 1
+  },
+  {
+    "number": 36,
+    "name": "Yasin",
+    "category": "Makkiyah",
+    "juz": 22
+  }
+]
+
