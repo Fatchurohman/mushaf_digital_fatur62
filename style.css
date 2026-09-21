@@ -1,4 +1,16 @@
-/* RESET & BASE STYLES */
+:root {
+  --bg-primary: #0a140d;
+  --bg-card: #0e1e14;
+  --bg-modal: #0d1b12;
+  --border-color: #1a3322;
+  --gold-primary: #d4af37;
+  --gold-light: #f3e5ab;
+  --text-main: #e0e6e1;
+  --text-muted: #8a9e8f;
+  --font-arabic: 'Amiri', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,65 +18,138 @@
 }
 
 body {
-  background-color: #0b140e; /* Dark green khas mushaf */
-  color: #e0e0e0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-sans);
   min-height: 100vh;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* CLASS UTILITAS - UTAMA KUNCI FIX BUBRAH */
+/* KUNCI SUPAYA POPUP TIDAK TAMPIL MERUSAK LAYAR UTAMA */
 .hidden {
   display: none !important;
 }
 
-/* HEADER */
 .app-header {
+  width: 100%;
+  max-width: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #1a3323;
-  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
 }
 
-.header-title h1 {
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  color: #c5a059; /* Warna emas */
+.app-title {
+  color: var(--gold-primary);
+  font-size: 1.15rem;
   font-weight: 700;
 }
 
-.header-title .subtitle {
-  font-size: 0.75rem;
-  color: #7a8e80;
+.app-subtitle {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  display: block;
 }
 
 .btn-pilih {
-  background-color: #162a1c;
-  color: #c5a059;
-  border: 1px solid #c5a059;
+  background-color: var(--bg-card);
+  color: var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   padding: 6px 14px;
   border-radius: 6px;
-  font-size: 0.85rem;
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
 }
 
-/* CONTAINER AYAT UTAMA */
-.quran-body {
+.quran-container {
+  width: 100%;
   max-width: 600px;
-  margin: 0 auto;
 }
 
-/* MODAL / POPUP DAFTAR SURAH */
+.surah-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.arabic-title {
+  font-family: var(--font-arabic);
+  font-size: 2.2rem;
+  color: var(--gold-primary);
+  margin-bottom: 4px;
+}
+
+.surah-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.bismillah-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.arabic-text {
+  font-family: var(--font-arabic);
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  line-height: 2.2;
+  direction: rtl;
+  margin-bottom: 8px;
+}
+
+.translation-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.verse-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.verse-number {
+  background-color: var(--border-color);
+  color: var(--gold-primary);
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.verse-content {
+  flex-grow: 1;
+}
+
+/* MODAL STYLES */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,11 +158,11 @@ body {
 }
 
 .modal-card {
-  background-color: #0d1b13;
-  border: 1px solid #c5a059;
-  border-radius: 10px;
+  background-color: var(--bg-modal);
+  border: 1px solid var(--gold-primary);
+  border-radius: 12px;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -88,19 +173,18 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 14px 16px;
-  border-bottom: 1px solid #1a3323;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modal-header h3 {
-  color: #c5a059;
-  font-size: 1rem;
+  color: var(--gold-primary);
 }
 
 .btn-close {
   background: transparent;
   border: none;
   color: #ffffff;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
@@ -109,18 +193,15 @@ body {
   overflow-y: auto;
 }
 
-/* PESAN ERROR */
-.error-box {
-  color: #ff6b6b;
-  text-align: center;
-  padding: 16px 8px;
-  font-size: 0.9rem;
-  line-height: 1.4;
+.surah-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
 }
 
-.error-box code {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 2px 4px;
-  border-radius: 3px;
-  color: #ffd1d1;
+.surah-item:hover {
+  background-color: var(--bg-card);
 }
