@@ -10,16 +10,23 @@ const btnLastRead = document.getElementById('btn-last-read');
 
 let globalSurahList = [];
 let currentFilter = 'all';
-let currentAudio = null;
 
-// Database Mapping Tematik
+// Variabel Kontrol Audio
+let currentAudio = null;
+let currentPlayingBtn = null;
+
+// Database Mapping Tematik Bahasa Indonesia (Sampel Surah Utama)
 const mappingDatabase = {
-  1: { theme: "Ummul Kitab & Induk Al-Qur'an", desc: "Prinsip dasar akidah, ibadah, permohonan hidayah, lan peta jalan kehidupan manungsa." },
-  2: { theme: "Fondasi Hukum & Kurikulum Kehidupan", desc: "Panduan pembentukan umat, hukum muamalah, lan pembeda antara kebenaran vs kebatilan." },
-  18: { theme: "Penyelamatan Fitnah Akhir Zaman", desc: "4 Benteng perlindungan fitnah: Agama, Harta, Ilmu, & Kekuasaan." },
-  36: { theme: "Jantung Al-Qur'an & Tauhid Rububiyah", desc: "Penegasan risalah kenabian, bukti kebangkitan sawise mati, lan peringatan alam semesta." },
-  67: { theme: "Kerajaan Allah & Benteng Siksa Kubur", desc: "Tafakur atas kesempurnaan ciptaan langit/bumi lan pentingnya amal terbaik." },
-  112: { theme: "Murni Akidah & Pembersihan Tauhid", desc: "Penegasan sifat Esa Allah, tempat bergantung segala sesuatu." }
+  1: { theme: "Ummul Kitab & Induk Al-Qur'an", desc: "Prinsip dasar akidah, ibadah, permohonan petunjuk hidayah, dan peta jalan kehidupan manusia." },
+  2: { theme: "Fondasi Hukum & Kurikulum Kehidupan", desc: "Panduan pembentukan umat, hukum muamalah, kisah Bani Israil, dan pembeda antara kebenaran vs kebatilan." },
+  3: { theme: "Keteguhan Akidah & Pertahanan Iman", desc: "Penegasan tauhid, bantahan terhadap penyimpangan akidah, dan pelajaran dari Perang Uhud." },
+  4: { theme: "Keadilan Sosial, Hak Wanita & Keluarga", desc: "Pengaturan hak-hak wanita, anak yatim, pembagian waris, serta tata kelola masyarakat yang adil." },
+  18: { theme: "Penyelamatan Fitnah Akhir Zaman", desc: "4 Benteng perlindungan dari fitnah: Agama (Pemuda Kahfi), Harta (Pemilik Kebun), Ilmu (Musa & Khidir), dan Kekuasaan (Zulkarnain)." },
+  36: { theme: "Jantung Al-Qur'an & Tauhid Rububiyah", desc: "Penegasan risalah kenabian, bukti kekuasaan Allah, serta kepastian hari kebangkitan setelah kematian." },
+  67: { theme: "Kerajaan Allah & Benteng Siksa Kubur", desc: "Tafakur atas kesempurnaan ciptaan alam semesta dan pentingnya beramal terbaik dalam hidup." },
+  112: { theme: "Pemurnian Akidah & Tauhid", desc: "Penegasan sifat Allah Yang Maha Esa, tempat bergantung segala sesuatu, dan tidak ada yang setara dengan-Nya." },
+  113: { theme: "Perlindungan dari Kejahatan Fisik & Gaib", desc: "Permohonan perlindungan kepada Allah dari kejahatan makhluk, kegelapan malam, sihir, dan kedengkian." },
+  114: { theme: "Perlindungan dari Bisikan Syaitan", desc: "Benteng diri dari bisikan tersembunyi syaitan yang meragukan hati manusia, baik dari golongan jin maupun manusia." }
 };
 
 // Event Listener Modal
@@ -55,7 +62,7 @@ if (btnLastRead) {
   });
 }
 
-// Tab Filter
+// Tab Filter Quick-Mapping
 tabBtns.forEach(btn => {
   btn.addEventListener('click', (e) => {
     tabBtns.forEach(b => b.classList.remove('active'));
@@ -148,6 +155,10 @@ function selectSurah(surahNumber) {
 
 async function loadSurahDetail(surahNumber = 1, targetVerse = null) {
   if (!quranContainer) return;
+  
+  // Hentikan audio yang sedang berputar jika berpindah surah
+  stopCurrentAudio();
+  
   quranContainer.innerHTML = '<p style="text-align:center; color:#8a9e8f; padding: 40px;">Memuat ayat dan audio...</p>';
 
   try {
@@ -165,7 +176,7 @@ async function loadSurahDetail(surahNumber = 1, targetVerse = null) {
 
     renderSurahContent(surahData);
 
-    // Scroll otomatis jika membuka dari penanda terakhir dibaca
+    // Scroll otomatis jika membuka dari bookmark
     if (targetVerse) {
       setTimeout(() => {
         const targetElem = document.getElementById(`verse-${targetVerse}`);
@@ -190,12 +201,14 @@ function renderSurahContent(surah) {
   const meaning = surah?.arti ?? '';
   const verses = surah?.ayat ?? [];
 
+  // Peta Kandungan Spesifik per Surah
   const mappingInfo = mappingDatabase[number] || {
-    theme: `Pokok Tematik Surah ${nameLatin}`,
-    desc: `Surah iki kalebu ${place} kanthi ${totalVerses} ayat sing ngemot piwulang urip lan akidah.`
+    theme: `Peta Kandungan Tematik Surah ${nameLatin}`,
+    desc: `Surah ${nameLatin} (${meaning}) tergolong fase ${place} dengan total ${totalVerses} ayat. Mengandung petunjuk akidah, panduan hukum kehidupan, serta landasan moral bagi pembentukan karakter seorang muslim.`
   };
 
   let html = `
+    <!-- BANNER MAPPING TEMATIK BAHASA INDONESIA -->
     <div class="mapping-banner">
       <div class="mapping-banner-header">
         <span class="mapping-tag">Surah ke-${number}</span>
@@ -226,7 +239,7 @@ function renderSurahContent(surah) {
       <div class="verse-card" id="verse-${vNum}">
         <div class="verse-left-controls">
           <div class="verse-number">${vNum}</div>
-          ${audioUrl ? `<button class="btn-audio-play" onclick="playAudio('${audioUrl}')" title="Putar Audio">▶</button>` : ''}
+          ${audioUrl ? `<button class="btn-audio-play" onclick="toggleAudio(this, '${audioUrl}')" title="Putar/Hentikan Audio">▶</button>` : ''}
           <button class="btn-mark-verse" onclick="markLastRead(${number}, ${vNum}, '${nameLatin}')" title="Tandai Terakhir Dibaca">🔖</button>
         </div>
         <div class="verse-content">
@@ -240,23 +253,68 @@ function renderSurahContent(surah) {
   quranContainer.innerHTML = html;
 }
 
-// Fungsi Audio Murattal per Ayat
-function playAudio(url) {
-  if (currentAudio) {
-    currentAudio.pause();
+// LOGIKA DUAL-CONTROL AUDIO (PLAY / PAUSE / TOGGLE)
+function toggleAudio(btnElement, url) {
+  // Jika tombol yang sama diklik saat audio sedang diputar -> PAUSE
+  if (currentAudio && currentPlayingBtn === btnElement) {
+    if (!currentAudio.paused) {
+      currentAudio.pause();
+      btnElement.innerText = '▶';
+      btnElement.style.borderColor = 'var(--border-color)';
+      btnElement.style.color = 'var(--text-muted)';
+      return;
+    } else {
+      currentAudio.play();
+      btnElement.innerText = '⏸';
+      btnElement.style.borderColor = 'var(--gold-primary)';
+      btnElement.style.color = 'var(--gold-primary)';
+      return;
+    }
   }
+
+  // Jika tombol lain diklik, matikan audio sebelumnya dulu
+  stopCurrentAudio();
+
+  // Jalankan audio baru
   currentAudio = new Audio(url);
-  currentAudio.play();
+  currentPlayingBtn = btnElement;
+
+  btnElement.innerText = '⏸';
+  btnElement.style.borderColor = 'var(--gold-primary)';
+  btnElement.style.color = 'var(--gold-primary)';
+
+  currentAudio.play().catch(err => {
+    console.error('Gagal memutar audio:', err);
+    stopCurrentAudio();
+  });
+
+  // Reset tombol saat audio selesai diputar
+  currentAudio.onended = () => {
+    stopCurrentAudio();
+  };
 }
 
-// Fungsi Simpen Penanda Terakhir Dibaca
+function stopCurrentAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  if (currentPlayingBtn) {
+    currentPlayingBtn.innerText = '▶';
+    currentPlayingBtn.style.borderColor = 'var(--border-color)';
+    currentPlayingBtn.style.color = 'var(--text-muted)';
+    currentPlayingBtn = null;
+  }
+}
+
+// Simpan Penanda Terakhir Dibaca
 function markLastRead(surahNumber, verseNumber, surahName) {
   const data = { surahNumber, verseNumber, surahName };
   localStorage.setItem('quran_last_read', JSON.stringify(data));
   alert(`Berhasil ditandai: Surah ${surahName} ayat ${verseNumber}`);
 }
 
-// Load Surah Pertama saat Buka
+// Load Surah Pertama saat Buka Aplikasi
 document.addEventListener('DOMContentLoaded', () => {
   loadSurahDetail(1);
 });
