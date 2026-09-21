@@ -7,15 +7,18 @@ const currentSurahTitle = document.getElementById('current-surah-title');
 const inputSearchSurah = document.getElementById('input-search-surah');
 const tabBtns = document.querySelectorAll('.tab-btn');
 const btnLastRead = document.getElementById('btn-last-read');
+const selectQori = document.getElementById('select-qori');
 
 let globalSurahList = [];
 let currentFilter = 'all';
+let currentSurahData = null; // Menyimpan data surah aktif
+let selectedQoriKey = '01';  // Default Qari: Abdullah Al-Juhany
 
 // Variabel Kontrol Audio
 let currentAudio = null;
 let currentPlayingBtn = null;
 
-// Database Mapping Tematik Bahasa Indonesia (Sampel Surah Utama)
+// Database Mapping Tematik Bahasa Indonesia
 const mappingDatabase = {
   1: { theme: "Ummul Kitab & Induk Al-Qur'an", desc: "Prinsip dasar akidah, ibadah, permohonan petunjuk hidayah, dan peta jalan kehidupan manusia." },
   2: { theme: "Fondasi Hukum & Kurikulum Kehidupan", desc: "Panduan pembentukan umat, hukum muamalah, kisah Bani Israil, dan pembeda antara kebenaran vs kebatilan." },
@@ -28,6 +31,17 @@ const mappingDatabase = {
   113: { theme: "Perlindungan dari Kejahatan Fisik & Gaib", desc: "Permohonan perlindungan kepada Allah dari kejahatan makhluk, kegelapan malam, sihir, dan kedengkian." },
   114: { theme: "Perlindungan dari Bisikan Syaitan", desc: "Benteng diri dari bisikan tersembunyi syaitan yang meragukan hati manusia, baik dari golongan jin maupun manusia." }
 };
+
+// Event Listener Pilih Qari
+if (selectQori) {
+  selectQori.addEventListener('change', (e) => {
+    selectedQoriKey = e.target.value;
+    stopCurrentAudio();
+    if (currentSurahData) {
+      renderSurahContent(currentSurahData);
+    }
+  });
+}
 
 // Event Listener Modal
 if (btnPilihSurah) {
@@ -155,8 +169,6 @@ function selectSurah(surahNumber) {
 
 async function loadSurahDetail(surahNumber = 1, targetVerse = null) {
   if (!quranContainer) return;
-  
-  // Hentikan audio yang sedang berputar jika berpindah surah
   stopCurrentAudio();
   
   quranContainer.innerHTML = '<p style="text-align:center; color:#8a9e8f; padding: 40px;">Memuat ayat dan audio...</p>';
@@ -166,17 +178,16 @@ async function loadSurahDetail(surahNumber = 1, targetVerse = null) {
     if (!response.ok) throw new Error(`Gagal mengambil surah nomor ${surahNumber}`);
 
     const result = await response.json();
-    const surahData = result?.data;
+    currentSurahData = result?.data;
 
-    if (!surahData || !Array.isArray(surahData.ayat)) throw new Error('Format data salah.');
+    if (!currentSurahData || !Array.isArray(currentSurahData.ayat)) throw new Error('Format data salah.');
 
     if (currentSurahTitle) {
-      currentSurahTitle.innerText = surahData?.namaLatin ?? 'Surah';
+      currentSurahTitle.innerText = currentSurahData?.namaLatin ?? 'Surah';
     }
 
-    renderSurahContent(surahData);
+    renderSurahContent(currentSurahData);
 
-    // Scroll otomatis jika membuka dari bookmark
     if (targetVerse) {
       setTimeout(() => {
         const targetElem = document.getElementById(`verse-${targetVerse}`);
@@ -201,14 +212,12 @@ function renderSurahContent(surah) {
   const meaning = surah?.arti ?? '';
   const verses = surah?.ayat ?? [];
 
-  // Peta Kandungan Spesifik per Surah
   const mappingInfo = mappingDatabase[number] || {
     theme: `Peta Kandungan Tematik Surah ${nameLatin}`,
     desc: `Surah ${nameLatin} (${meaning}) tergolong fase ${place} dengan total ${totalVerses} ayat. Mengandung petunjuk akidah, panduan hukum kehidupan, serta landasan moral bagi pembentukan karakter seorang muslim.`
   };
 
   let html = `
-    <!-- BANNER MAPPING TEMATIK BAHASA INDONESIA -->
     <div class="mapping-banner">
       <div class="mapping-banner-header">
         <span class="mapping-tag">Surah ke-${number}</span>
@@ -233,7 +242,8 @@ function renderSurahContent(surah) {
 
   verses.forEach(v => {
     const vNum = v?.nomorAyat ?? '';
-    const audioUrl = v?.audio?.['01'] ?? '';
+    // Ambil URL Audio sesuai Qari yang dipilih dari dropdown
+    const audioUrl = v?.audio?.[selectedQoriKey] || v?.audio?.['01'] || '';
 
     html += `
       <div class="verse-card" id="verse-${vNum}">
@@ -255,7 +265,6 @@ function renderSurahContent(surah) {
 
 // LOGIKA DUAL-CONTROL AUDIO (PLAY / PAUSE / TOGGLE)
 function toggleAudio(btnElement, url) {
-  // Jika tombol yang sama diklik saat audio sedang diputar -> PAUSE
   if (currentAudio && currentPlayingBtn === btnElement) {
     if (!currentAudio.paused) {
       currentAudio.pause();
@@ -272,10 +281,8 @@ function toggleAudio(btnElement, url) {
     }
   }
 
-  // Jika tombol lain diklik, matikan audio sebelumnya dulu
   stopCurrentAudio();
 
-  // Jalankan audio baru
   currentAudio = new Audio(url);
   currentPlayingBtn = btnElement;
 
@@ -288,7 +295,6 @@ function toggleAudio(btnElement, url) {
     stopCurrentAudio();
   });
 
-  // Reset tombol saat audio selesai diputar
   currentAudio.onended = () => {
     stopCurrentAudio();
   };
