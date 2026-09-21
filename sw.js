@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mushaf-fatur62-v2';
+const CACHE_NAME = 'mushaf-fatur62-v3';
 
 const ASSETS_TO_CACHE = [
     './',
@@ -7,18 +7,17 @@ const ASSETS_TO_CACHE = [
     './app.js',
     './manifest.json',
     './data/surah-mapping.json',
-    './data/surah/36.json',
-    './data/surah/1.json'
+    './data/surah/36.json'
 ];
 
 self.addEventListener('install', (event) => {
+    self.skipWaiting();
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('[Service Worker] Caching static assets...');
-                return cache.addAll(ASSETS_TO_CACHE);
-            })
-            .catch((err) => console.error('[Service Worker] Cache fail:', err))
+        caches.open(CACHE_NAME).then((cache) => {
+            return Promise.allSettled(
+                ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn(`Gagal cache: ${url}`, err)))
+            );
+        })
     );
 });
 
@@ -32,28 +31,25 @@ self.addEventListener('activate', (event) => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
 });
 
+// Menggunakan Network-First agar selalu mengambil CSS/JS paling baru dari GitHub
 self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') return;
+
     event.respondWith(
-        caches.match(event.request)
-            .then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-                return fetch(event.request).then((networkResponse) => {
-                    if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                        return networkResponse;
-                    }
+        fetch(event.request)
+            .then((networkResponse) => {
+                if (networkResponse && networkResponse.status === 200) {
                     const responseToCache = networkResponse.clone();
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(event.request, responseToCache);
                     });
-                    return networkResponse;
-                });
+                }
+                return networkResponse;
             })
+            .catch(() => caches.match(event.request))
     );
 });
-
