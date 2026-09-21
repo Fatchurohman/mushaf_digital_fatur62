@@ -6,11 +6,16 @@
 }
 
 body {
-  background-color: #0d1b13;
+  background-color: #0b140e; /* Dark green khas mushaf */
   color: #e0e0e0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   padding: 16px;
+}
+
+/* CLASS UTILITAS - UTAMA KUNCI FIX BUBRAH */
+.hidden {
+  display: none !important;
 }
 
 /* HEADER */
@@ -18,102 +23,104 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #1e3a29;
-  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1a3323;
+  margin-bottom: 16px;
 }
 
 .header-title h1 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 1px;
-  color: #d4af37;
+  color: #c5a059; /* Warna emas */
   font-weight: 700;
 }
 
 .header-title .subtitle {
-  font-size: 0.8rem;
-  color: #8a9a86;
+  font-size: 0.75rem;
+  color: #7a8e80;
 }
 
 .btn-pilih {
-  background-color: #1e3a29;
-  color: #d4af37;
+  background-color: #162a1c;
+  color: #c5a059;
   border: 1px solid #c5a059;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 6px;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
 }
 
-/* MODAL STYLES */
+/* CONTAINER AYAT UTAMA */
+.quran-body {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* MODAL / POPUP DAFTAR SURAH */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 16px;
 }
 
-.modal-overlay.hidden {
-  display: none;
-}
-
 .modal-card {
-  background-color: #0b1d13;
-  border: 1px solid #d4af37;
-  border-radius: 12px;
+  background-color: #0d1b13;
+  border: 1px solid #c5a059;
+  border-radius: 10px;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid #1e3a29;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1a3323;
 }
 
 .modal-header h3 {
-  color: #d4af37;
-  font-size: 1.1rem;
+  color: #c5a059;
+  font-size: 1rem;
 }
 
 .btn-close {
-  background: none;
+  background: transparent;
   border: none;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
 .modal-body {
   padding: 16px;
   overflow-y: auto;
-  max-height: 60vh;
 }
 
-/* ERROR MESSAGE */
+/* PESAN ERROR */
 .error-box {
   color: #ff6b6b;
   text-align: center;
-  padding: 20px 10px;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  padding: 16px 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .error-box code {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #ffd1d1;
 }
