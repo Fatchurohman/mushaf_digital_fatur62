@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mushaf Digital Fatur62</title>
+    <title>Mushaf Digital</title>
+    <!-- Google Fonts: Amiri & Scheherazade New untuk Font Arab Mewah -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#d4af37">
@@ -15,12 +19,14 @@
             <h1>Mushaf Digital</h1>
             <span id="current-surah-name">Al-Fatihah</span>
         </div>
-        <button id="btn-open-mapping" class="gold-btn">📖 Pilih Surah</button>
+        <div class="header-actions">
+            <button id="btn-open-settings" class="icon-btn" title="Pengaturan Font">⚙️</button>
+            <button id="btn-open-mapping" class="gold-btn">📖 Pilih Surah</button>
+        </div>
     </header>
 
     <main class="container">
         <div id="surah-container" class="mushaf-frame">
-            <!-- Tempat Ayat Al-Qur'an Ditampilkan -->
             <div class="loading">Memuat surah...</div>
         </div>
     </main>
@@ -33,7 +39,31 @@
                 <button id="btn-close-mapping" class="close-btn">&times;</button>
             </div>
             <div id="surah-list" class="surah-list">
-                <!-- List Surah akan dimuat otomatis lewat JS -->
+                <!-- List Surah akan dimuat otomatis via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pengaturan Font (Jenis & Ukuran) -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content setting-modal-content">
+            <div class="modal-header">
+                <h2>Pengaturan Tampilan Font</h2>
+                <button id="btn-close-settings" class="close-btn">&times;</button>
+            </div>
+            <div class="setting-body">
+                <div class="setting-item">
+                    <label for="font-family-select">Jenis Font Arab:</label>
+                    <select id="font-family-select" class="setting-control">
+                        <option value="'Amiri', serif">Amiri (Mewah Klasik)</option>
+                        <option value="'Scheherazade New', serif">Scheherazade (Jelas & Modern)</option>
+                        <option value="system-ui, sans-serif">Standard System</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="font-size-range">Ukuran Font Arab: <span id="font-size-val">2.2rem</span></label>
+                    <input type="range" id="font-size-range" min="1.5" max="3.5" step="0.1" value="2.2" class="setting-control">
+                </div>
             </div>
         </div>
     </div>
