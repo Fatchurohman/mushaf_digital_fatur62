@@ -1,7 +1,7 @@
 {
   "number": 1,
-  "name": "سُورَةُ ٱلْفَاتِحَةِ",
-  "translation": "Al-Fatihah",
+  "name": "سُورَةُ الْفَاتِحَةِ",
+  "translation": "Pembukaan",
   "revelation": "Makkiyah",
   "numberOfAyahs": 7,
   "verses": [
@@ -16,6 +16,36 @@
       "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
       "translation": "Segala puji bagi Allah, Tuhan seluruh alam,",
       "asbabunNuzul": null
+    },
+    {
+      "number": 3,
+      "arabic": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+      "translation": "Yang Maha Pengasih, Maha Penyayang,",
+      "asbabunNuzul": null
+    },
+    {
+      "number": 4,
+      "arabic": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
+      "translation": "Pemilik hari pembalasan.",
+      "asbabunNuzul": null
+    },
+    {
+      "number": 5,
+      "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "translation": "Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami mohon pertolongan.",
+      "asbabunNuzul": null
+    },
+    {
+      "number": 6,
+      "arabic": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+      "translation": "Tunjukilah kami jalan yang lurus,",
+      "asbabunNuzul": null
+    },
+    {
+      "number": 7,
+      "arabic": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+      "translation": "(yaitu) jalan orang-orang yang telah Engkau beri nikmat kepadanya; bukan (jalan) mereka yang dimurkai, dan bukan (pula jalan) mereka yang sesat.",
+      "asbabunNuzul": "Diturunkan di Makkah sebagai surat pertama yang diturunkan secara utuh 7 ayat sekaligus, memberikan bimbingan pokok dalam beribadah dan berdoa kepada Allah SWT."
     }
   ]
 }
