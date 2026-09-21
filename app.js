@@ -1,243 +1,130 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const btnOpenMapping = document.getElementById('btn-open-mapping');
+    const btnCloseMapping = document.getElementById('btn-close-mapping');
+    const mappingModal = document.getElementById('mapping-modal');
+    const surahListContainer = document.getElementById('surah-list');
+    const surahContainer = document.getElementById('surah-container');
+    const currentSurahName = document.getElementById('current-surah-name');
 
-body {
-    background-color: #0b2219;
-    color: #f1f5f9;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+    // Event Listener Buka / Tutup Modal
+    if (btnOpenMapping && mappingModal) {
+        btnOpenMapping.addEventListener('click', () => {
+            mappingModal.classList.remove('hidden');
+            loadSurahMapping();
+        });
+    }
 
-/* Header */
-.app-header {
-    background: linear-gradient(135deg, #123d2b, #0b2219);
-    border-bottom: 2px solid #d4af37;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+    if (btnCloseMapping && mappingModal) {
+        btnCloseMapping.addEventListener('click', () => {
+            mappingModal.classList.add('hidden');
+        });
+    }
 
-.header-title h1 {
-    font-size: 1.2rem;
-    color: #d4af37;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+    if (mappingModal) {
+        mappingModal.addEventListener('click', (e) => {
+            if (e.target === mappingModal) {
+                mappingModal.classList.add('hidden');
+            }
+        });
+    }
 
-.header-title span {
-    font-size: 0.85rem;
-    color: #e2e8f0;
-}
+    // Fungsi Fetch Mapping Surah
+    async function loadSurahMapping() {
+        if (!surahListContainer) return;
+        surahListContainer.innerHTML = '<div class="loading">Memuat daftar surah...</div>';
 
-.gold-btn {
-    background: linear-gradient(135deg, #d4af37, #aa7c11);
-    color: #0b2219;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
+        try {
+            const response = await fetch('./data/surah-mapping.json');
+            if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+            
+            const data = await response.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('Data mapping kosong.');
+            }
+            renderSurahList(data);
+        } catch (error) {
+            console.error('Error loadSurahMapping:', error);
+            surahListContainer.innerHTML = `<div class="error">Gagal memuat daftar surah. Pastikan file data/surah-mapping.json ada.</div>`;
+        }
+    }
 
-/* Layout Konten Utama */
-.container {
-    padding: 15px;
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-    flex: 1;
-}
+    // Render List Surah di Modal
+    function renderSurahList(surahs) {
+        surahListContainer.innerHTML = '';
+        surahs.forEach((surah) => {
+            if (!surah || !surah.number) return;
 
-.mushaf-frame {
-    background-color: #123d2b;
-    border: 2px solid #d4af37;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
+            const item = document.createElement('div');
+            item.className = 'surah-item';
+            item.innerHTML = `
+                <div class="surah-num">${surah.number}</div>
+                <div class="surah-info">
+                    <div class="surah-title-id">${surah.translation || 'Tanpa Nama'}</div>
+                    <div class="surah-sub">${surah.revelation || ''} • ${surah.numberOfAyahs || 0} Ayat</div>
+                </div>
+                <div class="surah-title-ar">${surah.name || ''}</div>
+            `;
 
-/* Header Detail Surah */
-.surah-header-detail {
-    text-align: center;
-    border-bottom: 1px dashed #d4af37;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
+            item.addEventListener('click', () => {
+                loadSurahData(surah.number);
+                if (mappingModal) mappingModal.classList.add('hidden');
+            });
 
-.surah-header-detail h2 {
-    color: #d4af37;
-    font-size: 1.8rem;
-}
+            surahListContainer.appendChild(item);
+        });
+    }
 
-.surah-header-detail p {
-    color: #cbd5e1;
-    font-size: 0.9rem;
-}
+    // Fungsi Fetch Isi Surah
+    async function loadSurahData(surahNumber) {
+        if (!surahContainer) return;
+        surahContainer.innerHTML = '<div class="loading">Memuat ayat...</div>';
 
-/* Card Ayat */
-.verse-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
+        try {
+            const response = await fetch(`./data/surah/${surahNumber}.json`);
+            if (!response.ok) throw new Error(`File ./data/surah/${surahNumber}.json tidak ditemukan.`);
 
-.verse-header {
-    margin-bottom: 10px;
-}
+            const data = await response.json();
+            if (!data || !Array.isArray(data.verses)) {
+                throw new Error('Format data surah tidak valid.');
+            }
 
-.verse-badge {
-    background-color: #d4af37;
-    color: #0b2219;
-    font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 50%;
-    font-size: 0.8rem;
-}
+            if (currentSurahName) {
+                currentSurahName.textContent = data.translation || `Surah ${surahNumber}`;
+            }
 
-.verse-arabic {
-    font-size: 1.8rem;
-    text-align: right;
-    line-height: 2.2;
-    color: #ffffff;
-    margin-bottom: 12px;
-    direction: rtl;
-}
+            renderVerses(data);
+        } catch (error) {
+            console.error('Error loadSurahData:', error);
+            surahContainer.innerHTML = `<div class="error">${error.message}</div>`;
+        }
+    }
 
-.verse-translation {
-    font-size: 0.95rem;
-    color: #e2e8f0;
-    line-height: 1.5;
-}
+    // Render Ayat ke Tampilan
+    function renderVerses(surah) {
+        surahContainer.innerHTML = `
+            <div class="surah-header-detail">
+                <h2>${surah.name || ''}</h2>
+                <p>${surah.translation || ''} (${surah.revelation || ''}) - ${surah.numberOfAyahs || 0} Ayat</p>
+            </div>
+        `;
 
-.asbabun-nuzul {
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(212, 175, 55, 0.1);
-    border-left: 3px solid #d4af37;
-    font-size: 0.85rem;
-    color: #fef08a;
-}
+        surah.verses.forEach((verse) => {
+            if (!verse) return;
 
-/* Modal Popup Mapping Surah */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 15px;
-}
+            const verseCard = document.createElement('div');
+            verseCard.className = 'verse-card';
+            verseCard.innerHTML = `
+                <div class="verse-header">
+                    <span class="verse-badge">${verse.number || '-'}</span>
+                </div>
+                <div class="verse-arabic">${verse.arabic || ''}</div>
+                <div class="verse-translation">${verse.translation || ''}</div>
+                ${verse.asbabunNuzul ? `<div class="asbabun-nuzul"><strong>Asbabun Nuzul:</strong> ${verse.asbabunNuzul}</div>` : ''}
+            `;
+            surahContainer.appendChild(verseCard);
+        });
+    }
 
-.modal.hidden {
-    display: none;
-}
-
-.modal-content {
-    background-color: #0b2219;
-    border: 2px solid #d4af37;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 500px;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #d4af37;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h2 {
-    color: #d4af37;
-    font-size: 1.2rem;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: #f1f5f9;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.surah-list {
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.surah-item {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-}
-
-.surah-item:hover {
-    background-color: #123d2b;
-}
-
-.surah-num {
-    background: #d4af37;
-    color: #0b2219;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-right: 12px;
-}
-
-.surah-info {
-    flex: 1;
-}
-
-.surah-title-id {
-    color: #f1f5f9;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-
-.surah-sub {
-    color: #94a3b8;
-    font-size: 0.8rem;
-}
-
-.surah-title-ar {
-    color: #d4af37;
-    font-size: 1.2rem;
-}
-
-.loading, .error {
-    text-align: center;
-    padding: 20px;
-    color: #e2e8f0;
-}
-
-.error {
-    color: #f87171;
-}
+    // Load awal surah Al-Fatihah
+    loadSurahData(1);
+});
