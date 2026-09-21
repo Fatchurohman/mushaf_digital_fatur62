@@ -4,34 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mushaf Digital</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Header -->
-  <header>
-    <h1>MUSHAF DIGITAL</h1>
-    <button id="btn-pilih-surah">Pilih Surah</button>
+  <header class="app-header">
+    <div class="header-title">
+      <h1>MUSHAF DIGITAL</h1>
+      <span class="subtitle">Pembukaan</span>
+    </div>
+    <button id="btn-pilih-surah" class="btn-pilih">Pilih Surah</button>
   </header>
 
   <!-- Container Utama Isi Ayat -->
-  <main id="quran-container">
-    <!-- Isi ayat akan dirender oleh JavaScript di sini -->
+  <main id="quran-container" class="quran-body">
+    <!-- Diisi via JS / default Al-Fatihah -->
   </main>
 
   <!-- Modal / Popup Daftar Surah -->
-  <div id="modal-surah" class="modal hidden">
-    <div class="modal-content">
+  <div id="modal-surah" class="modal-overlay hidden">
+    <div class="modal-card">
       <div class="modal-header">
-        <h2>Daftar Surah</h2>
-        <span id="btn-close-modal" class="close-btn">&times;</span>
+        <h3>Daftar Surah</h3>
+        <button id="btn-close-modal" class="btn-close">&times;</button>
       </div>
       <div id="surah-list-container" class="modal-body">
-        <!-- List 114 surah dari JSON akan dirender di sini -->
+        <!-- List surah dari JSON -->
       </div>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
