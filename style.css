@@ -1,3 +1,8 @@
+:root {
+    --arabic-font: 'Amiri', serif;
+    --arabic-size: 2.2rem;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +22,7 @@ body {
 .app-header {
     background: linear-gradient(135deg, #123d2b, #0b2219);
     border-bottom: 2px solid #d4af37;
-    padding: 15px 20px;
+    padding: 12px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,7 +32,7 @@ body {
 }
 
 .header-title h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #d4af37;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -38,18 +43,34 @@ body {
     color: #e2e8f0;
 }
 
+.header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .gold-btn {
     background: linear-gradient(135deg, #d4af37, #aa7c11);
     color: #0b2219;
     border: none;
-    padding: 8px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
     font-weight: bold;
     font-size: 0.85rem;
     cursor: pointer;
 }
 
-/* Layout Konten Utama */
+.icon-btn {
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid #d4af37;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Layout Konten */
 .container {
     padding: 15px;
     max-width: 800px;
@@ -66,7 +87,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Header Detail Surah */
 .surah-header-detail {
     text-align: center;
     border-bottom: 1px dashed #d4af37;
@@ -76,7 +96,8 @@ body {
 
 .surah-header-detail h2 {
     color: #d4af37;
-    font-size: 1.8rem;
+    font-family: var(--arabic-font);
+    font-size: 2rem;
 }
 
 .surah-header-detail p {
@@ -84,7 +105,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Card Ayat */
+/* Card Ayat & Teks Arab Mewah */
 .verse-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(212, 175, 55, 0.2);
@@ -107,12 +128,14 @@ body {
 }
 
 .verse-arabic {
-    font-size: 1.8rem;
+    font-family: var(--arabic-font);
+    font-size: var(--arabic-size);
     text-align: right;
-    line-height: 2.2;
+    line-height: 2.3;
     color: #ffffff;
     margin-bottom: 12px;
     direction: rtl;
+    font-weight: 400;
 }
 
 .verse-translation {
@@ -130,7 +153,7 @@ body {
     color: #fef08a;
 }
 
-/* Modal Popup Mapping Surah */
+/* Modal Popup */
 .modal {
     position: fixed;
     top: 0;
@@ -170,7 +193,7 @@ body {
 
 .modal-header h2 {
     color: #d4af37;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .close-btn {
@@ -229,7 +252,37 @@ body {
 
 .surah-title-ar {
     color: #d4af37;
-    font-size: 1.2rem;
+    font-family: var(--arabic-font);
+    font-size: 1.4rem;
+}
+
+/* Modal Setting Styles */
+.setting-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-item label {
+    color: #d4af37;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.setting-control {
+    padding: 8px;
+    background-color: #123d2b;
+    color: #ffffff;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    outline: none;
 }
 
 .loading, .error {
