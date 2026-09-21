@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mushaf Digital</title>
-  <link rel="stylesheet" href="./style.css?v=2.0">
+  <title>Mushaf Digital - Mapping Tematik</title>
+  <link rel="stylesheet" href="./style.css?v=3.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Load Font Scheherazade New (Arab Tebal) & Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Scheherazade+New:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -29,18 +30,26 @@
 
   <!-- Area Konten Utama Surah -->
   <main id="quran-container" class="quran-container">
-    <!-- Isi surah akan dirender secara dinamis oleh app.js -->
+    <!-- Isi surah dan Banner Mapping ala UAH akan dirender dinamis di sini -->
   </main>
 
-  <!-- Popup / Modal Daftar Surah -->
+  <!-- Popup / Modal Daftar Surah & Mapping -->
   <div id="modal-surah" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Daftar Surah</h3>
+        <h3>Peta Mapping Surah</h3>
         <button id="btn-close-modal" class="btn-close">&times;</button>
       </div>
 
-      <!-- Mapping & Input Pencarian Surah -->
+      <!-- Tab Filter Quick-Mapping ala UAH -->
+      <div class="mapping-tabs">
+        <button class="tab-btn active" data-filter="all">Semua</button>
+        <button class="tab-btn" data-filter="makkiyah">Makkiyah</button>
+        <button class="tab-btn" data-filter="madaniyah">Madaniyah</button>
+        <button class="tab-btn" data-filter="juz30">Juz 'Amma</button>
+      </div>
+
+      <!-- Input Pencarian Surah -->
       <div class="search-box-container">
         <input type="text" id="input-search-surah" class="search-input" placeholder="Cari nama atau nomor surah..." autocomplete="off">
       </div>
@@ -51,6 +60,6 @@
     </div>
   </div>
 
-  <script src="./app.js?v=2.0"></script>
+  <script src="./app.js?v=3.0"></script>
 </body>
 </html>
