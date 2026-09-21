@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mushaf Digital - Mapping Tematik</title>
-  <link rel="stylesheet" href="./style.css?v=4.0">
+  <link rel="stylesheet" href="./style.css?v=5.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Load Font Scheherazade New & Plus Jakarta Sans -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Scheherazade+New:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +29,14 @@
       </div>
     </div>
     <div class="header-actions">
-      <!-- Tombol Akses Quick-Bookmark -->
+      <!-- Dropdown Pilih Qari -->
+      <select id="select-qori" class="select-qori-dropdown" title="Pilih Suara Qari">
+        <option value="05">Mishary Rashid Al-Afasy</option>
+        <option value="01" selected>Abdullah Al-Juhany</option>
+        <option value="02">Abdul Muhsin Al-Qasim</option>
+        <option value="03">Abdurrahman As-Sudais</option>
+        <option value="04">Ibrahim Al-Dossari</option>
+      </select>
       <button id="btn-last-read" class="btn-bookmark" title="Lanjut Baca Terakhir">🔖</button>
       <button id="btn-pilih-surah" class="btn-pilih">Pilih Surah</button>
     </div>
@@ -68,6 +74,6 @@
     </div>
   </div>
 
-  <script src="./app.js?v=4.0"></script>
+  <script src="./app.js?v=5.0"></script>
 </body>
 </html>
