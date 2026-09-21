@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements Mapping Modal
     const btnOpenMapping = document.getElementById('btn-open-mapping');
     const btnCloseMapping = document.getElementById('btn-close-mapping');
     const mappingModal = document.getElementById('mapping-modal');
     const surahListContainer = document.getElementById('surah-list');
+
+    // DOM Elements Settings Modal
+    const btnOpenSettings = document.getElementById('btn-open-settings');
+    const btnCloseSettings = document.getElementById('btn-close-settings');
+    const settingsModal = document.getElementById('settings-modal');
+    const fontFamilySelect = document.getElementById('font-family-select');
+    const fontSizeRange = document.getElementById('font-size-range');
+    const fontSizeVal = document.getElementById('font-size-val');
+
+    // Content Containers
     const surahContainer = document.getElementById('surah-container');
     const currentSurahName = document.getElementById('current-surah-name');
 
-    // Event Listener Buka / Tutup Modal
+    // Handle Open/Close Mapping Modal
     if (btnOpenMapping && mappingModal) {
         btnOpenMapping.addEventListener('click', () => {
             mappingModal.classList.remove('hidden');
@@ -20,22 +31,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (mappingModal) {
-        mappingModal.addEventListener('click', (e) => {
-            if (e.target === mappingModal) {
-                mappingModal.classList.add('hidden');
-            }
+    // Handle Open/Close Settings Modal
+    if (btnOpenSettings && settingsModal) {
+        btnOpenSettings.addEventListener('click', () => {
+            settingsModal.classList.remove('hidden');
         });
     }
 
-    // Fungsi Fetch Mapping Surah
+    if (btnCloseSettings && settingsModal) {
+        btnCloseSettings.addEventListener('click', () => {
+            settingsModal.classList.add('hidden');
+        });
+    }
+
+    // Close Modals on Outside Click
+    window.addEventListener('click', (e) => {
+        if (e.target === mappingModal) mappingModal.classList.add('hidden');
+        if (e.target === settingsModal) settingsModal.classList.add('hidden');
+    });
+
+    // Font Customization Logic
+    if (fontFamilySelect) {
+        fontFamilySelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--arabic-font', e.target.value);
+            localStorage.setItem('preferred-arabic-font', e.target.value);
+        });
+    }
+
+    if (fontSizeRange && fontSizeVal) {
+        fontSizeRange.addEventListener('input', (e) => {
+            const sizeVal = `${e.target.value}rem`;
+            document.documentElement.style.setProperty('--arabic-size', sizeVal);
+            fontSizeVal.textContent = sizeVal;
+            localStorage.setItem('preferred-arabic-size', sizeVal);
+        });
+    }
+
+    // Load User Font Settings from LocalStorage
+    function loadSavedFontSettings() {
+        const savedFont = localStorage.getItem('preferred-arabic-font');
+        const savedSize = localStorage.getItem('preferred-arabic-size');
+
+        if (savedFont) {
+            document.documentElement.style.setProperty('--arabic-font', savedFont);
+            if (fontFamilySelect) fontFamilySelect.value = savedFont;
+        }
+
+        if (savedSize) {
+            document.documentElement.style.setProperty('--arabic-size', savedSize);
+            if (fontSizeRange) fontSizeRange.value = parseFloat(savedSize);
+            if (fontSizeVal) fontSizeVal.textContent = savedSize;
+        }
+    }
+
+    // Fetch Mapping Surah
     async function loadSurahMapping() {
         if (!surahListContainer) return;
         surahListContainer.innerHTML = '<div class="loading">Memuat daftar surah...</div>';
 
         try {
             const response = await fetch('./data/surah-mapping.json');
-            if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP Status ${response.status}`);
             
             const data = await response.json();
             if (!Array.isArray(data) || data.length === 0) {
@@ -44,11 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
             renderSurahList(data);
         } catch (error) {
             console.error('Error loadSurahMapping:', error);
-            surahListContainer.innerHTML = `<div class="error">Gagal memuat daftar surah. Pastikan file data/surah-mapping.json ada.</div>`;
+            surahListContainer.innerHTML = `<div class="error">Gagal memuat daftar surah. Pastikan data/surah-mapping.json ada.</div>`;
         }
     }
 
-    // Render List Surah di Modal
+    // Render Surah List
     function renderSurahList(surahs) {
         surahListContainer.innerHTML = '';
         surahs.forEach((surah) => {
@@ -74,14 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Fungsi Fetch Isi Surah
+    // Fetch & Render Surah
     async function loadSurahData(surahNumber) {
         if (!surahContainer) return;
         surahContainer.innerHTML = '<div class="loading">Memuat ayat...</div>';
 
         try {
             const response = await fetch(`./data/surah/${surahNumber}.json`);
-            if (!response.ok) throw new Error(`File ./data/surah/${surahNumber}.json tidak ditemukan.`);
+            if (!response.ok) throw new Error(`File surah ${surahNumber}.json tidak ditemukan.`);
 
             const data = await response.json();
             if (!data || !Array.isArray(data.verses)) {
@@ -99,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Render Ayat ke Tampilan
     function renderVerses(surah) {
         surahContainer.innerHTML = `
             <div class="surah-header-detail">
@@ -125,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Load awal surah Al-Fatihah
+    // Initialize Settings & Initial Surah
+    loadSavedFontSettings();
     loadSurahData(1);
 });
