@@ -1,77 +1,20 @@
-{
-  "featuredSurahs": [
-    {
-      "number": 1,
-      "name": "سُورَةُ الْفَاتِحَةِ",
-      "translation": "Al-Fatihah",
-      "numberOfAyahs": 7,
-      "revelation": "Makkiyah",
-      "note": "Rukun Shalat & Ruqyah"
-    },
-    {
-      "number": 18,
-      "name": "سُورَةُ الْكَهْفِ",
-      "translation": "Al-Kahf",
-      "numberOfAyahs": 110,
-      "revelation": "Makkiyah",
-      "note": "Dibaca Hari Jumat"
-    },
-    {
-      "number": 36,
-      "name": "سُورَةُ يٰسٓ",
-      "translation": "Yasin",
-      "numberOfAyahs": 83,
-      "revelation": "Makkiyah",
-      "note": "Jantung Al-Qur'an"
-    },
-    {
-      "number": 56,
-      "name": "سُورَةُ الْوَاقِعَةِ",
-      "translation": "Al-Waqi'ah",
-      "numberOfAyahs": 96,
-      "revelation": "Makkiyah",
-      "note": "Keberkahan Rezeki"
-    },
-    {
-      "number": 67,
-      "name": "سُورَةُ الْمُلْكِ",
-      "translation": "Al-Mulk",
-      "numberOfAyahs": 30,
-      "revelation": "Makkiyah",
-      "note": "Pelindung Siksa Kubur"
-    },
-    {
-      "number": 112,
-      "name": "سُورَةُ الْإِخْلَاصِ",
-      "translation": "Al-Ikhlas",
-      "numberOfAyahs": 4,
-      "revelation": "Makkiyah",
-      "note": "Senilai 1/3 Al-Qur'an"
-    },
-    {
-      "number": 113,
-      "name": "سُورَةُ الْفَلَقِ",
-      "translation": "Al-Falaq",
-      "numberOfAyahs": 5,
-      "revelation": "Makkiyah",
-      "note": "Pelindung Kejahatan"
-    },
-    {
-      "number": 114,
-      "name": "سُورَةُ النَّاسِ",
-      "translation": "An-Nas",
-      "numberOfAyahs": 6,
-      "revelation": "Makkiyah",
-      "note": "Pelindung Bisikan Setan"
-    }
-  ],
-  "allSurahs": [
-    { "number": 1, "name": "سُورَةُ الْفَاتِحَةِ", "translation": "Al-Fatihah", "numberOfAyahs": 7, "revelation": "Makkiyah" },
-    { "number": 2, "name": "سُورَةُ الْبَقَرَةِ", "translation": "Al-Baqarah", "numberOfAyahs": 286, "revelation": "Madaniyah" },
-    { "number": 3, "name": "سُورَةُ آلِ عِمْرَانَ", "translation": "Ali 'Imran", "numberOfAyahs": 200, "revelation": "Madaniyah" },
-    { "number": 4, "name": "سُورَةُ النِّسَاءِ", "translation": "An-Nisa'", "numberOfAyahs": 176, "revelation": "Madaniyah" },
-    { "number": 36, "name": "سُورَةُ يٰسٓ", "translation": "Yasin", "numberOfAyahs": 83, "revelation": "Makkiyah" },
-    { "number": 67, "name": "سُورَةُ الْمُلْكِ", "translation": "Al-Mulk", "numberOfAyahs": 30, "revelation": "Makkiyah" },
-    { "number": 114, "name": "سُورَةُ النَّاسِ", "translation": "An-Nas", "numberOfAyahs": 6, "revelation": "Makkiyah" }
-  ]
-}
+[
+  {
+    "number": 1,
+    "nameLatin": "Al-Fatihah",
+    "nameArabic": "الفاتحة",
+    "totalVerses": 7
+  },
+  {
+    "number": 2,
+    "nameLatin": "Al-Baqarah",
+    "nameArabic": "البقرة",
+    "totalVerses": 286
+  },
+  {
+    "number": 3,
+    "nameLatin": "Ali 'Imran",
+    "nameArabic": "آل عمران",
+    "totalVerses": 200
+  }
+]
