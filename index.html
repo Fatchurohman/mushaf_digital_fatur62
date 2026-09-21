@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Qur'an Klasik Mewah - fatur62</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <title>Mushaf Digital Fatur62</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#d4af37">
 </head>
 <body>
 
-<div class="quran-container">
-    <div class="inner-border">
-        <!-- Header Surah -->
-        <div class="header">
-            <div class="surah-title-ar" id="headerTitleAr">سُورَةُ يٰسٓ</div>
-            <div class="surah-subtitle" id="headerSubTitle">Surah Yasin (36) • Makkiyah • 83 Ayat</div>
+    <header class="app-header">
+        <div class="header-title">
+            <h1>Mushaf Digital</h1>
+            <span id="current-surah-name">Al-Fatihah</span>
         </div>
+        <button id="btn-open-mapping" class="gold-btn">📖 Pilih Surah</button>
+    </header>
 
-        <!-- Panel Kontrol Navigasi & Toggle -->
-        <div class="controls">
-            <div class="selector-wrapper">
-                <label for="surahSelector" class="control-label">Pilih Surat:</label>
-                <select id="surahSelector" class="surah-select"></select>
+    <main class="container">
+        <div id="surah-container" class="mushaf-frame">
+            <!-- Tempat Ayat Al-Qur'an Ditampilkan -->
+            <div class="loading">Memuat surah...</div>
+        </div>
+    </main>
+
+    <!-- Modal Mapping / Daftar Surah -->
+    <div id="mapping-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Daftar Surah</h2>
+                <button id="btn-close-mapping" class="close-btn">&times;</button>
             </div>
-            <div class="toggle-container">
-                <span class="toggle-label">Terjemahan</span>
-                <label class="switch">
-                    <input type="checkbox" id="toggleTranslation" checked>
-                    <span class="slider"></span>
-                </label>
+            <div id="surah-list" class="surah-list">
+                <!-- List Surah akan dimuat otomatis lewat JS -->
             </div>
-        </div>
-
-        <!-- Container Tempat Ayat Ditinggalkan -->
-        <div class="content-area" id="surahContainer">
-            <p style="text-align: center; color: var(--gold-dark);">Memuat data surat...</p>
-        </div>
-
-        <!-- Footer Teks 3D Logam Emas -->
-        <div class="footer">
-            <div class="metallic-gold-text">developer : fatur62</div>
         </div>
     </div>
-</div>
 
-<script src="app.js"></script>
+    <script src="./app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.error('Service Worker Error:', err));
+        }
+    </script>
 </body>
 </html>
