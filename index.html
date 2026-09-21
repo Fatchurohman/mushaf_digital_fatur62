@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mushaf Digital</title>
-  
-  <!-- Trik Cache-Busting: Tambahkan ?v=1.1 agar HP dipaksa muat CSS terbaru -->
-  <link rel="stylesheet" href="./style.css?v=1.1">
-  
+  <link rel="stylesheet" href="./style.css?v=1.2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,30 +15,14 @@
   <header class="app-header">
     <div class="header-info">
       <h1 class="app-title">MUSHAF DIGITAL</h1>
-      <span class="app-subtitle">Pembukaan</span>
+      <span id="current-surah-title" class="app-subtitle">Al-Fatihah</span>
     </div>
     <button id="btn-pilih-surah" class="btn-pilih">Pilih Surah</button>
   </header>
 
   <!-- Area Konten Utama Surah -->
   <main id="quran-container" class="quran-container">
-    <div class="surah-header">
-      <h2 class="arabic-title">سُورَةُ الْفَاتِحَةِ</h2>
-      <p class="surah-meta">Pembukaan (Makkiyah) - 7 Ayat</p>
-    </div>
-
-    <div class="bismillah-box">
-      <p class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      <p class="translation-text">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
-    </div>
-
-    <div class="verse-card">
-      <div class="verse-number">2</div>
-      <div class="verse-content">
-        <p class="arabic-text">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
-        <p class="translation-text">Segala puji bagi Allah, Tuhan seluruh alam.</p>
-      </div>
-    </div>
+    <!-- Isi surah akan dirender secara dinamis oleh app.js -->
   </main>
 
   <!-- Popup / Modal Daftar Surah -->
@@ -52,12 +33,11 @@
         <button id="btn-close-modal" class="btn-close">&times;</button>
       </div>
       <div id="surah-list-container" class="modal-body">
-        <!-- List dari JSON akan dirender ke sini oleh JS -->
+        <!-- List dari JSON akan dirender ke sini -->
       </div>
     </div>
   </div>
 
-  <!-- Trik Cache-Busting juga untuk JS -->
-  <script src="./app.js?v=1.1"></script>
+  <script src="./app.js?v=1.2"></script>
 </body>
 </html>
