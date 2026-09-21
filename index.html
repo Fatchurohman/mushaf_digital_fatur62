@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mushaf Digital</title>
-  <link rel="stylesheet" href="./style.css?v=1.2">
+  <link rel="stylesheet" href="./style.css?v=2.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,9 +13,16 @@
 
   <!-- Header Utama -->
   <header class="app-header">
-    <div class="header-info">
-      <h1 class="app-title">MUSHAF DIGITAL</h1>
-      <span id="current-surah-title" class="app-subtitle">Al-Fatihah</span>
+    <div class="header-left">
+      <div class="header-info">
+        <h1 class="app-title">MUSHAF DIGITAL</h1>
+        <span id="current-surah-title" class="app-subtitle">Al-Fatihah</span>
+      </div>
+      <!-- Badge Developer fatur62 dengan Indikator Kelap-Kelip -->
+      <div class="dev-badge">
+        <span class="status-pulse"></span>
+        <span class="dev-name">fatur62</span>
+      </div>
     </div>
     <button id="btn-pilih-surah" class="btn-pilih">Pilih Surah</button>
   </header>
@@ -32,12 +39,18 @@
         <h3>Daftar Surah</h3>
         <button id="btn-close-modal" class="btn-close">&times;</button>
       </div>
+
+      <!-- Mapping & Input Pencarian Surah -->
+      <div class="search-box-container">
+        <input type="text" id="input-search-surah" class="search-input" placeholder="Cari nama atau nomor surah..." autocomplete="off">
+      </div>
+
       <div id="surah-list-container" class="modal-body">
-        <!-- List dari JSON akan dirender ke sini -->
+        <!-- List dari API akan dirender ke sini -->
       </div>
     </div>
   </div>
 
-  <script src="./app.js?v=1.2"></script>
+  <script src="./app.js?v=2.0"></script>
 </body>
 </html>
