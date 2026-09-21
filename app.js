@@ -8,11 +8,12 @@ const inputSearchSurah = document.getElementById('input-search-surah');
 const tabBtns = document.querySelectorAll('.tab-btn');
 const btnLastRead = document.getElementById('btn-last-read');
 const selectQori = document.getElementById('select-qori');
+const visitorCountElem = document.getElementById('visitor-count');
 
 let globalSurahList = [];
 let currentFilter = 'all';
-let currentSurahData = null; // Menyimpan data surah aktif
-let selectedQoriKey = '01';  // Default Qari: Abdullah Al-Juhany
+let currentSurahData = null;
+let selectedQoriKey = '01';
 
 // Variabel Kontrol Audio
 let currentAudio = null;
@@ -31,6 +32,23 @@ const mappingDatabase = {
   113: { theme: "Perlindungan dari Kejahatan Fisik & Gaib", desc: "Permohonan perlindungan kepada Allah dari kejahatan makhluk, kegelapan malam, sihir, dan kedengkian." },
   114: { theme: "Perlindungan dari Bisikan Syaitan", desc: "Benteng diri dari bisikan tersembunyi syaitan yang meragukan hati manusia, baik dari golongan jin maupun manusia." }
 };
+
+// Fungsi Counter Pengunjung Otomatis Real-time (Hit API)
+async function updateVisitorCount() {
+  if (!visitorCountElem) return;
+  try {
+    const response = await fetch('https://api.counterapi.dev/v1/fatur62_mushaf_digital/visits/up');
+    if (response.ok) {
+      const data = await response.json();
+      visitorCountElem.innerText = data.count.toLocaleString('id-ID');
+    } else {
+      visitorCountElem.innerText = '1';
+    }
+  } catch (err) {
+    console.error('Gagal memuat jumlah pengunjung:', err);
+    visitorCountElem.innerText = '1';
+  }
+}
 
 // Event Listener Pilih Qari
 if (selectQori) {
@@ -242,7 +260,6 @@ function renderSurahContent(surah) {
 
   verses.forEach(v => {
     const vNum = v?.nomorAyat ?? '';
-    // Ambil URL Audio sesuai Qari yang dipilih dari dropdown
     const audioUrl = v?.audio?.[selectedQoriKey] || v?.audio?.['01'] || '';
 
     html += `
@@ -320,7 +337,8 @@ function markLastRead(surahNumber, verseNumber, surahName) {
   alert(`Berhasil ditandai: Surah ${surahName} ayat ${verseNumber}`);
 }
 
-// Load Surah Pertama saat Buka Aplikasi
+// Load Surah & Counter saat Buka Aplikasi
 document.addEventListener('DOMContentLoaded', () => {
   loadSurahDetail(1);
+  updateVisitorCount();
 });
