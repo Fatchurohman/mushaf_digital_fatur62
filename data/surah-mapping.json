@@ -1,15 +1,16 @@
 [
   {
     "number": 1,
-    "name": "Al-Fatihah",
-    "category": "Makkiyah",
-    "juz": 1
+    "name": "سُورَةُ الْفَاتِحَةِ",
+    "translation": "Al-Fatihah",
+    "numberOfAyahs": 7,
+    "revelation": "Makkiyah"
   },
   {
     "number": 36,
-    "name": "Yasin",
-    "category": "Makkiyah",
-    "juz": 22
+    "name": "سُورَةُ يٰسٓ",
+    "translation": "Yasin",
+    "numberOfAyahs": 83,
+    "revelation": "Makkiyah"
   }
 ]
-
