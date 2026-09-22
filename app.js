@@ -77,20 +77,38 @@ function getSurahMappingInfo(surah) {
   };
 }
 
-// COUNTER PENGUNJUNG
+// FUNGSI COUNTER PENGUNJUNG HYBRID (AUTO-INCREMENT & ANTI-STUCK)
 function updateVisitorCount() {
   if (!visitorCountElem) return;
+
+  // 1. Ambil hitungan lokal saiki (default 128 yen durung ana)
+  let localCount = parseInt(localStorage.getItem('mushaf_visitor_count') || '128', 10);
+  
+  // 2. Chek apakah sesi kunjungan iki wis dihitung (supaya ora nambah terus mung amarga refresh terus-terusan)
+  const hasVisited = sessionStorage.getItem('mushaf_visited_session');
+  if (!hasVisited) {
+    localCount += 1;
+    localStorage.setItem('mushaf_visitor_count', localCount);
+    sessionStorage.setItem('mushaf_visited_session', 'true');
+  }
+
+  // Tampilake hitungan lokal dhisik (langsung metu tanpa ngenteni API)
+  visitorCountElem.innerText = localCount.toLocaleString('id-ID');
+
+  // 3. Coba kirim hitungan menyang API global (background sync)
   fetch('https://api.counterapi.dev/v1/fatur62_mushaf_digital/visits/up')
     .then(res => res.ok ? res.json() : null)
     .then(data => {
       if (data && data.count) {
-        visitorCountElem.innerText = data.count.toLocaleString('id-ID');
-      } else {
-        visitorCountElem.innerText = '128';
+        // Yen API sukses lan angkane luwih gedhe saka lokal, update nganggo angka API
+        const finalCount = Math.max(data.count, localCount);
+        visitorCountElem.innerText = finalCount.toLocaleString('id-ID');
+        localStorage.setItem('mushaf_visitor_count', finalCount);
       }
     })
     .catch(() => {
-      visitorCountElem.innerText = '128';
+      // Yen API gagal/error, tetep tampilkan hitungan lokal sing wis nambah mau
+      console.log('CounterAPI offline, menggunakan counter lokal.');
     });
 }
 
