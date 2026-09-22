@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapping Surat - Deskripsi Panjang</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* Batasi lebar kolom deskripsi */
+        .col-deskripsi {
+            max-width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Indikator visual bahwa teks bisa diklik/di-hover */
+        .col-deskripsi.expandable {
+            color: #0066cc;
+        }
+
+        /* Saat baris diekspansi */
+        .col-deskripsi.expanded {
+            white-space: normal;
+            word-wrap: break-word;
+            overflow: visible;
+            background-color: #eef6ff;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Data Mapping Surat</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">No</th>
+                <th style="width: 30%;">Nomor Surat</th>
+                <th style="width: 60%;">Deskripsi Mapping</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data akan di-render melalui JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Data Dummy JSON (Simulasi data dari API / Database)
+        const rawJsonData = JSON.stringify([
+            {
+                id: 1,
+                noSurat: "001/SK/2026",
+                deskripsi: "Surat Keputusan mengenai penetapan alokasi anggaran operasional pengembangan perangkat lunak frontend dan backend tahun anggaran 2026/2027."
+            },
+            {
+                id: 2,
+                noSurat: "002/UND/2026",
+                deskripsi: "Undangan rapat koordinasi evaluasi sistem."
+            },
+            {
+                id: 3,
+                noSurat: "003/MEMO/2026",
+                deskripsi: null // Contoh kasus data null/undefined
+            }
+        ]);
+
+        // Fungsi Render Data secara Aman
+        function renderTableData(jsonString) {
+            const tableBody = document.getElementById("table-body");
+            if (!tableBody) return;
+
+            tableBody.innerHTML = "";
+
+            try {
+                const dataList = JSON.parse(jsonString);
+
+                // Validasi apakah hasil parse berupa Array
+                if (!Array.isArray(dataList)) {
+                    throw new Error("Format data JSON tidak valid.");
+                }
+
+                dataList.forEach((item, index) => {
+                    // Validasi null / undefined / tipe data string
+                    const id = item?.id ?? (index + 1);
+                    const noSurat = item?.noSurat ?? "-";
+                    const deskripsiRaw = item?.deskripsi;
+                    
+                    // Sanitasi nilai deskripsi
+                    const deskripsi = (typeof deskripsiRaw === "string" && deskripsiRaw.trim() !== "") 
+                        ? deskripsiRaw 
+                        : "Tidak ada deskripsi";
+
+                    const tr = document.createElement("tr");
+
+                    // Render elemen baris
+                    tr.innerHTML = `
+                        <td>${id}</td>
+                        <td>${escapeHtml(noSurat)}</td>
+                        <td class="col-deskripsi expandable" 
+                            title="${escapeHtml(deskripsi)}" 
+                            data-fulltext="${escapeHtml(deskripsi)}">
+                            ${escapeHtml(deskripsi)}
+                        </td>
+                    `;
+
+                    tableBody.appendChild(tr);
+                });
+
+                // Pasang Event Listener untuk toggle klik
+                attachExpandEvent();
+
+            } catch (error) {
+                console.error("Gagal memproses data JSON:", error);
+                tableBody.innerHTML = `<tr><td colspan="3" style="color: red; text-align: center;">Gagal memuat data surat.</td></tr>`;
+            }
+        }
+
+        // Fungsi Event Handler untuk toggle ekspansi teks saat diklik
+        function attachExpandEvent() {
+            const deskripsiCells = document.querySelectorAll(".col-deskripsi");
+            
+            deskripsiCells.forEach(cell => {
+                cell.addEventListener("click", (event) => {
+                    const target = event.currentTarget;
+                    target.classList.toggle("expanded");
+                });
+            });
+        }
+
+        // Fungsi Helper Sanitasi HTML (Mencegah XSS)
+        function escapeHtml(str) {
+            if (typeof str !== "string") return "";
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Jalankan saat DOM selesai di-load
+        document.addEventListener("DOMContentLoaded", () => {
+            renderTableData(rawJsonData);
+        });
+    </script>
+</body>
+</html>
