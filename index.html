@@ -37,7 +37,26 @@
       </div>
     </div>
 
-    <div class="header-actions">
+    <div class="header-actions" style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+  <!-- Baris Atas: Qari & Pilih Surah -->
+  <div class="actions-top-row" style="display: flex; align-items: center; gap: 6px;">
+    <select id="select-qori" class="select-qori-dropdown" title="Pilih Suara Qari">
+      <option value="05">Mishary Rashid Al-Afasy</option>
+      <option value="01" selected>Abdullah Al-Juhany</option>
+      <option value="02">Abdul Muhsin Al-Qasim</option>
+      <option value="03">Abdurrahman As-Sudais</option>
+      <option value="04">Ibrahim Al-Dossari</option>
+    </select>
+    <button id="btn-pilih-surah" class="btn-pilih">Pilih Surah</button>
+  </div>
+
+  <!-- Baris Bawah: Tombol Lanjut Baca di Bawah (Center) -->
+  <button id="btn-last-read" class="btn-bookmark" title="Lanjut Baca Terakhir" style="display: inline-flex; align-items: center; justify-content: center; gap: 4px; width: 100%; padding: 4px 8px;">
+    <span>🔖</span>
+    <span style="font-size: 0.75rem; font-weight: 600;">Lanjut Baca Terakhir</span>
+  </button>
+</div>
+
       <!-- Dropdown Pilih Qari -->
       <select id="select-qori" class="select-qori-dropdown" title="Pilih Suara Qari">
         <option value="05">Mishary Rashid Al-Afasy</option>
