@@ -1,20 +1,1288 @@
-[
-  {
-    "number": 1,
-    "nameLatin": "Al-Fatihah",
-    "nameArabic": "الفاتحة",
-    "totalVerses": 7
+// DATA MAPPING KANDUNGAN TEMATIK 114 SURAH AL-QUR'AN (FULL 114 SURAH - BAHASA INDONESIA BAKU)
+const SURAH_MAPPING = {
+  1: {
+    nama: "Al-Fatihah",
+    arti: "Pembukaan",
+    kategori: "Makkiyah",
+    topik_utama: "Induk Al-Qur'an (Ummul Qur'an), Tauhid, dan Doa Kelurusan Hidup",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Pujian kepada Allah SWT, Tauhid Rububiyah, dan Keimanan pada Hari Pembalasan." },
+      { ayat: "5", deskripsi: "Ikrar Tauhid Uluhiyah: Hanya menyembah dan memohon pertolongan kepada Allah." },
+      { ayat: "6-7", deskripsi: "Permohonan petunjuk Jalan yang Lurus (Sirothol Mustaqim) serta permohonan dihindarkan dari jalan orang yang dimurkai dan sesat." }
+    ]
   },
-  {
-    "number": 2,
-    "nameLatin": "Al-Baqarah",
-    "nameArabic": "البقرة",
-    "totalVerses": 286
+  2: {
+    nama: "Al-Baqarah",
+    arti: "Sapi Betina",
+    kategori: "Madaniyah",
+    topik_utama: "Hukum Islam, Syariat Kompleks, Keimanan, dan Pembentukan Ummat",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Golongan Manusia: Golongan Orang Bertaqwa, Orang Kafir, dan Orang Munafik." },
+      { ayat: "21-39", deskripsi: "Kekuasaan Allah, penciptaan Manusia, dan kisah Nabi Adam AS di Surga." },
+      { ayat: "40-141", deskripsi: "Peringatan, penyimpangan, dan sejarah Bani Israil serta Nabi Musa AS." },
+      { ayat: "142-152", deskripsi: "Pemindahan arah Kiblat menuju Ka'bah di Masjidil Haram." },
+      { ayat: "153-253", deskripsi: "Hukum Syariat: Puasa, Haji, Waris, Nikah, Qishash, Perang, dan Infak." },
+      { ayat: "254-260", deskripsi: "Keagungan Allah (Ayat Kursi) dan Kekuasaan Allah dalam menghidupkan yang mati." },
+      { ayat: "261-283", deskripsi: "Etika berinfak, bahaya Riba, dan aturan perikatan Utang-Piutang." },
+      { ayat: "284-286", deskripsi: "Keimanan, kepatuhan total kepada Allah, dan Doa Penutup Surah." }
+    ]
   },
-  {
-    "number": 3,
-    "nameLatin": "Ali 'Imran",
-    "nameArabic": "آل عمران",
-    "totalVerses": 200
+  3: {
+    nama: "Ali 'Imran",
+    arti: "Keluarga 'Imran",
+    kategori: "Madaniyah",
+    topik_utama: "Keteguhan Aqidah, Ketauhidan, dan Pelajaran Perang Uhud",
+    pemetaan_ayat: [
+      { ayat: "1-32", deskripsi: "Keutamaan Al-Qur'an, Pemurnian Tauhid, dan Bantahan terhadap Aqidah yang Keliru." },
+      { ayat: "33-63", deskripsi: "Kisah Keluarga 'Imran, Kelahiran Maryam, Nabi Zakaria AS, dan Nabi Isa AS." },
+      { ayat: "64-101", deskripsi: "Seruan Ahli Kitab untuk kembali pada kalimat tauhid yang sama." },
+      { ayat: "102-120", deskripsi: "Anjuran menjaga persatuan umat Islam dan amar ma'ruf nahi munkar." },
+      { ayat: "121-180", deskripsi: "Pelajaran penting dan evaluasi dari Perang Uhud." },
+      { ayat: "181-200", deskripsi: "Tanda-tanda kekuasaan Allah bagi orang berakal (Ulul Albab) dan kesabaran." }
+    ]
+  },
+  4: {
+    nama: "An-Nisa'",
+    arti: "Wanita",
+    kategori: "Madaniyah",
+    topik_utama: "Hukum Keluarga, Hak Wanita, Anak Yatim, dan Keadilan Sosial",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Hak perlindungan anak yatim, hak-hak wanita, dan hukum waris (Mawarits)." },
+      { ayat: "15-35", deskripsi: "Aturan pernikahan, mahar, larangan zina, dan penyelesaian konflik rumah tangga." },
+      { ayat: "36-57", deskripsi: "Perintah berbuat baik, kewajiban Shalat, dan larangan bersikap sombong." },
+      { ayat: "58-104", deskripsi: "Ketaatan kepada Pemimpin (Ulil Amri), keadilan hukum, dan hukum peperangan." },
+      { ayat: "105-134", deskripsi: "Tuntutan keadilan dalam penegakan hukum dan bahaya sifat kemunafikan." },
+      { ayat: "135-176", deskripsi: "Kewajiban menjadi saksi yang adil, penyelesaian masalah Ahli Kitab, dan hukum Kalalah." }
+    ]
+  },
+  5: {
+    nama: "Al-Ma'idah",
+    arti: "Hidangan",
+    kategori: "Madaniyah",
+    topik_utama: "Perjanjian, Makanan Halal-Haram, dan Penegakan Hukum Syariat",
+    pemetaan_ayat: [
+      { ayat: "1-11", deskripsi: "Ketetapan Makanan Halal dan Haram, kesucian bersuci (Wudhu/Tayammum)." },
+      { ayat: "12-26", deskripsi: "Pelanggaran janji oleh Ahli Kitab dan kisah pengembaraan Bani Israil." },
+      { ayat: "27-50", deskripsi: "Kisah Qabil dan Habil, hukum Qishash, dan kewajiban memutuskan hukum dengan Al-Qur'an." },
+      { ayat: "51-86", deskripsi: "Larangan menjadikan musuh sebagai pemimpin dan celaan terhadap perbuatan maksiat." },
+      { ayat: "87-108", deskripsi: "Aturan sumpah, larangan khamar, judi, berburu saat ihram, dan wasiat." },
+      { ayat: "109-120", deskripsi: "Mukjizat Nabi Isa AS dan peristiwa turunnya Hidangan dari Langit." }
+    ]
+  },
+  6: {
+    nama: "Al-An'am",
+    arti: "Binatang Ternak",
+    kategori: "Makkiyah",
+    topik_utama: "Penegakan Aqidah Tauhid, Pembuktian Keagungan Allah, dan Bimbingan Alam Semesta",
+    pemetaan_ayat: [
+      { ayat: "1-30", deskripsi: "Tanda-tanda kekuasaan Allah di alam semesta dan akibat penolakan kaum musyrik." },
+      { ayat: "31-73", deskripsi: "Hiburan Allah bagi Rasulullah SAW dan bukti kebangkitan setelah kematian." },
+      { ayat: "74-90", deskripsi: "Kisah Nabi Ibrahim AS mencari Tuhan dan keturunannya dari kalangan para nabi." },
+      { ayat: "91-140", deskripsi: "Sifat-sifat Allah, kehalalan binatang ternak, dan prasangka batil kaum jahiliyah." },
+      { ayat: "141-165", deskripsi: "10 Perintah Utama dalam Islam, kelurusan agama Ibrahim, dan pengorbanan hidup-mati." }
+    ]
+  },
+  7: {
+    nama: "Al-A'raf",
+    arti: "Tempat yang Tinggi",
+    kategori: "Makkiyah",
+    topik_utama: "Pertentangan Hak dan Batil serta Sejarah Para Nabi Penyeru Tauhid",
+    pemetaan_ayat: [
+      { ayat: "1-30", deskripsi: "Awal mula penciptaan Adam AS, tipu daya Iblis, dan pakaian penutup aurat." },
+      { ayat: "31-58", deskripsi: "Etika beribadah, gambaran penghuni Surga, Neraka, dan tempat Al-A'raf." },
+      { ayat: "59-102", deskripsi: "Kisah Nabi Nuh AS, Hud AS, Shalih AS, Luth AS, dan Syu'aib AS." },
+      { ayat: "103-171", deskripsi: "Perjuangan Nabi Musa AS menghadapi Fir'aun dan pembangkangan Bani Israil." },
+      { ayat: "172-206", deskripsi: "Perjanjian asal manusia (Persetujuan Tauhid) dan perintah mendengarkan bacaan Al-Qur'an." }
+    ]
+  },
+  8: {
+    nama: "Al-Anfal",
+    arti: "Rampasan Perang",
+    kategori: "Madaniyah",
+    topik_utama: "Hukum Peperangan, Pembagian Rampasan Perang, dan Strategi Kemenangan Perang Badar",
+    pemetaan_ayat: [
+      { ayat: "1-19", deskripsi: "Aturan pembagian harta rampasan perang (Ghanimah) dan pertolongan malaikat pada Perang Badar." },
+      { ayat: "20-44", deskripsi: "Perintah taat kepada Allah dan Rasul, kewaspadaan terhadap fitnah, dan pemisahan hak-batil." },
+      { ayat: "45-75", deskripsi: "Strategi keteguhan dalam perang, hukum perjanjian damai, dan persaudaraan Muhajirin-Anshar." }
+    ]
+  },
+  9: {
+    nama: "At-Taubah",
+    arti: "Pengampunan",
+    kategori: "Madaniyah",
+    topik_utama: "Pemutusan Perjanjian Kaum Musyrik, Perang Tabuk, dan Pengampunan Dosa",
+    pemetaan_ayat: [
+      { ayat: "1-28", deskripsi: "Pengumuman pemutusan perjanjian dengan kaum musyrik yang melanggar janji." },
+      { ayat: "29-72", deskripsi: "Perintah memerangi pembangkang, penggolongan orang munafik, dan 8 golongan penerima Zakat." },
+      { ayat: "73-110", deskripsi: "Ciri-ciri kemunafikan, pembongkaran Masjid Dhirar, dan keteguhan orang-orang yang jujur." },
+      { ayat: "111-129", deskripsi: "Jual beli jiwa-harta dengan Surga, penerimaan taubat tiga sahabat, dan kasih sayang Rasulullah." }
+    ]
+  },
+  10: {
+    nama: "Yunus",
+    arti: "Nabi Yunus",
+    kategori: "Makkiyah",
+    topik_utama: "Tanda Kekuasaan Allah, Penurunan Wahyu Al-Qur'an, dan Penyelamatan Umat Beriman",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Kebenaran Al-Qur'an, proses penciptaan langit dan bumi, serta bantahan terhadap penuntut mukjizat." },
+      { ayat: "21-60", deskripsi: "Sifat manusia saat tertimpa musibah dan kelapangan, serta keutamaan Al-Qur'an sebagai obat jiwa." },
+      { ayat: "61-109", deskripsi: "Kisah Nabi Nuh AS, Musa AS, dan penyelamatan unik kaum Nabi Yunus AS." }
+    ]
+  },
+  11: {
+    nama: "Hud",
+    arti: "Nabi Hud",
+    kategori: "Makkiyah",
+    topik_utama: "Keteguhan Mengemban Risalah dan Kehancuran Kaum Penentang Nabi",
+    pemetaan_ayat: [
+      { ayat: "1-24", deskripsi: "Kejelasan Al-Qur'an, rezeki seluruh makhluk di bumi, dan tantangan meniru Al-Qur'an." },
+      { ayat: "25-49", deskripsi: "Kisah lengkap Nabi Nuh AS dan peristiwa pembuatan Kapal Penyelamat serta Banjir Bandang." },
+      { ayat: "50-95", deskripsi: "Kisah Nabi Hud AS (Kaum 'Ad), Nabi Shalih AS (Kaum Tsamud), Nabi Ibrahim AS, Luth AS, dan Syu'aib AS." },
+      { ayat: "96-123", deskripsi: "Kisah Nabi Musa AS, tujuan penuturan sejarah nabi, dan anjuran istiqamah dalam beribadah." }
+    ]
+  },
+  12: {
+    nama: "Yusuf",
+    arti: "Nabi Yusuf",
+    kategori: "Makkiyah",
+    topik_utama: "Kisah Terbaik (*Ahsanul Qashas*): Ujian Kesabaran, Kejujuran, dan Keberhasilan Nabi Yusuf AS",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Mimpi Nabi Yusuf AS, kecemburuan saudara-saudaranya, dan pelemparan ke dalam sumur." },
+      { ayat: "21-35", deskripsi: "Ujian fitnah di istana menteri Mesir dan keteguhan kesucian jiwa Nabi Yusuf AS." },
+      { ayat: "36-57", deskripsi: "Nabi Yusuf AS di dalam penjara, penafsiran mimpi Raja Mesir, dan pengangkatan sebagai Menteri." },
+      { ayat: "58-101", deskripsi: "Pertemuan kembali dengan saudara-saudara, Nabi Ya'qub AS, dan terwujudnya penglihatan mimpi." },
+      { ayat: "102-111", deskripsi: "Pelajaran tauhid dan hikmah dibalik sejarah para rasul." }
+    ]
+  },
+  13: {
+    nama: "Ar-Ra'd",
+    arti: "Guruh / Petir",
+    kategori: "Madaniyah",
+    topik_utama: "Kebenaran Al-Qur'an, Tanda-tanda Kekuasaan Allah di Alam, dan Ketenangan Hati",
+    pemetaan_ayat: [
+      { ayat: "1-18", deskripsi: "Fenomena alam: langit, bumi, gunung, tanaman, dan tasbihnya suara petir kepada Allah." },
+      { ayat: "19-29", deskripsi: "Ciri-ciri orang berakal (*Ulul Albab*) dan ketenangan hati dengan mengingat Allah (*Zikrullah*)." },
+      { ayat: "30-43", deskripsi: "Kebenaran mukjizat Al-Qur'an dan perlindungan Allah kepada hamba-Nya." }
+    ]
+  },
+  14: {
+    nama: "Ibrahim",
+    arti: "Nabi Ibrahim",
+    kategori: "Makkiyah",
+    topik_utama: "Fungsi Al-Qur'an Mengeluarkan Manusia dari Kegelapan, Kesyukuran, dan Doa Nabi Ibrahim AS",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Tujuan pengutusan Rasul, janji pertambahan nikmat bagi orang bersyukur, lan akibat kufur." },
+      { ayat: "21-34", deskripsi: "Penyesalan di akhirat, pengakuan tipu daya Iblis, lan keagungan nikmat Allah." },
+      { ayat: "35-52", deskripsi: "Doa Nabi Ibrahim AS untuk keamanan kota Mekkah, keturunan shalih, lan tegaknya Shalat." }
+    ]
+  },
+  15: {
+    nama: "Al-Hijr",
+    arti: "Gunung Al-Hijr",
+    kategori: "Makkiyah",
+    topik_utama: "Jaminan Pemeliharaan Al-Qur'an dan Kehancuran Kaum Pendusta",
+    pemetaan_ayat: [
+      { ayat: "1-25", deskripsi: "Jaminan pemeliharaan Al-Qur'an oleh Allah dan penciptaan benteng bintang di langit." },
+      { ayat: "26-50", deskripsi: "Penciptaan manusia dari tanah liat, pembangkangan Iblis, lan kepastian Surga bagi yang bertaqwa." },
+      { ayat: "51-99", deskripsi: "Kisah tamu Nabi Ibrahim AS, penghancuran kaum Luth AS, lan penduduk Al-Hijr (Tsamud)." }
+    ]
+  },
+  16: {
+    nama: "An-Nahl",
+    arti: "Lebah",
+    kategori: "Makkiyah",
+    topik_utama: "Bukti-bukti Nikmat Allah di Alam Semesta dan Pengajaran Hikmah dari Lebah",
+    pemetaan_ayat: [
+      { ayat: "1-29", deskripsi: "Penciptaan binatang ternak, hujan, dan tanaman sebagai bukti Keesaan Allah." },
+      { ayat: "30-69", deskripsi: "Balasan bagi orang bertaqwa dan ilham Allah kepada Lebah pencipta madu sebagai obat." },
+      { ayat: "70-97", deskripsi: "Perumpamaan-perumpamaan Allah, anjuran berbuat adil, kebaikan, lan menepati janji." },
+      { ayat: "98-128", deskripsi: "Adab membaca Al-Qur'an, aturan kehalalan makanan, lan keteladanan Nabi Ibrahim AS." }
+    ]
+  },
+  17: {
+    nama: "Al-Isra'",
+    arti: "Perjalanan Malam",
+    kategori: "Makkiyah",
+    topik_utama: "Peristiwa Isra' Mi'raj, Akhlak Kemasyarakatan, dan Kemuliaan Manusia",
+    pemetaan_ayat: [
+      { ayat: "1-8", deskripsi: "Peristiwa Isra' Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsha dan kehancuran Bani Israil." },
+      { ayat: "9-22", deskripsi: "Fungsi Al-Qur'an memberi petunjuk dan pertanggungjawaban amal perbuatan secara mandiri." },
+      { ayat: "23-40", deskripsi: "Pedoman Akhlak: Berbakti kepada kedua orang tua, larangan boros, zina, dan membunuh." },
+      { ayat: "41-85", deskripsi: "Kemuliaan manusia, ancaman iblis, kewajiban Shalat Tahajud, dan hakekat Ruh." },
+      { ayat: "86-111", deskripsi: "Tantangan keutamaan Al-Qur'an, sembilan mukjizat Nabi Musa AS, dan nama-nama Indah Allah (Asmaul Husna)." }
+    ]
+  },
+  18: {
+    nama: "Al-Kahf",
+    arti: "Gua",
+    kategori: "Makkiyah",
+    topik_utama: "Empat Ujian Kehidupan: Ujian Fitnah Agama, Harta, Ilmu, dan Kekuasaan",
+    pemetaan_ayat: [
+      { ayat: "1-27", deskripsi: "Kisah Pemuda Ashabul Kahfi: Ujian Pertahanan Fitnah Agama." },
+      { ayat: "28-49", deskripsi: "Kisah Pemilik Dua Kebun (*Shahibul Jannatain*): Ujian Fitnah Harta benda." },
+      { ayat: "50-82", deskripsi: "Kisah Perjalanan Nabi Musa AS dan Nabi Khidhr AS: Ujian Fitnah Ilmu Pengetahuan." },
+      { ayat: "83-110", deskripsi: "Kisah Raja Dzulkarnain dan Yakjuj Makjuj: Ujian Fitnah Kekuasaan dan Kepemimpinan." }
+    ]
+  },
+  19: {
+    nama: "Maryam",
+    arti: "Siti Maryam",
+    kategori: "Makkiyah",
+    topik_utama: "Rahmat Allah, Kemukjizatan Kelahiran Para Nabi, dan Pembatasan Anaknya Allah",
+    pemetaan_ayat: [
+      { ayat: "1-15", deskripsi: "Kisah Nabi Zakaria AS dikaruniai putra Nabi Yahya AS di usia senja." },
+      { ayat: "16-40", deskripsi: "Kisah Maryam melahirkan Nabi Isa AS tanpa ayah serta ucapan Isa AS saat bayi." },
+      { ayat: "41-65", deskripsi: "Kisah Keteguhan Tauhid Nabi Ibrahim AS menghadapi ayahnya yang menyembah berhala." },
+      { ayat: "66-98", deskripsi: "Bantahan tegas terhadap anggapan bahwa Allah mempunyai anak." }
+    ]
+  },
+  20: {
+    nama: "Tha-Ha",
+    arti: "Tha-Ha",
+    kategori: "Makkiyah",
+    topik_utama: "Al-Qur'an Sebagai Peringatan dan Perjuangan Dakwah Nabi Musa AS",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Fungsi Al-Qur'an dan wahyu pertama Nabi Musa AS di Lembah Suci Tuwa." },
+      { ayat: "15-98", deskripsi: "Mukjizat Tongkat, dakwah kepada Fir'aun, pertarungan penyihir, lan penyesatan Samiri." },
+      { ayat: "99-135", deskripsi: "Keadaan hari kiamat, penciptaan Adam AS, dan perintah menjaga shalat keluarga." }
+    ]
+  },
+  21: {
+    nama: "Al-Anbiya'",
+    arti: "Para Nabi",
+    kategori: "Makkiyah",
+    topik_utama: "Kepastian Hari Berbangkit dan Kesatuan Misi Dakwah Para Nabi",
+    pemetaan_ayat: [
+      { ayat: "1-33", deskripsi: "Kelalaian manusia menghadapi kiamat dan bukti-bukti penciptaan alam semesta." },
+      { ayat: "34-93", deskripsi: "Kisah Nabi Ibrahim AS dihancurkan berhala, Nabi Nuh AS, Ayub AS, Yunus AS, lan Zakaria AS." },
+      { ayat: "94-112", deskripsi: "Kedatangan Yakjuj Makjuj dan pengutusan Nabi Muhammad SAW sebagai Rahmat bagi Alam Semesta." }
+    ]
+  },
+  22: {
+    nama: "Al-Hajj",
+    arti: "Ibadah Haji",
+    kategori: "Madaniyah",
+    topik_utama: "Dahsyatnya Kiamat, Syariat Ibadah Haji, dan Izin Mempertahankan Diri (Jihad)",
+    pemetaan_ayat: [
+      { ayat: "1-24", deskripsi: "Kepanikan hari kiamat, tahapan penciptaan manusia, dan balasan di akhirat." },
+      { ayat: "25-37", deskripsi: "Sejarah pembangunan Ka'bah oleh Nabi Ibrahim AS, syariat Haji, dan qurban." },
+      { ayat: "38-60", deskripsi: "Izin berperang pertamali untuk mempertahankan diri dari kedhaliman." },
+      { ayat: "61-78", deskripsi: "Kekuasaan Allah pada pergantian malam-siang dan perumpamaan lalat." }
+    ]
+  },
+  23: {
+    nama: "Al-Mu'minun",
+    arti: "Orang-Orang Beriman",
+    kategori: "Makkiyah",
+    topik_utama: "Karakteristik Keberuntungan Orang Beriman dan Bukti Ketauhidan",
+    pemetaan_ayat: [
+      { ayat: "1-11", deskripsi: "7 Sifat Orang Beriman yang memenangkan Surga Firdaus." },
+      { ayat: "12-22", deskripsi: "Fase perkembangan janin dalam rahim dan nikmat hasil bumi." },
+      { ayat: "23-50", deskripsi: "Kisah Nuh AS, Musa AS, Harun AS, dan penolakan kaum mukadzibin." },
+      { ayat: "51-118", deskripsi: "Kesatuan ajaran nabi, penyesalan orang mati, dan permohonan ampunan." }
+    ]
+  },
+  24: {
+    nama: "An-Nur",
+    arti: "Cahaya",
+    kategori: "Madaniyah",
+    topik_utama: "Aturan Kehormatan Diri, Hukum Zina, Tuduhan Palsu (*Li'an*), dan Etika Rumah Tangga",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Hukum perzinaan dan tata cara tuduhan sumpah *Li'an* antara suami istri." },
+      { ayat: "11-26", deskripsi: "Berita bohong fitnah keji (*Haditsul Ifki*) terhadap Ummul Mukminin Aisyah RA." },
+      { ayat: "27-34", deskripsi: "Etika meminta izin masuk rumah, menjaga pandangan (*Ghadul Bashar*), dan anjuran menikah." },
+      { ayat: "35-46", deskripsi: "Perumpamaan Cahaya Allah (*Ayat An-Nur*) dan amal hampa orang kafir." },
+      { ayat: "47-64", deskripsi: "Ketaatan total para sahabat dan etika kesopanan di dalam rumah tangga." }
+    ]
+  },
+  25: {
+    nama: "Al-Furqan",
+    arti: "Pembeda",
+    kategori: "Makkiyah",
+    topik_utama: "Keagungan Al-Qur'an sebagai Pembeda Haq-Batil dan Sifat *Ibadurrahman*",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Keagungan Al-Qur'an dan bantahan tuduhan tuduhan kaum musyrikin." },
+      { ayat: "21-44", deskripsi: "Penyesalan orang dhalim di akhirat dan tuduhan Al-Qur'an sebagai dongeng." },
+      { ayat: "45-62", deskripsi: "Tanda kekuasaan Allah: bayangan, malam, angin, dan batas dua laut." },
+      { ayat: "63-77", deskripsi: "Sifat-sifat hamba Allah Yang Maha Pengasih (*Ibadurrahman*)." }
+    ]
+  },
+  26: {
+    nama: "Asy-Syu'ara'",
+    arti: "Para Penyair",
+    kategori: "Makkiyah",
+    topik_utama: "Mukjizat Al-Qur'an, Risalah Para Nabi, dan Kebatilan Penyair Sesat",
+    pemetaan_ayat: [
+      { ayat: "1-9", deskripsi: "Jaminan Al-Qur'an dan kesedihan Rasulullah atas penolakan kaumnya." },
+      { ayat: "10-68", deskripsi: "Kisah lengkap Nabi Musa AS membelah Laut Merah menghadapi Fir'aun." },
+      { ayat: "69-104", deskripsi: "Kisah Nabi Ibrahim AS dan bantahan penyembahan patung." },
+      { ayat: "105-191", deskripsi: "Kisah Nabi Nuh AS, Hud AS, Shalih AS, Luth AS, dan Syu'aib AS." },
+      { ayat: "192-227", deskripsi: "Al-Qur'an diturunkan melalui Malaikat Jibril dan celaan penyair sesat." }
+    ]
+  },
+  27: {
+    nama: "An-Naml",
+    arti: "Semut",
+    kategori: "Makkiyah",
+    topik_utama: "Kerajaan Nabi Sulaiman AS, Kekuasaan Allah, dan Mukjizat Al-Qur'an",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Petunjuk Al-Qur'an dan wahyu mukjizat Nabi Musa AS di pohon membara." },
+      { ayat: "15-44", deskripsi: "Mukjizat Nabi Sulaiman AS memahami bahasa Semut, Burung Hud-hud, dan Ratu Balqis." },
+      { ayat: "45-58", deskripsi: "Kisah Nabi Shalih AS (Kaum Tsamud) dan Nabi Luth AS." },
+      { ayat: "59-93", deskripsi: "Pertanyaan-pertanyaan kekuasaan Allah dan kemunculan Binatang Melata (*Dabbah*)." }
+    ]
+  },
+  28: {
+    nama: "Al-Qashas",
+    arti: "Kisah-Kisah",
+    kategori: "Makkiyah",
+    topik_utama: "Perjalanan Hidup Nabi Musa AS dan Kehancuran Karun Akibat Kesombongan Harta",
+    pemetaan_ayat: [
+      { ayat: "1-21", deskripsi: "Kelahiran Nabi Musa AS, dihanyutkan ke sungai, dan dibesarkan di Istana Fir'aun." },
+      { ayat: "22-43", deskripsi: "Pelarian ke Madyan, pernikahan dengan putri Nabi Syu'aib, dan panggilan Kenabian." },
+      { ayat: "44-75", deskripsi: "Kejelasan berita risalah dan kelemahan sesembahan selain Allah." },
+      { ayat: "76-88", deskripsi: "Kisah Karun (*Qarun*) yang sombong atas hartanya dan ditelan oleh bumi." }
+    ]
+  },
+  29: {
+    nama: "Al-'Ankabut",
+    arti: "Laba-Laba",
+    kategori: "Makkiyah",
+    topik_utama: "Ujian Keimanan dan Perumpamaan Rapuhnya Perlindungan Selain Allah",
+    pemetaan_ayat: [
+      { ayat: "1-13", deskripsi: "Kepastian ujian bagi orang berniat mengaku beriman dan kewajiban berbakti pada orang tua." },
+      { ayat: "14-40", deskripsi: "Ujian dakwah Nabi Nuh AS, Ibrahim AS, Luth AS, Syu'aib AS, 'Ad, Tsamud, dan Qarun." },
+      { ayat: "41-43", deskripsi: "Perumpamaan pelindung berhala seperti Sarang Laba-Laba (*Al-'Ankabut*) yang amat rapuh." },
+      { ayat: "44-69", deskripsi: "Perintah membaca Al-Qur'an, Shalat mencegah keji-munkar, dan kesungguhan Mujahid." }
+    ]
+  },
+  30: {
+    nama: "Ar-Rum",
+    arti: "Bangsa Romawi",
+    kategori: "Makkiyah",
+    topik_utama: "Nubuat Kemenangan Romawi, Tanda-tanda Kekuasaan Allah, dan Fitrah Manusia",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Nubuat Al-Qur'an tentang kemenangan Bangsa Romawi atas Persia." },
+      { ayat: "11-30", deskripsi: "Tanda keagungan Allah: Penciptaan berpasangan, perbedaan bahasa/kulit, dan Fitrah Manusia." },
+      { ayat: "31-60", deskripsi: "Larangan syirik, bahaya kerusakan alam akibat perbuatan manusia, dan ketetapan janji Allah." }
+    ]
+  },
+  31: {
+    nama: "Luqman",
+    arti: "Luqman Al-Hakim",
+    kategori: "Makkiyah",
+    topik_utama: "Wasiat Hikmah Luqman kepada Anaknya: Tauhid, Akhlak, dan Kewajiban Shalat",
+    pemetaan_ayat: [
+      { ayat: "1-11", deskripsi: "Ciri-ciri *Muhsinin* dan celaan terhadap pembeli perkataan kosong penyesat manusia." },
+      { ayat: "12-19", deskripsi: "Nasihat Luqman: Larangan syirik, menghormati orang tua, shalat, dan larangan sombong." },
+      { ayat: "20-34", deskripsi: "Keluasan Ilmu Allah yang tak habis ditulis tinta air laut dan 5 Kunci Gaib." }
+    ]
+  },
+  32: {
+    nama: "As-Sajdah",
+    arti: "Sujud",
+    kategori: "Makkiyah",
+    topik_utama: "Kebenaran Al-Qur'an, Penciptaan Alam Semesta, dan Perbandingan Penghuni Surga-Neraka",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Al-Qur'an wahyu pencipta langit-bumi dan proses penciptaan manusia dari sari pati tanah." },
+      { ayat: "15-22", deskripsi: "Ciri orang beriman yang bersujud, bangun malam (Tahajud), lan balasan Surga." },
+      { ayat: "23-30", deskripsi: "Pemberian Kitab Taurat kepada Nabi Musa AS dan penyelesaian perselisihan di hari kiamat." }
+    ]
+  },
+  33: {
+    nama: "Al-Ahzab",
+    arti: "Golongan yang Bersekutu",
+    kategori: "Madaniyah",
+    topik_utama: "Perang Ahzab (Khandaq), Hukum Adopsi Anak, Pengutamaan Nabi, dan Kewajiban Jilbab",
+    pemetaan_ayat: [
+      { ayat: "1-8", deskripsi: "Anjuran bertaqwa, hukum pengangkatan anak (adopsi), dan perjanjian para nabi." },
+      { ayat: "9-27", deskripsi: "Peristiwa Perang Khandaq (Ahzab), pengkhianatan Bani Quraizhah, dan pertolongan angin kencang." },
+      { ayat: "28-40", deskripsi: "Kedudukan Istri-Istri Nabi (*Ummahatul Mukminin*) dan Penutup Para Nabi (*Khatamun Nabiyyin*)." },
+      { ayat: "41-59", deskripsi: "Perintah banyak berdzikir, etika bertamu rumah Nabi, dan kewajiban mengulurkan Jilbab." },
+      { ayat: "60-73", deskripsi: "Ancaman bagi munafik dan pemikulan Amanah berat oleh manusia." }
+    ]
+  },
+  34: {
+    nama: "Saba'",
+    arti: "Kaum Saba'",
+    kategori: "Makkiyah",
+    topik_utama: "Kekuasaan Allah atas Alam, Mukjizat Nabi Daud & Sulaiman, serta Bencana Negeri Saba'",
+    pemetaan_ayat: [
+      { ayat: "1-9", deskripsi: "Pengetahuan Allah meliputi hal gaib di langit-bumi dan kepastian Kiamat." },
+      { ayat: "10-14", deskripsi: "Mukjizat Nabi Daud AS (Besi Lunak) dan Nabi Sulaiman AS (Mengendalikan Jin & Angin)." },
+      { ayat: "15-21", deskripsi: "Kufur nikmat Penduduk Saba' dan azab Banjir Bandang (*Sailal 'Arim*)." },
+      { ayat: "22-54", deskripsi: "Kelemahan sesembahan selain Allah dan penyesalan pengikut pemimpin sesat." }
+    ]
+  },
+  35: {
+    nama: "Fatir",
+    arti: "Pencipta",
+    kategori: "Makkiyah",
+    topik_utama: "Penciptaan Malaikat, Kebutuhan Manusia kepada Allah, dan Tiga Golongan Pengamalkan Kitab",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Allah Pencipta malaikat bersayap dan ketidakbutuhan Allah kepada makhluk." },
+      { ayat: "15-28", deskripsi: "Manusia butuh kepada Allah (*Faqir*) dan perbedaan orang buta-melihat serta hidup-mati." },
+      { ayat: "29-38", deskripsi: "3 Golongan Penerima Kitab: Dhalim pada diri, Pertengahan (*Muqtasid*), dan Berlomba Kebaikan (*Sabiqun*)." },
+      { ayat: "39-45", deskripsi: "Ancaman bagi perencana kejahatan dan penangguhan azab bagi manusia." }
+    ]
+  },
+  36: {
+    nama: "Ya-Sin",
+    arti: "Ya-Sin",
+    kategori: "Makkiyah",
+    topik_utama: "Jantung Al-Qur'an (*Qalbul Qur'an*): Peringatan Risalah, Kebangkitan, dan Penghuni Surga",
+    pemetaan_ayat: [
+      { ayat: "1-12", deskripsi: "Kebenaran Risalah Nabi Muhammad SAW dan pencatatan setiap amalan manusia." },
+      { ayat: "13-32", deskripsi: "Kisah Penduduk Negeri (*Ashabul Qaryah*) dan Perjuangan Pejuang Tauhid (Habib An-Najjar)." },
+      { ayat: "33-50", deskripsi: "Tanda kekuasaan: Tanah subur, malam-siang, matahari-bulan, dan kapal berlayar." },
+      { ayat: "51-83", deskripsi: "Sangkakala Kiamat, nikmat Penghuni Surga, dan kekuasaan ciptaan Allah (*Kun Fayakun*)." }
+    ]
+  },
+  37: {
+    nama: "As-Saffat",
+    arti: "Barisan-Barisan",
+    kategori: "Makkiyah",
+    topik_utama: "Saf Malaikat Beribadah, Pemurnian Tauhid, dan Ujian Penyembelihan Nabi Ismail AS",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Barisan Malaikat dan penjagaan langit dari lemparan bintang terhadap setan." },
+      { ayat: "11-74", deskripsi: "Bantahan kiamat dan kenikmatan makanan Surga dibanding Pohon Zaqqum Neraka." },
+      { ayat: "75-113", deskripsi: "Kisah Nabi Nuh AS, Kepatuhan Nabi Ibrahim AS saat diperintah menyembelih Nabi Ismail AS." },
+      { ayat: "114-182", deskripsi: "Kisah Nabi Musa, Harun, Ilyas, Luth, Yunus AS, dan penyucian Allah dari tuduhan beranak." }
+    ]
+  },
+  38: {
+    nama: "Sad",
+    arti: "Sad",
+    kategori: "Makkiyah",
+    topik_utama: "Ujian Para Nabi (Daud, Sulaiman, Ayub) dan Awal Mula Kedengkian Iblis",
+    pemetaan_ayat: [
+      { ayat: "1-16", deskripsi: "Kesombongan penentang tauhid dan kehancuran umat-umat terdahulu." },
+      { ayat: "17-40", deskripsi: "Kisah Penyesalan Nabi Daud AS dan Doa Kerajaan Istimewa Nabi Sulaiman AS." },
+      { ayat: "41-64", deskripsi: "Kisah Kesabaran Nabi Ayub AS menghadapi penyakit dan gambaran Surga-Neraka." },
+      { ayat: "65-88", deskripsi: "Penciptaan Nabi Adam AS dari tanah lan Penolakan Iblis untuk bersujud." }
+    ]
+  },
+  39: {
+    nama: "Az-Zumar",
+    arti: "Rombongan-Rombongan",
+    kategori: "Makkiyah",
+    topik_utama: "Pemurnian Ibadah Hanya Untuk Allah (*Ikhlas*) dan Pengampunan Dosa yang Melampaui Batas",
+    pemetaan_ayat: [
+      { ayat: "1-21", deskripsi: "Perintah Ikhlas dalam beragama dan perbedaan orang berilmu (*Ulama*) vs bodoh." },
+      { ayat: "22-52", deskripsi: "Getaran hati saat mendengar Al-Qur'an dan perumpamaan orang syirik." },
+      { ayat: "53-61", deskripsi: "Kabar gembira ampunan Allah bagi hamba yang melampaui batas (*Jangan Putus Asa*)." },
+      { ayat: "62-75", deskripsi: "Tiupan Sangkakala Kiamat dan giringan Rombongan ke Neraka vs Rombongan ke Surga." }
+    ]
+  },
+  40: {
+    nama: "Ghafir / Al-Mu'min",
+    arti: "Maha Pengampun / Orang Beriman",
+    kategori: "Makkiyah",
+    topik_utama: "Sifat Pengampun Allah, Doa Malaikat Pemikul 'Arsy, dan Lelaki Beriman dari Keluarga Fir'aun",
+    pemetaan_ayat: [
+      { ayat: "1-9", deskripsi: "Sifat Allah Maha Pengampun dan Doa Istighfar Malaikat Pemikul 'Arsy untuk orang beriman." },
+      { ayat: "10-22", deskripsi: "Penyesalan orang kafir di Neraka dan kepastian Hari Kiamat (*Yaumal Azifah*)." },
+      { ayat: "23-55", deskripsi: "Kisah Musyawarah Rahasia Lelaki Beriman (*Rajulun Mu'min*) pembela Nabi Musa AS di Istana Fir'aun." },
+      { ayat: "56-85", deskripsi: "Perintah berdoa (*Ud'uni Astajib Lakum*) dan tidak bergunanya iman saat azab sudah datang." }
+    ]
+  },
+  41: {
+    nama: "Fussilat",
+    arti: "Yang Dijelaskan",
+    kategori: "Makkiyah",
+    topik_utama: "Rincian Wahyu Al-Qur'an, Kesaksian Anggota Tubuh, dan Keteguhan Orang Istiqamah",
+    pemetaan_ayat: [
+      { ayat: "1-18", deskripsi: "Penjelasan detail Al-Qur'an dan penciptaan Langit-Bumi dalam 6 masa." },
+      { ayat: "19-32", deskripsi: "Kesaksian Pendengaran, Penglihatan, dan Kulit di Akhirat serta Turunnya Malaikat bagi Orang Istiqamah." },
+      { ayat: "33-46", deskripsi: "Anjuran dakwah terbaik dan membalas kejahatan dengan kebaikan." },
+      { ayat: "47-54", deskripsi: "Bukti kebenaran Al-Qur'an di ufuk alam semesta dan pada diri manusia sendiri." }
+    ]
+  },
+  42: {
+    nama: "Asy-Syura",
+    arti: "Musyawarah",
+    kategori: "Makkiyah",
+    topik_utama: "Prinsip Musyawarah dalam Isu Bersama, Kesatuan Agama Para Nabi, dan Penyebab Musibah",
+    pemetaan_ayat: [
+      { ayat: "1-12", deskripsi: "Kesesuaian Wahyu para Nabi dan Allah Penentu Rezeki para hamba-Nya." },
+      { ayat: "13-29", deskripsi: "Perintah menegakkan agama tanpa berpecah belah dan pengampunan dosa." },
+      { ayat: "30-43", deskripsi: "Musibah akibat perbuatan tangan manusia sendiri dan Ciri Utama: Bermusyawarah (*Syura*)." },
+      { ayat: "44-53", deskripsi: "3 Cara Allah berkomunikasi menurunkan wahyu kepada manusia." }
+    ]
+  },
+  43: {
+    nama: "Az-Zukhruf",
+    arti: "Perhiasan",
+    kategori: "Makkiyah",
+    topik_utama: "Al-Qur'an Berbahasa Arab, Bahaya Menilai Kebenaran dari Perhiasan Dunia, dan Pernyataan Bebas Syirik",
+    pemetaan_ayat: [
+      { ayat: "1-25", deskripsi: "Keutamaan Al-Qur'an di Induk Kitab (*Lauhul Mahfuzh*) dan taklid buta pada nenek moyang." },
+      { ayat: "26-56", deskripsi: "Pernyataan lepas tangan Nabi Ibrahim AS dan bantahan mengukur kenabian dari kekayaan." },
+      { ayat: "57-89", deskripsi: "Penjelasan tuduhan Nabi Isa AS dan penegasan Allah tidak mempunyai anak." }
+    ]
+  },
+  44: {
+    nama: "Ad-Dukhan",
+    arti: "Kabut Asap",
+    kategori: "Makkiyah",
+    topik_utama: "Malam Kemuliaan Lailatul Qadr, Ancaman Siksa Kabut Asap (*Dukhan*), dan Makanan Pohon Zaqqum",
+    pemetaan_ayat: [
+      { ayat: "1-16", deskripsi: "Turunnya Al-Qur'an pada Malam Diberkahi dan ancaman Bencana Kabut (*Dukhan*)." },
+      { ayat: "17-33", deskripsi: "Ujian kaum Fir'aun dan tangisan langit-bumi atas kehancuran mereka." },
+      { ayat: "34-59", deskripsi: "Tujuan penciptaan alam bukan main-main dan gambaran Pohon Zaqqum vs Surga." }
+    ]
+  },
+  45: {
+    nama: "Al-Jatsiyah",
+    arti: "Yang Berlutut",
+    kategori: "Makkiyah",
+    topik_utama: "Tanda Kekuasaan di Seluruh Alam, Peringatan Bagi Pengikut Hawa Nafsu, dan Manusia Berlutut di Akhirat",
+    pemetaan_ayat: [
+      { ayat: "1-13", deskripsi: "Bukti penciptaan manusia, binatang, dan pergantian siang-malam." },
+      { ayat: "14-26", deskripsi: "Bahaya menjadikan Hawa Nafsu sebagai Tuhan (*Ilah*) dan prasangka kaum Ateis/Materialis." },
+      { ayat: "27-37", deskripsi: "Pemandangan Hari Kiamat ketika setiap umat Berlutut (*Jatsiyah*) di depan buku catatan amalnya." }
+    ]
+  },
+  46: {
+    nama: "Al-Ahqaf",
+    arti: "Bukit-Bukit Pasir",
+    kategori: "Makkiyah",
+    topik_utama: "Kisah Kaum 'Ad di Bukit Pasir Al-Ahqaf, Anjuran Berbakti Usia 40 Tahun, dan Jin Mendengarkan Al-Qur'an",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Bantahan Al-Qur'an sebagai sihir dan perintah berbakti pada orang tua." },
+      { ayat: "15-20", deskripsi: "Doa manusia mencapai usia 40 Tahun dan perbedaan anak shalih vs pembangkang." },
+      { ayat: "21-28", deskripsi: "Kisah Nabi Hud AS memperingatkan Kaum 'Ad di Bukit Pasir (*Al-Ahqaf*)." },
+      { ayat: "29-35", deskripsi: "Rombongan Jin mendengarkan bacaan Al-Qur'an dan beriman serta anjuran sabar *Ulul Azmi*." }
+    ]
+  },
+  47: {
+    nama: "Muhammad",
+    arti: "Nabi Muhammad",
+    kategori: "Madaniyah",
+    topik_utama: "Perbedaan Amal Orang Beriman vs Kafir, Ketentuan Peperangan, dan Ujian Kenikmatan",
+    pemetaan_ayat: [
+      { ayat: "1-11", deskripsi: "Penghapusan dosa bagi pengikut Nabi Muhammad SAW dan pertolongan Allah bagi pejuang agama." },
+      { ayat: "12-19", deskripsi: "Perbandingan Kenikmatan Surga (Sungai Air, Susu, Arak, Madu) vs Penghuni Neraka." },
+      { ayat: "20-38", deskripsi: "Penyingkapan kelakuan orang munafik yang takut perang dan larangan bakhil berinfak." }
+    ]
+  },
+  48: {
+    nama: "Al-Fath",
+    arti: "Kemenangan",
+    kategori: "Madaniyah",
+    topik_utama: "Kemenangan Nyata Perjanjian Hudaibiyah, Sumpah Setia *Bai'atur Ridwan*, dan Sifat Sahabat Nabi",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Kemenangan yang Nyata (*Fathan Mubina*) dan peristiwa janji setia *Bai'atur Ridwan*." },
+      { ayat: "11-17", deskripsi: "Alasan bohong orang Badui yang enggan ikut berjuang dan uzur halangan perang." },
+      { ayat: "18-28", deskripsi: "Keridhaan Allah pada sahabat di bawah pohon dan terwujudnya Mimpi Makkah." },
+      { ayat: "29", deskripsi: "Sifat Sahabat Nabi: Keras pada orang kafir penyerang, berkasih sayang antar sesama, dan bekas sujud di wajah." }
+    ]
+  },
+  49: {
+    nama: "Al-Hujurat",
+    arti: "Kamar-Kamar",
+    kategori: "Madaniyah",
+    topik_utama: "Etika Akhlak Sosial Islam: Larangan Ghibah, Prasangka Buruk, Mengolok-olok, dan Persaudaraan Islam",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Etika sopan santun memanggil dan berhadapan dengan Rasulullah SAW." },
+      { ayat: "6-10", deskripsi: "Kewajiban Tabayyun (Klarifikasi Berita Fasik) dan Perdamaian Persaudaraan Islam (*Ukhuwah*)." },
+      { ayat: "11-13", deskripsi: "Larangan mengolok-olok, mencela, memanggil julukan buruk, Prasangka Buruk, Tajassus, dan Ghibah." },
+      { ayat: "14-18", deskripsi: "Perbedaan antara sekadar Islam di bibir dan Keimanan sejati di dalam Hati." }
+    ]
+  },
+  50: {
+    nama: "Qaf",
+    arti: "Qaf",
+    kategori: "Makkiyah",
+    topik_utama: "Hakikat Kematian, Pengawasan Malaikat Raqib-Atid, dan Kedekatan Allah melebihi Urat Leher",
+    pemetaan_ayat: [
+      { ayat: "1-15", deskripsi: "Keheranan pencetus Kiamat dan pembuktian kebangkitan lewat keindahan alam." },
+      { ayat: "16-29", deskripsi: "Penciptaan manusia, Allah lebih dekat dari Urat Leher (*Hablil Warid*), lan catatan Malaikat Raqib-Atid." },
+      { ayat: "30-45", deskripsi: "Sakaratul Maut, giringan ke Mahsyar, pertanyaan ke Neraka Jahannam, dan peringatan Al-Qur'an." }
+    ]
+  },
+  51: {
+    nama: "Az-Zariyat",
+    arti: "Angin yang Menerbangkan",
+    kategori: "Makkiyah",
+    topik_utama: "Tujuan Utama Penciptaan Jin & Manusia Hanya Untuk Beribadah dan Kepastian Rezeki",
+    pemetaan_ayat: [
+      { ayat: "1-23", deskripsi: "Sumpah angin, kepastian balasan, dan tanda rezeki ada di langit." },
+      { ayat: "24-46", deskripsi: "Kisah Malaikat bertamu ke rumah Nabi Ibrahim AS membawa kabar gembira dan kehancuran Kaum Luth." },
+      { ayat: "47-60", deskripsi: "Tujuan Hidup: *\"Dan Aku tidak menciptakan Jin dan Manusia melainkan supaya mereka beribadah kepada-Ku\"* (Ayat 56)." }
+    ]
+  },
+  52: {
+    nama: "At-Tur",
+    arti: "Bukit",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Bukit Tursina, Kepastian Azab Hari Kiamat, dan Kenikmatan Keluarga Surga",
+    pemetaan_ayat: [
+      { ayat: "1-28", deskripsi: "Sumpah demi Bukit Tur dan kenikmatan Penghuni Surga berkumpul bersama keluarganya." },
+      { ayat: "29-49", deskripsi: "Bantahan tuduhan Nabi tukang tenung/penyair dan pertanyaan logis asal-usul penciptaan manusia." }
+    ]
+  },
+  53: {
+    nama: "An-Najm",
+    arti: "Bintang",
+    kategori: "Makkiyah",
+    topik_utama: "Kebenaran Wahyu Nabi, Peristiwa Sidratul Muntaha saat Mi'raj, dan Kebatilan Berhala",
+    pemetaan_ayat: [
+      { ayat: "1-18", deskripsi: "Nabi tidak berbicara dari Hawa Nafsu dan penglihatan Malaikat Jibril di Sidratul Muntaha." },
+      { ayat: "19-32", deskripsi: "Kebatilan berhala Lata, Uzza, Manat, dan larangan menganggap diri paling suci." },
+      { ayat: "33-62", deskripsi: "Prinsip Dosa tidak dipikul orang lain (*Mawaazinu*) dan anjuran Bersujud kepada Allah." }
+    ]
+  },
+  54: {
+    nama: "Al-Qamar",
+    arti: "Bulan",
+    kategori: "Makkiyah",
+    topik_utama: "Mukjizat Terbelahnya Bulan (*Insyiqaqul Qamar*) dan Kemudahan Al-Qur'an Dipelajari",
+    pemetaan_ayat: [
+      { ayat: "1-8", deskripsi: "Mukjizat Terbelahnya Bulan dan kemurkaan pendusta Kiamat." },
+      { ayat: "9-42", deskripsi: "Kehancuran Kaum Nuh, 'Ad, Tsamud, Luth, Fir'aun dan pengulangan ayat: *\"Dan sungguh telah Kami mudahkan Al-Qur'an untuk peringatan...\"*" },
+      { ayat: "43-55", deskripsi: "Segala sesuatu diciptakan menurut Kadar (*Qadar*) dan tempat tinggal orang bertaqwa." }
+    ]
+  },
+  55: {
+    nama: "Ar-Rahman",
+    arti: "Yang Maha Pengasih",
+    kategori: "Madaniyah",
+    topik_utama: "Nikmat-Nikmat Allah dan Pengulangan Teguran: *\"Fabi'ayyi aala'i Rabbikuma Tukadzdziban\"*",
+    pemetaan_ayat: [
+      { ayat: "1-30", deskripsi: "Pengajaran Al-Qur'an, Keseimbangan Timbangan (*Mizan*), dan nikmat penciptaan Manusia & Jin." },
+      { ayat: "31-45", deskripsi: "Tantangan menembus penjuru langit-bumi dan gambaran azab pembalasan." },
+      { ayat: "46-78", deskripsi: "Gambaran 4 Surga, Bidadari, dan pengulangan 31 kali kalimat *\"Maka nikmat Tuhanmu yang manakah yang kamu dustakan?\"*" }
+    ]
+  },
+  56: {
+    nama: "Al-Waqi'ah",
+    arti: "Hari Kiamat",
+    kategori: "Makkiyah",
+    topik_utama: "Kepastian Kiamat dan Pengelompokan Manusia Menjadi 3 Golongan di Akhirat",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Kepastian Peristiwa Hari Kiamat (*Al-Waqi'ah*) dan pembagian 3 Golongan." },
+      { ayat: "11-26", deskripsi: "Golongan Pertama: *As-Sabiqunas Sabiqun* (Orang yang paling dahulu beriman & paling dekat dengan Allah)." },
+      { ayat: "27-40", deskripsi: "Golongan Kedua: *Ashabul Yamin* (Golongan Kanan penerima catatan amal)." },
+      { ayat: "41-56", deskripsi: "Golongan Ketiga: *Ashabussyimal* (Golongan Kiri penghuni air panas dan asap hitam)." },
+      { ayat: "57-96", deskripsi: "Bukti penciptaan Benih, Air, Api, dan Perintah bertasbih menyebut Nama Allah Maha Besar." }
+    ]
+  },
+  57: {
+    nama: "Al-Hadid",
+    arti: "Besi",
+    kategori: "Madaniyah",
+    topik_utama: "Tasbih Seluruh Makhluk, Anjuran Berinfak, Cahaya Orang Beriman, dan Manfaat Besi",
+    pemetaan_ayat: [
+      { ayat: "1-6", deskripsi: "Sifat Allah: Yang Awal, Yang Akhir, Yang Z lahir, dan Yang Batin." },
+      { ayat: "7-17", deskripsi: "Anjuran Infak sebelum Kemenangan Makkah dan Cahaya Terang Berjalan di depan Orang Beriman." },
+      { ayat: "18-24", deskripsi: "Hakikat kehidupan dunia hanyalah permainan dan perlombaan menuju ampunan Allah." },
+      { ayat: "25-29", deskripsi: "Penurunan Kitab, Keadilan Mizan, dan ditutunkannya Besi (*Al-Hadid*) yang memiliki kekuatan dahsyat." }
+    ]
+  },
+  58: {
+    nama: "Al-Mujadilah",
+    arti: "Wanita yang Mengajukan Gugatan",
+    kategori: "Madaniyah",
+    topik_utama: "Pengaduan Keadilan Wanita (*Zihar*), Larangan Pembicaraan Rahasia Kejahatan (*Najwa*), dan Majelis",
+    pemetaan_ayat: [
+      { ayat: "1-6", deskripsi: "Pendengaran Allah atas ucapan gugatan wanita (Khaulah binti Tha'labah) dan Hukum *Zihar*." },
+      { ayat: "7-13", deskripsi: "Larangan Bisikan Rahasia Dosa (*Najwa*) dan Adab Kelapangan dalam Majelis Ilmu." },
+      { ayat: "14-22", deskripsi: "Golongan Syaitan (*Hizbusy Syaithan*) vs Golongan Allah (*Hizbullah*)." }
+    ]
+  },
+  59: {
+    nama: "Al-Hasyr",
+    arti: "Pengusiran",
+    kategori: "Madaniyah",
+    topik_utama: "Pengusiran Yahudi Bani Nadhir, Aturan Harta *Fai'*, dan Ayat-Ayat Asmaul Husna",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Pengusiran Bani Nadhir akibat pengkhianatan dan aturan pembagian Harta *Fai'* agar tidak berputar di orang kaya saja." },
+      { ayat: "11-17", deskripsi: "Janji palsu kaum munafik dan perumpamaan tipu daya Syaitan." },
+      { ayat: "18-24", deskripsi: "Perintah Bertaqwa persiapan esok hari, perumpamaan Al-Qur'an diturunkan di atas Gunung, dan Asmaul Husna." }
+    ]
+  },
+  60: {
+    nama: "Al-Mumtahanah",
+    arti: "Wanita yang Diuji",
+    kategori: "Madaniyah",
+    topik_utama: "Larangan Setia pada Musuh Islam, Teladan Teladan Nabi Ibrahim, dan Pengujian Hijrah Wanita",
+    pemetaan_ayat: [
+      { ayat: "1-7", deskripsi: "Larangan menjadikan musuh Allah sebagai teman setia dan teladan Nabi Ibrahim AS." },
+      { ayat: "8-9", deskripsi: "Aturan Berbuat Baik kepada Orang Kafir yang tidak memerangi Islam." },
+      { ayat: "10-13", deskripsi: "Tata cara pengujian Keimanan Wanita yang berhijrah dan Sumpah Setia (*Bai'at*) Wanita." }
+    ]
+  },
+  61: {
+    nama: "As-Saff",
+    arti: "Barisan",
+    kategori: "Madaniyah",
+    topik_utama: "Barisan Kokoh Pejuang, Larangan Bicara Tanpa Bukti Amal, dan Kabar Kerasulan dari Isa AS",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Kemurkaan Allah pada orang yang mengatakan apa yang tidak dikerjakan dan kecintaan pada Barisan Teratur." },
+      { ayat: "5-9", deskripsi: "Bantahan kaum Musa AS dan Kabar gembira Nabi Isa AS tentang kedatangan Rasul bernama Ahmad (Muhammad SAW)." },
+      { ayat: "10-14", deskripsi: "Perniagaan Utama yang Menyelamatkan dari Azab Pedih: Beriman dan Berjihad." }
+    ]
+  },
+  62: {
+    nama: "Al-Jumu'ah",
+    arti: "Hari Jum'at",
+    kategori: "Madaniyah",
+    topik_utama: "Pengutusan Rasul Penyuci Jiwa, Perumpamaan Keledai Memikul Kitab, dan Kewajiban Shalat Jum'at",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Pengutusan Rasulullah membacakan ayat, menyucikan jiwa, dan mengajarkan Hikmah." },
+      { ayat: "5-8", deskripsi: "Perumpamaan penganut Taurat yang tidak mengamalkannya seperti Keledai memikul kitab tebal." },
+      { ayat: "9-11", deskripsi: "Panggilan Shalat Jum'at: Perintah meninggalkan jual-beli dan bersegera menuju Zikrullah." }
+    ]
+  },
+  63: {
+    nama: "Al-Munafiqun",
+    arti: "Orang-Orang Munafik",
+    kategori: "Madaniyah",
+    topik_utama: "Ciri-Ciri Utama Sifat Kemunafikan, Sumpah Palsu, dan Bahaya Kelalaian Akibat Harta/Anak",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Sumpah tameng orang munafik, fisik yang memukau namun hatinya bagai Kayu Tersandar." },
+      { ayat: "5-8", deskripsi: "Kesombongan ucapan Abdullah bin Ubay bin Salul merendahkan umat beriman." },
+      { ayat: "9-11", deskripsi: "Larangan Harta dan Anak melalaikan Zikrullah serta penyesalan minta diundur Ajal." }
+    ]
+  },
+  64: {
+    nama: "At-Taghabun",
+    arti: "Hari Dinampakkan Kesalahan",
+    kategori: "Madaniyah",
+    topik_utama: "Hari Saling Menyesali (*At-Taghabun*), Ujian Pasangan/Anak, dan Perintah Bertaqwa Semampunya",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Penciptaan manusia beriman/kafir dan Hari Pengungkapan Kesalahan (*At-Taghabun*)." },
+      { ayat: "11-13", deskripsi: "Setiap musibah terjadi atas izin Allah dan perintah Tawakal." },
+      { ayat: "14-18", deskripsi: "Pasangan dan Anak bisa menjadi Musuh/Fitnah dan Perintah Bertaqwa Sesuai Kemampuan." }
+    ]
+  },
+  65: {
+    nama: "At-Talaq",
+    arti: "Perceraian",
+    kategori: "Madaniyah",
+    topik_utama: "Hukum Perceraian, Masa Iddah Wanita, Hak Nafkah, dan Janji Solusi Orang Bertaqwa",
+    pemetaan_ayat: [
+      { ayat: "1-7", deskripsi: "Aturan Talak, Perhitungan Masa Iddah, Hak Tempat Tinggal, dan Janji Jalan Keluar (*Jalan Keluar*) serta Rezeki Tak Terduga bagi Orang Bertaqwa." },
+      { ayat: "8-12", deskripsi: "Peringatan kehancuran negeri yang mendurhakai perintah Allah dan penciptaan 7 Langit." }
+    ]
+  },
+  66: {
+    nama: "At-Tahrim",
+    arti: "Mengharamkan",
+    kategori: "Madaniyah",
+    topik_utama: "Teguran Mengharamkan Halal, Perintah Menjaga Keluarga dari Api Neraka, dan Teladan Wanita",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Teguran Allah kepada Rasulullah yang mengharamkan madu demi menyenangkan istri." },
+      { ayat: "6-8", deskripsi: "Perintah Utama: *\"Peliharalah dirimu dan keluargamu dari api neraka\"* dan Taubat Nasuha." },
+      { ayat: "9-12", deskripsi: "Perbandingan Teladan: Istri Nabi Nuh/Luth (Contoh Buruk) vs Istri Fir'aun (Asiyah) & Maryam (Contoh Baik)." }
+    ]
+  },
+  67: {
+    nama: "Al-Mulk",
+    arti: "Kerajaan",
+    kategori: "Makkiyah",
+    topik_utama: "Kekuasaan Kerajaan Allah, Tujuan Ujian Hidup-Mati, dan Kesempurnaan Ciptaan Langit",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Maha Suci Allah Pemilik Kerajaan dan Pencipta Mati-Hidup untuk Menguji Amal Terbaik (*Ahsanu 'Amala*)." },
+      { ayat: "6-14", deskripsi: "Penyesalan Penghuni Neraka Jahannam yang tidak mau Mendengar dan Berakal." },
+      { ayat: "15-30", deskripsi: "Kemudahan Bumi ditundukkan, Burung mengembang wujud, dan Pertanyaan sumber Air Bersih." }
+    ]
+  },
+  68: {
+    nama: "Al-Qalam",
+    arti: "Pena",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Pena, Keagungan Akhlak Rasulullah, Kisah Pemilik Kebun Bakhil, dan Teguran Nabi Yunus",
+    pemetaan_ayat: [
+      { ayat: "1-16", deskripsi: "Sumpah Pena (*Nun wal Qalam*), Pujian Akhlak Agung Nabi Muhammad, dan larangan ikuti orang bakhil." },
+      { ayat: "17-33", deskripsi: "Kisah Pemilik Kebun (*Ashabul Jannah*) yang bakhil dan kebunnya terbakar dalam semalam." },
+      { ayat: "34-52", deskripsi: "Bantahan persetujuan muslim dengan pendosa dan peringatan jangan seperti Nabi Yunus (*Shahibul Hut*) yang tergesa-gesa." }
+    ]
+  },
+  69: {
+    nama: "Al-Haqqah",
+    arti: "Hari Kiamat yang Pasti",
+    kategori: "Makkiyah",
+    topik_utama: "Kehancuran Kaum 'Ad & Tsamud, Penerimaan Buku Catatan Amal Kanan vs Kiri",
+    pemetaan_ayat: [
+      { ayat: "1-18", deskripsi: "Dahsyatnya Kiamat (*Al-Haqqah*) dan Kehancuran Kaum Tsamud, 'Ad, serta Fir'aun." },
+      { ayat: "19-37", deskripsi: "Kebahagiaan Penyerah Buku Amal Tangan Kanan vs Penyesalan Penyerah Tangan Kiri." },
+      { ayat: "38-52", deskripsi: "Kemurnian Wahyu Al-Qur'an bukan perkataan Penyair atau Dukun." }
+    ]
+  },
+  70: {
+    nama: "Al-Ma'arij",
+    arti: "Tempat-Tempat Naik",
+    kategori: "Makkiyah",
+    topik_utama: "Malaikat Naik ke Langit, Sifat Keluh Kesah Manusia, dan Sifat Penyelamat Shalat",
+    pemetaan_ayat: [
+      { ayat: "1-18", deskripsi: "Tempat naik Malaikat dalam sehari senilai 50 Ribu Tahun dan dahsyatnya adzab kiamat." },
+      { ayat: "19-35", deskripsi: "Sifat Dasar Manusia: Keluh Kesah saat tertimpa Kesusahan & Pelit saat mendapat Kebaikan, KECUALI Orang Shalat." },
+      { ayat: "36-44", deskripsi: "Bantahan bagi orang kafir yang ingin masuk Surga tanpa Keimanan." }
+    ]
+  },
+  71: {
+    nama: "Nuh",
+    arti: "Nabi Nuh",
+    kategori: "Makkiyah",
+    topik_utama: "Perjuangan Dakwah Nabi Nuh AS Selama 950 Tahun, Doa Memohon Hujan, dan Tenggelamnya Kaum",
+    pemetaan_ayat: [
+      { ayat: "1-20", deskripsi: "Seruan Dakwah Malam-Siang Nabi Nuh AS dan Janji Keutamaan Istighfar (Hujan, Harta, Anak)." },
+      { ayat: "21-28", deskripsi: "Tipu daya pemimpin berhala (Wadd, Suwa', Yaghuts, Ya'uq, Nasr) dan Doa Pemusnahan Kaum Kafir." }
+    ]
+  },
+  72: {
+    nama: "Al-Jinn",
+    arti: "Jin",
+    kategori: "Makkiyah",
+    topik_utama: "Mendengarnya Rombongan Jin pada Al-Qur'an, Pengakuan Tauhid Jin, dan Penjagaan Wahyu",
+    pemetaan_ayat: [
+      { ayat: "1-15", deskripsi: "Rombongan Jin mendengarkan Al-Qur'an, takjub, dan beriman serta meninggalkan Syirik." },
+      { ayat: "16-28", deskripsi: "Janji kelapangan rezeki bagi yang istiqamah dan Penjagaan ketat Malaikat terhadap Wahyu." }
+    ]
+  },
+  73: {
+    nama: "Al-Muzzammil",
+    arti: "Orang yang Berselimut",
+    kategori: "Makkiyah",
+    topik_utama: "Perintah Bangun Shalat Malam (*Qiyamullail*), Membaca Al-Qur'an Tartil, dan Keringanan Syariat",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Panggilan Allah kepada Nabi: Bangun Shalat Malam dan Bacalah Al-Qur'an secara Tartil." },
+      { ayat: "11-19", deskripsi: "Ancaman bagi pendusta berharta dan dahsyatnya Kiamat membuat anak beruban." },
+      { ayat: "20", deskripsi: "Keringanan Shalat Malam sesuai kemampuan, perintah membaca Al-Qur'an, Shalat, Zakat, dan Infaq." }
+    ]
+  },
+  74: {
+    nama: "Al-Muddassir",
+    arti: "Orang yang Berkemul",
+    kategori: "Makkiyah",
+    topik_utama: "Awal Perintah Dakwah Terang-terangan, Penyucian Pakaian, dan Penjaga Neraka Saqar",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Perintah Bangun dan Berilah Peringatan! Bersihkan pakaianmu dan tinggalkan dosa!" },
+      { ayat: "11-31", deskripsi: "Kesombongan Walid bin Mughirah dan Ancaman Neraka Saqar yang dijaga 19 Malaikat." },
+      { ayat: "32-56", deskripsi: "Pertanyaan dialogis penghuni Surga kepada Penghuni Saqar: *\"Apakah yang memasukkanmu ke dalam Saqar?\"*" }
+    ]
+  },
+  75: {
+    nama: "Al-Qiyamah",
+    arti: "Hari Kiamat",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Hari Kiamat, Pengumpulan Tulang Belulang, Larangan Menggerakkan Lidah Tergesa-gesa",
+    pemetaan_ayat: [
+      { ayat: "1-15", deskripsi: "Penyusunan kembali Tulang Jari-jemari manusia di Hari Kiamat." },
+      { ayat: "16-19", deskripsi: "Larangan menggerakkan lidah tergesa-gesa menirukan Malaikat Jibril membaca Wahyu." },
+      { ayat: "20-40", deskripsi: "Wajah-wajah berseri melihat Tuhan (*An-Nazhirah*) vs Wajah muram dan fase Sakaratul Maut." }
+    ]
+  },
+  76: {
+    nama: "Al-Insan / Ad-Dahr",
+    arti: "Manusia / Masa",
+    kategori: "Madaniyah",
+    topik_utama: "Penciptaan Manusia dari Setetes Mani, Pemberian Makanan Kebaikan, dan Balasan Surga",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Periode manusia belum disebut dan penciptaan dari setetes mani yang bercampur." },
+      { ayat: "5-22", deskripsi: "Pemberian Makanan (*It'amut Tha'am*) kepada Orang Miskin, Anak Yatim, Tawanan demi Allah dan Balasan Surga." },
+      { ayat: "23-31", deskripsi: "Anjuran Bersabar menetapkan hukum dan Dzikir Pagi-Petang." }
+    ]
+  },
+  77: {
+    nama: "Al-Mursalat",
+    arti: "Malaikat-Malaikat yang Diutus",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Malaikat Diutus, Kehancuran Pendusta, dan Pengulangan Teguran *\"Wailuy Yauma'idzil Lil Mukadzdzibin\"*",
+    pemetaan_ayat: [
+      { ayat: "1-15", deskripsi: "Sumpah Malaikat yang diutus dan kepastian hari keputusan." },
+      { ayat: "16-50", deskripsi: "Penciptaan Air Hina (Mani) dan pengulangan 10 kali: *\"Celakalah pada hari itu bagi orang-orang yang mendustakan!\"*" }
+    ]
+  },
+  78: {
+    nama: "An-Naba'",
+    arti: "Berita Besar",
+    kategori: "Makkiyah",
+    topik_utama: "Berita Besar Hari Kiamat (*An-Naba'ul 'Azhim*), Hamparan Bumi, dan Penyesalan Orang Kafir",
+    pemetaan_ayat: [
+      { ayat: "1-16", deskripsi: "Pertanyaan Berita Besar Kiamat dan bukti nikmat: bumi hamparan, gunung pasak, tidur istirahat." },
+      { ayat: "17-30", deskripsi: "Hari Keputusan (*Yaumal Fashl*), Tiupan Sangkakala, dan azab Neraka Jahannam." },
+      { ayat: "31-40", deskripsi: "Kemenangan Orang Bertaqwa (*Mafaza*) dan jeritan orang kafir: *\"Betapa senangnya jika aku menjadi tanah saja!\"*" }
+    ]
+  },
+  79: {
+    nama: "An-Nazi'at",
+    arti: "Malaikat-Malaikat yang Mencabut",
+    kategori: "Makkiyah",
+    topik_utama: "Pencabutan Nyawa Keras vs Lembut, Kehancuran Fir'aun, dan Kiamat Penjaga Nafsu",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Sumpah Malaikat Pencabut Nyawa secara Keras vs Lembut dan Guncangan Kiamat." },
+      { ayat: "15-26", deskripsi: "Kisah Nabi Musa AS memperingatkan Fir'aun yang mengaku *\"Akulah Tuhanmu yang paling tinggi\"*." },
+      { ayat: "27-46", deskripsi: "Penciptaan Langit lebih sulit dan Surga bagi orang yang Menahan Hawa Nafsu." }
+    ]
+  },
+  80: {
+    nama: "'Abasa",
+    arti: "Ia Bermuka Masam",
+    kategori: "Makkiyah",
+    topik_utama: "Teguran Bermuka Masam pada Sahabat Buta (Abdullah bin Ummi Maktum) dan Makanan Manusia",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Teguran Allah kepada Rasulullah karena bermuka masam pada sahabat buta yang ingin belajar." },
+      { ayat: "11-32", deskripsi: "Kemuliaan Lembaran Al-Qur'an dan Kufur nikmat manusia atas Makanan yang ditumbuhkan." },
+      { ayat: "33-42", deskripsi: "Tiupan Pekat Kiamat (*As-Sakhkhah*) membuat manusia lari dari saudara, ibu, ayah, dan anaknya." }
+    ]
+  },
+  81: {
+    nama: "At-Takwir",
+    arti: "Mengulung",
+    kategori: "Makkiyah",
+    topik_utama: "Kejadian Dahsyat Kiamat (Matahari Digulung), Pertanyaan Bayi Perempuan Ditanam Hidup-Hidup",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Matahari digulung, bintang berjatuhan, dan Bayi Perempuan yang dikubur hidup-hidup (*Wa'iidatu*) ditanya." },
+      { ayat: "15-29", deskripsi: "Sumpah Bintang Beredar dan Al-Qur'an bukan perkataan Setan Terkutuk." }
+    ]
+  },
+  82: {
+    nama: "Al-Infitar",
+    arti: "Terbelah",
+    kategori: "Makkiyah",
+    topik_utama: "Langit Terbelah, Lautan Meluap, Pencatatan Malaikat Kiraman Katibin",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Langit terbelah, bintang bertaburan, lautan dimuntahkan, dan kuburan dibongkar." },
+      { ayat: "6-12", deskripsi: "Teguran kelalaian manusia pada Tuhan Yang Maha Pemurah dan Pengawasan Malaikat *Kiraman Katibin*." },
+      { ayat: "13-19", deskripsi: "Pembalasan Orang Berbakti (*Abrar*) vs Orang Durhaka (*Fujjar*) pada Hari Pembalasan (*Yaumuddin*)." }
+    ]
+  },
+  83: {
+    nama: "Al-Muthaffifin",
+    arti: "Orang-Orang yang Curang",
+    kategori: "Makkiyah",
+    topik_utama: "Ancaman Kecurangan Timbangan, Catatan Kitab *Sijjin* vs *'Illiyyun*",
+    pemetaan_ayat: [
+      { ayat: "1-6", deskripsi: "Celaka bagi orang yang Curang Timbangan: Minta dipenuhi saat membeli, mengurangi saat menimbang." },
+      { ayat: "7-17", deskripsi: "Catatan Kejahatan Orang Durhaka tersimpan dalam Kitab *Sijjin*." },
+      { ayat: "18-36", deskripsi: "Catatan Kebaikan Orang Bertaqwa tersimpan dalam Kitab *'Illiyyun* dan Balasan Minuman Suci." }
+    ]
+  },
+  84: {
+    nama: "Al-Insyiqaq",
+    arti: "Terbelah",
+    kategori: "Makkiyah",
+    topik_utama: "Kepatuhan Langit-Bumi Hancur, Kesusahan Perjuangan Manusia Menemui Tuhan",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Langit terbelah dan bumi diratakan memuntahkan isinya mengikut perintah Tuhan." },
+      { ayat: "6-15", deskripsi: "Manusia bekerja keras menuju Tuhannya: Penyerahan catatan dari Kanan vs dari Belakang Punggung." },
+      { ayat: "16-25", deskripsi: "Sumpah Merahnya Senja dan tahapan kehidupan yang harus dilalui manusia." }
+    ]
+  },
+  85: {
+    nama: "Al-Buruj",
+    arti: "Gugusan Bintang",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Gugusan Bintang, Kisah Kekejaman Pembuat Parit Api (*Ashabul Ukhdud*), dan Pemeliharaan Kitab",
+    pemetaan_ayat: [
+      { ayat: "1-9", deskripsi: "Kisah Pembantaian Pembuat Parit Api (*Ashabul Ukhdud*) membakar orang beriman." },
+      { ayat: "10-22", deskripsi: "Azab pembakar orang beriman, Keagungan Allah Pemilik 'Arsy, dan Al-Qur'an terjaga di *Lauhul Mahfuzh*." }
+    ]
+  },
+  86: {
+    nama: "At-Tariq",
+    arti: "Yang Datang di Malam Hari",
+    kategori: "Makkiyah",
+    topik_utama: "Bintang Penembus Gelap (*At-Tariq*), Penciptaan Manusia dari Air Memancar, dan Al-Qur'an Pembeda",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Sumpah Bintang Cahaya Terang (*At-Tariq*) dan Penciptaan Manusia dari Air yang Memancar (*Maa'in Daafiq*)." },
+      { ayat: "11-17", deskripsi: "Al-Qur meupakan perkataan Pembeda Hak-Batil (*Qaulum Fashl*) bukan gurauan." }
+    ]
+  },
+  87: {
+    nama: "Al-A'la",
+    arti: "Yang Maha Tinggi",
+    kategori: "Makkiyah",
+    topik_utama: "Penyucian Nama Allah Maha Tinggi, Jaminan Kemudahan Menghafal Wahyu, dan Kitab-Kitab Dahulu",
+    pemetaan_ayat: [
+      { ayat: "1-8", deskripsi: "Perintah Bertasbih menyucikan Nama Allah Yang Maha Tinggi dan Jaminan Kemudahan Menghafal." },
+      { ayat: "9-19", deskripsi: "Keberuntungan Orang yang Menyucikan Diri (*Thahir*) dan Lembaran Kitab Ibrahim & Musa." }
+    ]
+  },
+  88: {
+    nama: "Al-Ghasyiyah",
+    arti: "Hari Pembalasan yang Menutupi",
+    kategori: "Makkiyah",
+    topik_utama: "Dahsyatnya Hari Kiamat, Wajah Tunduk Terbakar vs Wajah Berseri, dan Renungan Ciptaan Unta",
+    pemetaan_ayat: [
+      { ayat: "1-7", deskripsi: "Wajah-wajah Khusyu' Tunduk Terbakar Api dan Makanan Duri (*Dhari'*) Penghuni Neraka." },
+      { ayat: "8-16", deskripsi: "Wajah-wajah Berseri-seri Nikmat di Surga Tinggi tanpa mendengar perkataan sia-sia." },
+      { ayat: "17-26", deskripsi: "Perintah Merenungkan Ciptaan: Unta, Langit, Gunung, Bumi, dan Tugas Rasul Hanya Memberi Peringatan." }
+    ]
+  },
+  89: {
+    nama: "Al-Fajr",
+    arti: "Fajar",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Waktu Fajar, Kehancuran Kaum 'Ad (Iram) & Tsamud, Ujian Harta, dan Jiwa yang Tenang",
+    pemetaan_ayat: [
+      { ayat: "1-14", deskripsi: "Sumpah Fajar, Malam Sepuluh, dan Peringatan Kehancuran Kaum 'Ad (Iram), Tsamud, dan Fir'aun." },
+      { ayat: "15-26", deskripsi: "Ujian Manusia saat dimuliakan vs disempitkan Rezeki serta kecaman enggan memberi makan Anak Yatim." },
+      { ayat: "27-30", deskripsi: "Panggilan Indah kepada Jiwa yang Tenang (*Ya Ayyatuhan Nafsul Muthma'innah*) Masuk ke dalam Surga." }
+    ]
+  },
+  90: {
+    nama: "Al-Balad",
+    arti: "Negeri",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Kota Mekkah, Manusia Diciptakan Bersusah Payah, dan Jalan Mendaki yang Sukar",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Sumpah Kota Mekkah (*Al-Balad*) dan Manusia diciptakan berada dalam Kesusahan Payah (*Kabad*)." },
+      { ayat: "11-20", deskripsi: "Jalan Mendaki lagi Sukar (*Aqabah*): Memerdekakan Budak dan Memberi Makan Yatim/Miskin saat Kelaparan." }
+    ]
+  },
+  91: {
+    nama: "Asy-Syams",
+    arti: "Matahari",
+    kategori: "Makkiyah",
+    topik_utama: "11 Sumpah Alam Semesta, Keberuntungan Menyucikan Jiwa vs Kehancuran Mengotorinya (Kaum Tsamud)",
+    pemetaan_ayat: [
+      { ayat: "1-10", deskripsi: "Rangkaian Sumpah Matahari, Bulan, Siang, Malam, Langit, Bumi dan Keberuntungan Penyucian Jiwa (*Zakkaha*)." },
+      { ayat: "11-15", deskripsi: "Kehancuran Kaum Tsamud akibat membunuh Unta Betina Nabi Shalih AS (*Naaqatallah*)." }
+    ]
+  },
+  92: {
+    nama: "Al-Lail",
+    arti: "Malam",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Malam & Siang, Perbedaan Usaha Manusia (Dermawan Bertaqwa vs Bakhil Membangkang)",
+    pemetaan_ayat: [
+      { ayat: "1-7", deskripsi: "Jalan Kemudahan bagi Orang yang Dermawan, Bertaqwa, dan Membenarkan Kebaikan." },
+      { ayat: "8-13", deskripsi: "Jalan Kesukaran bagi Orang yang Bakhil, Merasa Cukup, dan Mendustakan Kebaikan." },
+      { ayat: "14-21", deskripsi: "Ancaman Api Menyala-nyala (*Naran Talazh-zha*) dan Keselamatan Orang Suci Murni Mencari Keridhaan Allah." }
+    ]
+  },
+  93: {
+    nama: "Ad-Duha",
+    arti: "Waktu Dhuha",
+    kategori: "Makkiyah",
+    topik_utama: "Hiburan Allah kepada Rasulullah SAW: Tuhan Tidak Meninggalkanmu dan Akhirat Lebih Baik dari Dunia",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Sumpah Waktu Dhuha & Malam Sunyi: Tuhanmu tidak meninggalkanmu dan Akhirat lebih baik bagimu." },
+      { ayat: "6-11", deskripsi: "Perlindungan Allah sejak Yatim, Bingung, Miskin dan Perintah Jangan Mencegah Yatim/Peminta." }
+    ]
+  },
+  94: {
+    nama: "Ash-Syarh / Al-Insyirah",
+    arti: "Kelapangan",
+    kategori: "Makkiyah",
+    topik_utama: "Kelapangan Dada Nabi, Pengangkatan Beban, dan Janji Kemudahan Bersama Kesulitan",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Kelapangan Dada, Pelepasan Beban Berat Punggung, dan Pengangkatan Sebutan Nama Nabi." },
+      { ayat: "5-8", deskripsi: "Prinsip Utama: *\"Sesungguhnya bersama Kesulitan ada Kemudahan\"* (Diulang 2x) dan Perintah Tetap Bekerja Keras." }
+    ]
+  },
+  95: {
+    nama: "At-Tin",
+    arti: "Buah Tin",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Buah Tin, Zaitun, Bukit Sinai, Penciptaan Manusia Bentuk Terbaik vs Tempat Terendah",
+    pemetaan_ayat: [
+      { ayat: "1-3", deskripsi: "Sumpah Buah Tin, Zaitun, Gunung Sinai, dan Kota Mekkah yang Aman." },
+      { ayat: "4-8", deskripsi: "Penciptaan Manusia Bentuk Terbaik (*Ahsani Taqwim*), Dikembalikan ke Tempat Terendah KECUALI yang Beriman." }
+    ]
+  },
+  96: {
+    nama: "Al-'Alaq",
+    arti: "Segumpal Darah",
+    kategori: "Makkiyah",
+    topik_utama: "Wahyu Pertama Al-Qur'an (Iqra'), Penciptaan Manusia, Pena Ilmu, dan Pembangkangan Abu Jahal",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Wahyu Pertama: Perintah Membaca (*Iqra'*), Penciptaan dari Segumpal Darah, dan Pena Ilmu." },
+      { ayat: "6-19", deskripsi: "Kecenderungan Manusia Melampaui Batas saat Merasa Kaya dan Larangan Menuruti Penghalang Shalat (Abu Jahal)." }
+    ]
+  },
+  97: {
+    nama: "Al-Qadr",
+    arti: "Kemuliaan",
+    kategori: "Makkiyah",
+    topik_utama: "Malam Kemuliaan Lailatul Qadr yang Lebih Baik dari Seribu Bulan dan Turunnya Malaikat",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Turunnya Al-Qur'an pada Malam Lailatul Qadr, Keutamaan Lebih Baik dari 1000 Bulan, dan Kesejahteraan hingga Fajar." }
+    ]
+  },
+  98: {
+    nama: "Al-Bayyinah",
+    arti: "Bukti yang Nyata",
+    kategori: "Madaniyah",
+    topik_utama: "Kedatangan Rasul Sebagai Bukti Nyata, Kemurnian Agama Tauhid, dan Seburuk/Sebaik-baik Makhluk",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Kedatangan Bukti Nyata (*Al-Bayyinah*) dan Perintah Menyembah Allah secara Ikhlas Murni (*Hunafa'*)." },
+      { ayat: "6-8", deskripsi: "Orang Kafir Seburuk-buruk Makhluk (*Syarrul Bariyyah*) vs Orang Beriman Sebaik-baik Makhluk (*Khairul Bariyyah*)." }
+    ]
+  },
+  99: {
+    nama: "Az-Zalzalah",
+    arti: "Goncangan Dahsyat",
+    kategori: "Madaniyah",
+    topik_utama: "Goncangan Dahsyat Kiamat, Bumi Membongkar Rahasia Isi, dan Perhitungan Dzarrah Sekecil Apa Pun",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Goncangan Dahsyat Bumi (*Zilzalaha*), Bumi mengeluarkan isinya, dan menceritakan beritanya." },
+      { ayat: "6-8", deskripsi: "Perhitungan Amal Presisi: Kebaikan seberat Dzarrah (*Biji Sawi*) maupun Kejahatan seberat Dzarrah akan Terlihat." }
+    ]
+  },
+  100: {
+    nama: "Al-'Adiyat",
+    arti: "Kuda Perang yang Berlari Kencang",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Kuda Perang, Sifat Kufur Nikmat Manusia, dan Sifat Sangat Mencintai Harta",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Sumpah Kuda Perang Berlari Kencang Terengah-engah Menerbangkan Debu Musuh." },
+      { ayat: "6-11", deskripsi: "Manusia Sangat Ingkar Nikmat pada Tuhannya, Sangat Mencintai Harta, dan Pengungkapan Isi Dada di Kubur." }
+    ]
+  },
+  101: {
+    nama: "Al-Qari'ah",
+    arti: "Hari Kiamat yang Menggetarkan",
+    kategori: "Makkiyah",
+    topik_utama: "Dahsyatnya Hari Kiamat (*Al-Qari'ah*), Manusia Seperti Anai-Anai, dan Timbangan Berat vs Ringan",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Dahsyatnya Kiamat (*Al-Qari'ah*): Manusia seperti Anai-Anai Laron Beterbangan & Gunung Seperti Bulu Dihamburkan." },
+      { ayat: "6-11", deskripsi: "Timbangan Amal Berat = Kehidupan Memuaskan vs Timbangan Ringan = Neraka Hawiyah (Api Sangat Panas)." }
+    ]
+  },
+  102: {
+    nama: "At-Takasur",
+    arti: "Bermegah-Megahan",
+    kategori: "Makkiyah",
+    topik_utama: "Kelalaian Akibat Berlomba Bermegah-megahan Harta Hingga Masuk Liang Kubur",
+    pemetaan_ayat: [
+      { ayat: "1-8", deskripsi: "Berlomba Bermegah-megahan (*At-Takasur*) Melalaikan Manusia Hingga Masuk Kubur dan Pertanyaan Nikmat." }
+    ]
+  },
+  103: {
+    nama: "Al-'Asr",
+    arti: "Masa / Waktu",
+    kategori: "Makkiyah",
+    topik_utama: "Sumpah Demi Masa: Seluruh Manusia Kerugian KECUALI yang Beriman, Beramal Shalih, dan Saling Menasehati",
+    pemetaan_ayat: [
+      { ayat: "1-3", deskripsi: "Sumpah Demi Masa (*Wal 'Asr*): Manusia Sungguh Rugi KECUALI yang Beriman, Beramal Shalih, Saling Menasehati Kebenaran & Kesabaran." }
+    ]
+  },
+  104: {
+    nama: "Al-Humazah",
+    arti: "Pengumpat",
+    kategori: "Makkiyah",
+    topik_utama: "Ancaman Bagi Pengumpat, Pencela, Pengumpul Harta, dan Azab Neraka Huthamah",
+    pemetaan_ayat: [
+      { ayat: "1-9", deskripsi: "Celaka bagi Pengumpat & Pencela (*Humazatil Lumazah*) Mengira Harta Mengekalkannya; Dihempaskan ke Neraka Huthamah." }
+    ]
+  },
+  105: {
+    nama: "Al-Fil",
+    arti: "Gajah",
+    kategori: "Makkiyah",
+    topik_utama: "Kehancuran Pasukan Bergajah Abrahah Oleh Burung Ababil Pembawa Batu Neraka",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Pemusnahan Pasukan Bergajah Raja Abrahah Penyerang Ka'bah Oleh Rombongan Burung Ababil Menjadi Seperti Daun Dimakan Ulat." }
+    ]
+  },
+  106: {
+    nama: "Quraisy",
+    arti: "Suku Quraisy",
+    kategori: "Makkiyah",
+    topik_utama: "Peringatan Nikmat Kebiasaan Bepergian Suku Quraisy dan Perintah Menyembah Pemilik Ka mekkah",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Kebiasaan Bepergian Suku Quraisy Musim Dingin & Panas; Perintah Menyembah Tuhan Pemilik Rumah Ini (Ka'bah)." }
+    ]
+  },
+  107: {
+    nama: "Al-Ma'un",
+    arti: "Barang-Barang yang Berguna",
+    kategori: "Makkiyah",
+    topik_utama: "Ciri Pendusta Agama: Menghardik Anak Yatim, Enggan Memberi Makan Miskin, dan Shalat Lalai/Riya'",
+    pemetaan_ayat: [
+      { ayat: "1-7", deskripsi: "Pendusta Agama: Menghardik Yatim, Enggan Beri Makan Miskin, Celaka Orang Shalat yang Lalai, Riya', & Enggan Tolong-menolong." }
+    ]
+  },
+  108: {
+    nama: "Al-Kausar",
+    arti: "Nikmat yang Banyak",
+    kategori: "Makkiyah",
+    topik_utama: "Pemberian Nikmat Berlimpah (Telaga Al-Kausar), Perintah Shalat & Qurban, serta Terputusnya Pembenci Nabi",
+    pemetaan_ayat: [
+      { ayat: "1-3", deskripsi: "Pemberian Nikmat Berlimpah (*Al-Kausar*); Perintah Shalat & Berqurban (*Wanhar*); Orang Pembenci Nabi Dialah yang Terputus." }
+    ]
+  },
+  109: {
+    nama: "Al-Kafirun",
+    arti: "Orang-Orang Kafir",
+    kategori: "Makkiyah",
+    topik_utama: "Penegasan Toleransi Aqidah: Tidak Ada Kompromi Penyembahan (*Lakum Dinukum Waliyadin*)",
+    pemetaan_ayat: [
+      { ayat: "1-6", deskripsi: "Pernyataan Beda Sesembahan dengan Orang Kafir dan Prinsip Toleransi Tegas: *\"Untukmu Agamamu, dan Untukku Agamaku\"*." }
+    ]
+  },
+  110: {
+    nama: "An-Nashr",
+    arti: "Pertolongan",
+    kategori: "Madaniyah",
+    topik_utama: "Kabar Gembira Pertolongan Allah, Kemenangan Makkah (*Fathu Makkah*), dan Perintah Bertasbih/Istighfar",
+    pemetaan_ayat: [
+      { ayat: "1-3", deskripsi: "Datangnya Pertolongan Allah & Kemenangan Makkah; Manusia Berbondong Masuk Agama Allah; Perintah Bertasbih & Minta Ampun." }
+    ]
+  },
+  111: {
+    nama: "Al-Lahab / Al-Masad",
+    arti: "Gejolak Api / Tali Sabut",
+    kategori: "Makkiyah",
+    topik_utama: "Kehancuran Abu Lahab dan Istrinya Pembawa Kayu Bakar Akibat Memusuhi Dakwah Nabi",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Binasalah Kedua Tangan Abu Lahab & Harta Tak Berguna; Masuk Api Bergejolak Bersama Istrinya Pembawa Tali Sabut di Leher." }
+    ]
+  },
+  112: {
+    nama: "Al-Ikhlas",
+    arti: "Ikhlas / Pemurnian Tauhid",
+    kategori: "Makkiyah",
+    topik_utama: "Hakekat Pemurnian Tauhid: Allah Maha Esa, Tempat Memohon, Tidak Beranak dan Tidak Diperanakkan",
+    pemetaan_ayat: [
+      { ayat: "1-4", deskripsi: "Katakanlah Allah Maha Esa (*Ahad*), Tempat Bergantung (*Ash-Shamad*), Tidak Beranak/Diperanakkan, & Tiada Setara Dengan-Nya." }
+    ]
+  },
+  113: {
+    nama: "Al-Falaq",
+    arti: "Waktu Subuh",
+    kategori: "Makkiyah",
+    topik_utama: "Permohonan Perlindungan Kepada Allah dari Kejahatan Makhluk, Gelap Malam, Sihir, dan Orang Dengki",
+    pemetaan_ayat: [
+      { ayat: "1-5", deskripsi: "Perlindungan kepada Tuhan Waktu Subuh (*Al-Falaq*) dari Kejahatan Makhluk, Gelap Malam, Penyihir Pentiup Tali, & Orang Dengki (*Hasid*)." }
+    ]
+  },
+  114: {
+    nama: "An-Nas",
+    arti: "Manusia",
+    kategori: "Makkiyah",
+    topik_utama: "Permohonan Perlindungan Kepada Allah (Raja & Tembusan Manusia) dari Bisikan Setan (*Al-Waswas*) Golongan Jin dan Manusia",
+    pemetaan_ayat: [
+      { ayat: "1-6", deskripsi: "Perlindungan kepada Tuhan, Raja, Sesembahan Manusia dari Bisikan Kejahatan Setan Pembisik (*Al-Waswas*) dari Golongan Jin dan Manusia." }
+    ]
   }
-]
+};
+
+// FUNGSI PENGAMBILAN DATA MAPPING SURAH SECARA AMAN (VALIDASI & ERROR HANDLING)
+function getSurahMapping(surahNumber) {
+  try {
+    if (!surahNumber || isNaN(surahNumber)) {
+      throw new Error("Nomor surah tidak valid.");
+    }
+    
+    const mapping = SURAH_MAPPING[surahNumber];
+    if (!mapping) {
+      return {
+        nama: "Tidak Diketahui",
+        arti: "-",
+        kategori: "-",
+        topik_utama: "Data pemetaan tematik belum tersedia untuk surah ini.",
+        pemetaan_ayat: []
+      };
+    }
+    return mapping;
+  } catch (error) {
+    console.error("Gagal mengambil data pemetaan surah:", error);
+    return null;
+  }
+}
