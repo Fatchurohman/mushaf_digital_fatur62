@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mushaf Digital - Card Tematik</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Container Card Utama */
+        .surah-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Box Peta Kandungan Tematik */
+        .peta-box {
+            background-color: #242420;
+            border-left: 3px solid #d4a373;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .peta-title {
+            color: #d4a373;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .peta-content {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        /* Efek Clamp saat terpotong */
+        .peta-content.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* Tampilkan maks 4 baris */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Tombol Baca Selengkapnya */
+        .btn-toggle-read {
+            background: none;
+            border: none;
+            color: #d4a373;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 0 0 0;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-toggle-read:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="surah-card">
+        <!-- Box Peta Kandungan -->
+        <div class="peta-box">
+            <div class="peta-title">Peta Kandungan (Mapping Tematik)</div>
+            <div class="peta-content collapsed" id="peta-text">
+                <!-- Data Teks Penuh di-render di sini -->
+            </div>
+            <button class="btn-toggle-read" id="btn-read-more" style="display: none;">
+                <span id="btn-text">Selengkapnya</span> ▼
+            </button>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            // Data JSON Dummy Peta Tematik
+            const rawData = JSON.stringify({
+                surahName: "Asy-Syu'ara'",
+                petaTematik: "Peta Tematik Surah Asy-Syu'ara' (Para Penyair): Surat ini terdiri dari 227 ayat termasuk golongan surat-surat Makkiyyah. Dinamakan Asy Syu'araa' (kata jamak dari Asy Syaa'ir yang berarti penyair) diambil dari kata Asy Syuaraa' yang terdapat pada ayat 224, yaitu pada bagian terakhir surat ini, di mana Allah SWT menegaskan kedudukan para penyair dan memperbandingkan mereka dengan para nabi."
+            });
+
+            function escapeHtml(str) {
+                if (typeof str !== "string") return "";
+                return str
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function renderPetaTematik(jsonString) {
+                const textContainer = document.getElementById("peta-text");
+                const btnReadMore = document.getElementById("btn-read-more");
+                const btnText = document.getElementById("btn-text");
+
+                if (!textContainer || !btnReadMore) return;
+
+                try {
+                    const data = JSON.parse(jsonString);
+                    const deskripsiRaw = data?.petaTematik;
+
+                    // Validasi aman null / undefined
+                    const deskripsi = (typeof deskripsiRaw === "string" && deskripsiRaw.trim() !== "")
+                        ? deskripsiRaw
+                        : "Peta kandungan tematik belum tersedia.";
+
+                    textContainer.innerHTML = escapeHtml(deskripsi);
+
+                    // Cek apakah teks cukup panjang untuk butuh tombol "Selengkapnya"
+                    // Jika panjang karakter > 150, munculkan tombol toggle
+                    if (deskripsi.length > 150) {
+                        btnReadMore.style.display = "inline-block";
+
+                        btnReadMore.addEventListener("click", () => {
+                            const isCollapsed = textContainer.classList.contains("collapsed");
+
+                            if (isCollapsed) {
+                                textContainer.classList.remove("collapsed");
+                                btnText.textContent = "Sembunyikan";
+                                btnReadMore.innerHTML = `<span id="btn-text">Sembunyikan</span> ▲`;
+                            } else {
+                                textContainer.classList.add("collapsed");
+                                btnText.textContent = "Selengkapnya";
+                                btnReadMore.innerHTML = `<span id="btn-text">Selengkapnya</span> ▼`;
+                            }
+                        });
+                    }
+
+                } catch (err) {
+                    console.error("Error parsing JSON Peta Tematik:", err);
+                    textContainer.innerHTML = "Gagal memuat peta kandungan.";
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                renderPetaTematik(rawData);
+            });
+        })();
+    </script>
+</body>
+</html>
