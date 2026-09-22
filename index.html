@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mushaf Digital - Mapping Tematik</title>
+  <link rel="stylesheet" href="style.css?v=11.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Scheherazade+New:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Utama -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="header-info">
+        <h1 class="app-title">MUSHAF DIGITAL</h1>
+        <span id="current-surah-title" class="app-subtitle">Al-Fatihah</span>
+      </div>
+
+      <!-- Badge Developer Lengkap & Counter Pengunjung -->
+      <div class="header-meta-group" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <div class="dev-badge-luxury">
+          <div class="pulse-container">
+            <span class="status-pulse"></span>
+            <span class="status-ring"></span>
+          </div>
+          <span class="dev-label">DEVELOPER</span>
+          <span class="dev-name">fatur62</span>
+        </div>
+
+        <div class="visitor-badge" style="background: rgba(22, 27, 34, 0.8); border: 1px solid var(--border-color); padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--gold-light); display: flex; align-items: center; gap: 5px;">
+          <span>👁️</span>
+          <span id="visitor-count">...</span> Pengunjung
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA ACTIONS (BARIS ATAS & BARIS BAWAH RAPI DENGAN SINGLE ID) -->
+    <div class="header-actions" style="display: flex; flex-direction: column; align-items: stretch; gap: 6px;">
+      
+      <!-- Baris 1: Select Qori + Pilih Surah -->
+      <div class="actions-top-row" style="display: flex; align-items: center; gap: 6px;">
+        <select id="select-qori" class="select-qori-dropdown" title="Pilih Suara Qari" style="flex: 1;">
+          <option value="05">Mishary Rashid Al-Afasy</option>
+          <option value="01" selected>Abdullah Al-Juhany</option>
+          <option value="02">Abdul Muhsin Al-Qasim</option>
+          <option value="03">Abdurrahman As-Sudais</option>
+          <option value="04">Ibrahim Al-Dossari</option>
+        </select>
+        <button id="btn-pilih-surah" class="btn-pilih" style="white-space: nowrap;">Pilih Surah</button>
+      </div>
+
+      <!-- Baris 2: Lanjut Baca Terakhir Posisi Center di Bawah -->
+      <button id="btn-last-read" class="btn-bookmark" title="Lanjut Baca Terakhir" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 6px 12px; cursor: pointer;">
+        <span>🔖</span>
+        <span style="font-size: 0.8rem; font-weight: 600;">Lanjut Baca Terakhir</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Area Konten Utama Surah -->
+  <main id="quran-container" class="quran-container">
+    <!-- Content & Audio Player dirender dinamis -->
+  </main>
+
+  <!-- Popup / Modal Daftar Surah & Mapping -->
+  <div id="modal-surah" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Peta Mapping Surah</h3>
+        <button id="btn-close-modal" class="btn-close">&times;</button>
+      </div>
+
+      <!-- Tab Filter Quick-Mapping -->
+      <div class="mapping-tabs">
+        <button class="tab-btn active" data-filter="all">Semua</button>
+        <button class="tab-btn" data-filter="makkiyah">Makkiyah</button>
+        <button class="tab-btn" data-filter="madaniyah">Madaniyah</button>
+        <button class="tab-btn" data-filter="juz30">Juz 'Amma</button>
+      </div>
+
+      <!-- Input Pencarian Surah -->
+      <div class="search-box-container">
+        <input type="text" id="input-search-surah" class="search-input" placeholder="Cari nama atau nomor surah..." autocomplete="off">
+      </div>
+
+      <div id="surah-list-container" class="modal-body">
+        <!-- List Surah -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL Pop-up Deskripsi Mapping Tematik Lengkap -->
+  <div id="modal-deskripsi-mapping" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-mapping-title">Peta Kandungan (Mapping Tematik)</h3>
+        <button id="btn-close-modal-mapping" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 16px; line-height: 1.6; color: #e0e0e0; font-size: 0.95rem;">
+        <p id="modal-mapping-content" style="margin: 0; white-space: pre-line; word-break: break-word;">
+          <!-- Teks deskripsi lengkap diisi melalui JS -->
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js?v=11.0"></script>
+</body>
+</html>
