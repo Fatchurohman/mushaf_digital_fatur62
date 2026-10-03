@@ -37,38 +37,38 @@ let showTranslation = localStorage.getItem('mushaf_show_translation') !== 'false
 let currentAudio = null;
 let currentPlayingBtn = null;
 
-// DATA PEMETAAN LENGKAP JUZ 1 - 30
+// DATABASE PEMETAAN PRESISI JUZ 1 - 30 SESUAI RALAT USER
 const JUZ_MAPPING = [
-  { juz: 1, surahId: 1, ayah: 1, name: "Al-Fatihah", title: "Juz 1 (Al-Fatihah 1 - Al-Baqarah 141)" },
-  { juz: 2, surahId: 2, ayah: 142, name: "Al-Baqarah", title: "Juz 2 (Al-Baqarah 142 - Al-Baqarah 252)" },
-  { juz: 3, surahId: 2, ayah: 253, name: "Al-Baqarah", title: "Juz 3 (Al-Baqarah 253 - Ali 'Imran 92)" },
-  { juz: 4, surahId: 3, ayah: 93, name: "Ali 'Imran", title: "Juz 4 (Ali 'Imran 93 - An-Nisa' 23)" },
-  { juz: 5, surahId: 4, ayah: 24, name: "An-Nisa'", title: "Juz 5 (An-Nisa' 24 - An-Nisa' 147)" },
-  { juz: 6, surahId: 4, ayah: 148, name: "An-Nisa'", title: "Juz 6 (An-Nisa' 148 - Al-Ma'idah 81)" },
-  { juz: 7, surahId: 5, ayah: 82, name: "Al-Ma'idah", title: "Juz 7 (Al-Ma'idah 82 - Al-An'am 110)" },
-  { juz: 8, surahId: 6, ayah: 111, name: "Al-An'am", title: "Juz 8 (Al-An'am 111 - Al-A'raf 87)" },
-  { juz: 9, surahId: 7, ayah: 88, name: "Al-A'raf", title: "Juz 9 (Al-A'raf 88 - Al-Anfal 40)" },
-  { juz: 10, surahId: 8, ayah: 41, name: "Al-Anfal", title: "Juz 10 (Al-Anfal 41 - At-Taubah 92)" },
-  { juz: 11, surahId: 9, ayah: 93, name: "At-Taubah", title: "Juz 11 (At-Taubah 93 - Hud 5)" },
-  { juz: 12, surahId: 11, ayah: 6, name: "Hud", title: "Juz 12 (Hud 6 - Yusuf 52)" },
-  { juz: 13, surahId: 12, ayah: 53, name: "Yusuf", title: "Juz 13 (Yusuf 53 - Ibrahim 52)" },
-  { juz: 14, surahId: 15, ayah: 1, name: "Al-Hijr", title: "Juz 14 (Al-Hijr 1 - An-Nahl 128)" },
-  { juz: 15, surahId: 17, ayah: 1, name: "Al-Isra'", title: "Juz 15 (Al-Isra' 1 - Al-Kahf 74)" },
-  { juz: 16, surahId: 18, ayah: 75, name: "Al-Kahf", title: "Juz 16 (Al-Kahf 75 - Taha 135)" },
-  { juz: 17, surahId: 21, ayah: 1, name: "Al-Anbiya'", title: "Juz 17 (Al-Anbiya' 1 - Al-Hajj 78)" },
-  { juz: 18, surahId: 23, ayah: 1, name: "Al-Mu'minun", title: "Juz 18 (Al-Mu'minun 1 - Al-Furqan 20)" },
-  { juz: 19, surahId: 25, ayah: 21, name: "Al-Furqan", title: "Juz 19 (Al-Furqan 21 - An-Naml 55)" },
-  { juz: 20, surahId: 27, ayah: 56, name: "An-Naml", title: "Juz 20 (An-Naml 56 - Al-'Ankabut 45)" },
-  { juz: 21, surahId: 29, ayah: 46, name: "Al-'Ankabut", title: "Juz 21 (Al-'Ankabut 46 - Al-Ahzab 30)" },
-  { juz: 22, surahId: 33, ayah: 31, name: "Al-Ahzab", title: "Juz 22 (Al-Ahzab 31 - Ya-Sin 27)" },
-  { juz: 23, surahId: 36, ayah: 28, name: "Ya-Sin", title: "Juz 23 (Ya-Sin 28 - Az-Zumar 31)" },
-  { juz: 24, surahId: 39, ayah: 32, name: "Az-Zumar", title: "Juz 24 (Az-Zumar 32 - Fussilat 46)" },
-  { juz: 25, surahId: 41, ayah: 47, name: "Fussilat", title: "Juz 25 (Fussilat 47 - Al-Jasiyah 37)" },
-  { juz: 26, surahId: 46, ayah: 1, name: "Al-Ahqaf", title: "Juz 26 (Al-Ahqaf 1 - Qaf 45)" },
-  { juz: 27, surahId: 51, ayah: 1, name: "Az-Zariyat", title: "Juz 27 (Az-Zariyat 1 - Al-Hadid 29)" },
-  { juz: 28, surahId: 58, ayah: 1, name: "Al-Mujadilah", title: "Juz 28 (Al-Mujadilah 1 - At-Tahrim 12)" },
-  { juz: 29, surahId: 67, ayah: 1, name: "Al-Mulk", title: "Juz 29 (Al-Mulk 1 - Al-Mursalat 50)" },
-  { juz: 30, surahId: 78, ayah: 1, name: "An-Naba'", title: "Juz 30 (An-Naba' 1 - An-Nas 6)" }
+  { juz: 1, surahId: 1, ayah: 1, name: "Al-Fatihah", title: "Juz 1 (Al-Fatihah 1:1 - Al-Baqarah 2:141)" },
+  { juz: 2, surahId: 2, ayah: 142, name: "Al-Baqarah", title: "Juz 2 (Al-Baqarah 2:142 - Al-Baqarah 2:252)" },
+  { juz: 3, surahId: 2, ayah: 253, name: "Al-Baqarah", title: "Juz 3 (Al-Baqarah 2:253 - Ali 'Imran 3:91)" },
+  { juz: 4, surahId: 3, ayah: 92, name: "Ali 'Imran", title: "Juz 4 (Ali 'Imran 3:92 - An-Nisa' 4:23)" },
+  { juz: 5, surahId: 4, ayah: 24, name: "An-Nisa'", title: "Juz 5 (An-Nisa' 4:24 - An-Nisa' 4:147)" },
+  { juz: 6, surahId: 4, ayah: 148, name: "An-Nisa'", title: "Juz 6 (An-Nisa' 4:148 - Al-Ma'idah 5:82)" },
+  { juz: 7, surahId: 5, ayah: 83, name: "Al-Ma'idah", title: "Juz 7 (Al-Ma'idah 5:83 - Al-An'am 6:110)" },
+  { juz: 8, surahId: 6, ayah: 111, name: "Al-An'am", title: "Juz 8 (Al-An'am 6:111 - Al-A'raf 7:87)" },
+  { juz: 9, surahId: 7, ayah: 88, name: "Al-A'raf", title: "Juz 9 (Al-A'raf 7:88 - Al-Anfal 8:40)" },
+  { juz: 10, surahId: 8, ayah: 41, name: "Al-Anfal", title: "Juz 10 (Al-Anfal 8:41 - At-Taubah 9:93)" },
+  { juz: 11, surahId: 9, ayah: 94, name: "At-Taubah", title: "Juz 11 (At-Taubah 9:94 - Hud 11:5)" },
+  { juz: 12, surahId: 11, ayah: 6, name: "Hud", title: "Juz 12 (Hud 11:6 - Yusuf 12:52)" },
+  { juz: 13, surahId: 12, ayah: 53, name: "Yusuf", title: "Juz 13 (Yusuf 12:53 - Al-Hijr 15:1)" },
+  { juz: 14, surahId: 15, ayah: 2, name: "Al-Hijr", title: "Juz 14 (Al-Hijr 15:2 - An-Nahl 16:128)" },
+  { juz: 15, surahId: 17, ayah: 1, name: "Al-Isra'", title: "Juz 15 (Al-Isra' 17:1 - Al-Kahf 18:74)" },
+  { juz: 16, surahId: 18, ayah: 75, name: "Al-Kahf", title: "Juz 16 (Al-Kahf 18:75 - Thaha 20:135)" },
+  { juz: 17, surahId: 21, ayah: 1, name: "Al-Anbiya'", title: "Juz 17 (Al-Anbiya' 21:1 - Al-Hajj 22:78)" },
+  { juz: 18, surahId: 23, ayah: 1, name: "Al-Mu'minun", title: "Juz 18 (Al-Mu'minun 23:1 - Al-Furqan 25:20)" },
+  { juz: 19, surahId: 25, ayah: 21, name: "Al-Furqan", title: "Juz 19 (Al-Furqan 25:21 - An-Naml 27:59)" },
+  { juz: 20, surahId: 27, ayah: 60, name: "An-Naml", title: "Juz 20 (An-Naml 27:60 - Al-Ankabut 29:44)" },
+  { juz: 21, surahId: 29, ayah: 45, name: "Al-Ankabut", title: "Juz 21 (Al-Ankabut 29:45 - Al-Ahzab 33:30)" },
+  { juz: 22, surahId: 33, ayah: 31, name: "Al-Ahzab", title: "Juz 22 (Al-Ahzab 33:31 - Yasin 36:21)" },
+  { juz: 23, surahId: 36, ayah: 22, name: "Yasin", title: "Juz 23 (Yasin 36:22 - Az-Zumar 39:31)" },
+  { juz: 24, surahId: 39, ayah: 32, name: "Az-Zumar", title: "Juz 24 (Az-Zumar 39:32 - Fussilat 41:46)" },
+  { juz: 25, surahId: 41, ayah: 47, name: "Fussilat", title: "Juz 25 (Fussilat 41:47 - Al-Jatsiyah 45:37)" },
+  { juz: 26, surahId: 46, ayah: 1, name: "Al-Ahqaf", title: "Juz 26 (Al-Ahqaf 46:1 - Adz-Dzariyat 51:30)" },
+  { juz: 27, surahId: 51, ayah: 31, name: "Adz-Dzariyat", title: "Juz 27 (Adz-Dzariyat 51:31 - Al-Hadid 57:29)" },
+  { juz: 28, surahId: 58, ayah: 1, name: "Al-Mujadilah", title: "Juz 28 (Al-Mujadilah 58:1 - At-Tahrim 66:12)" },
+  { juz: 29, surahId: 67, ayah: 1, name: "Al-Mulk", title: "Juz 29 (Al-Mulk 67:1 - Al-Mursalat 77:50)" },
+  { juz: 30, surahId: 78, ayah: 1, name: "An-Naba'", title: "Juz 30 (An-Naba' 78:1 - An-Nas 114:6)" }
 ];
 
 // EVENT LISTENER UNTUK CLOSING MODAL DESKRIPSI MAPPING
@@ -346,7 +346,7 @@ function filterAndRenderSurah() {
   renderSurahList(filtered);
 }
 
-// RENDER DAFTAR 30 JUZ
+// RENDER DAFTAR 30 JUZ BERDASARKAN HASIL RALAT
 function renderJuzGrid(keyword = '') {
   if (!surahListContainer) return;
 
