@@ -27,7 +27,7 @@ const modalMappingContent = document.getElementById('modal-mapping-content');
 let globalSurahList = [];
 let currentFilter = 'all';
 let currentSurahData = null;
-let selectedQoriKey = '01';
+let selectedQoriKey = '05'; // Default ke Mishary Rashid Al-Afasy
 
 // STATE PENGATURAN TAMPILAN
 let currentArabicFont = localStorage.getItem('mushaf_arabic_font') || "'Scheherazade New', serif";
@@ -125,7 +125,8 @@ function getSurahMappingInfo(surah) {
   const number = surah?.nomor ?? 1;
   const nameLatin = surah?.namaLatin ?? '';
   const meaning = surah?.arti ?? '';
-  const place = surah?.tempatTurun === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+  const placeRaw = surah?.tempatTurun ?? '';
+  const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
   const totalVerses = surah?.jumlahAyat ?? 0;
 
   if (mappingDatabase[number]) {
@@ -320,6 +321,7 @@ async function loadSurahList() {
   }
 }
 
+// PERBAIKAN LOGIKA FILTER MAKKIYAH (PENGGUNAAN LOWERCASE STRING COMPARISON)
 function filterAndRenderSurah() {
   const keyword = (inputSearchSurah?.value ?? '').toLowerCase().trim();
 
@@ -330,14 +332,18 @@ function filterAndRenderSurah() {
 
   const filtered = globalSurahList.filter(surah => {
     const number = surah?.nomor ?? 0;
-    const place = (surah?.tempatTurun ?? '').toLowerCase();
-    const latin = (surah?.namaLatin ?? '').toLowerCase();
+    const place = (surah?.tempatTurun ?? '').toLowerCase().trim();
+    const latin = (surah?.namaLatin ?? '').toLowerCase().trim();
     const numStr = String(number);
 
     let passTab = true;
-    if (currentFilter === 'makkiyah') passTab = place === 'makkah';
-    else if (currentFilter === 'madaniyah') passTab = place === 'madinah';
-    else if (currentFilter === 'juz30') passTab = number >= 78 && number <= 114;
+    if (currentFilter === 'makkiyah') {
+      passTab = (place === 'makkah');
+    } else if (currentFilter === 'madaniyah') {
+      passTab = (place === 'madinah');
+    } else if (currentFilter === 'juz30') {
+      passTab = (number >= 78 && number <= 114);
+    }
 
     let passSearch = latin.includes(keyword) || numStr.includes(keyword);
     return passTab && passSearch;
@@ -346,7 +352,7 @@ function filterAndRenderSurah() {
   renderSurahList(filtered);
 }
 
-// RENDER DAFTAR 30 JUZ BERDASARKAN HASIL RALAT
+// RENDER DAFTAR 30 JUZ
 function renderJuzGrid(keyword = '') {
   if (!surahListContainer) return;
 
@@ -395,7 +401,8 @@ function renderSurahList(surahArray) {
     const number = surah?.nomor ?? '-';
     const nameLatin = surah?.namaLatin ?? 'Surah';
     const nameArabic = surah?.nama ?? '';
-    const place = surah?.tempatTurun === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+    const placeRaw = surah?.tempatTurun ?? '';
+    const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
 
     return `
       <div class="surah-item" onclick="selectSurah(${number})">
@@ -449,7 +456,6 @@ async function loadSurahDetail(surahNumber = 1, targetVerse = null) {
   }
 }
 
-// FUNGSI SCROLL PRESISI DENGAN RETRY LUBANG PENITI (AKURAT UNTUK SURAH PANJANG/NAVIGASI JUZ)
 function scrollToTargetVerse(targetVerse, attempts = 0) {
   const targetElem = document.getElementById(`verse-${targetVerse}`);
   if (targetElem) {
@@ -473,7 +479,8 @@ function renderSurahContent(surah) {
   const nameArabic = surah?.nama ?? '';
   const nameLatin = surah?.namaLatin ?? '';
   const totalVerses = surah?.jumlahAyat ?? 0;
-  const place = surah?.tempatTurun === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+  const placeRaw = surah?.tempatTurun ?? '';
+  const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
   const meaning = surah?.arti ?? '';
   const verses = surah?.ayat ?? [];
 
@@ -516,7 +523,7 @@ function renderSurahContent(surah) {
 
   verses.forEach(v => {
     const vNum = v?.nomorAyat ?? '';
-    const audioUrl = v?.audio?.[selectedQoriKey] || v?.audio?.['01'] || '';
+    const audioUrl = v?.audio?.[selectedQoriKey] || v?.audio?.['05'] || v?.audio?.['01'] || '';
 
     html += `
       <div class="verse-card" id="verse-${vNum}">
