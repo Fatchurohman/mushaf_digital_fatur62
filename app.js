@@ -125,8 +125,8 @@ function getSurahMappingInfo(surah) {
   const number = surah?.nomor ?? 1;
   const nameLatin = surah?.namaLatin ?? '';
   const meaning = surah?.arti ?? '';
-  const placeRaw = surah?.tempatTurun ?? '';
-  const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+  const placeRaw = (surah?.tempatTurun ?? '').toLowerCase().trim();
+  const place = (placeRaw === 'makkah' || placeRaw === 'mekah') ? 'Makkiyah' : 'Madaniyah';
   const totalVerses = surah?.jumlahAyat ?? 0;
 
   if (mappingDatabase[number]) {
@@ -321,7 +321,7 @@ async function loadSurahList() {
   }
 }
 
-// PERBAIKAN LOGIKA FILTER MAKKIYAH (PENGGUNAAN LOWERCASE STRING COMPARISON)
+// PERBAIKAN LOGIKA FILTER MAKKIYAH (MENGAKOMODASI "MEKAH" DAN "MAKKAH")
 function filterAndRenderSurah() {
   const keyword = (inputSearchSurah?.value ?? '').toLowerCase().trim();
 
@@ -338,7 +338,7 @@ function filterAndRenderSurah() {
 
     let passTab = true;
     if (currentFilter === 'makkiyah') {
-      passTab = (place === 'makkah');
+      passTab = (place === 'makkah' || place === 'mekah');
     } else if (currentFilter === 'madaniyah') {
       passTab = (place === 'madinah');
     } else if (currentFilter === 'juz30') {
@@ -401,8 +401,8 @@ function renderSurahList(surahArray) {
     const number = surah?.nomor ?? '-';
     const nameLatin = surah?.namaLatin ?? 'Surah';
     const nameArabic = surah?.nama ?? '';
-    const placeRaw = surah?.tempatTurun ?? '';
-    const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+    const placeRaw = (surah?.tempatTurun ?? '').toLowerCase().trim();
+    const place = (placeRaw === 'makkah' || placeRaw === 'mekah') ? 'Makkiyah' : 'Madaniyah';
 
     return `
       <div class="surah-item" onclick="selectSurah(${number})">
@@ -479,8 +479,8 @@ function renderSurahContent(surah) {
   const nameArabic = surah?.nama ?? '';
   const nameLatin = surah?.namaLatin ?? '';
   const totalVerses = surah?.jumlahAyat ?? 0;
-  const placeRaw = surah?.tempatTurun ?? '';
-  const place = placeRaw.toLowerCase() === 'makkah' ? 'Makkiyah' : 'Madaniyah';
+  const placeRaw = (surah?.tempatTurun ?? '').toLowerCase().trim();
+  const place = (placeRaw === 'makkah' || placeRaw === 'mekah') ? 'Makkiyah' : 'Madaniyah';
   const meaning = surah?.arti ?? '';
   const verses = surah?.ayat ?? [];
 
