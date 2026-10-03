@@ -317,6 +317,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .modal-header {
@@ -325,6 +326,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .modal-header h3 {
@@ -340,23 +342,28 @@ body {
   cursor: pointer;
 }
 
+/* TAB CONTAINER FIXED LAYOUT */
 .mapping-tabs {
   display: flex;
   gap: 6px;
   padding: 10px 16px;
   border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--bg-modal);
 }
 
 .tab-btn {
   background: rgba(22, 27, 34, 0.8);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 16px;
   font-size: 0.75rem;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
 .tab-btn.active {
@@ -366,9 +373,12 @@ body {
   font-weight: 700;
 }
 
+/* SEARCH BOX FIXED LAYOUT */
 .search-box-container {
   padding: 10px 16px;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  background: var(--bg-modal);
 }
 
 .search-input {
@@ -376,10 +386,14 @@ body {
   background: rgba(13, 17, 23, 0.8);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   color: #fff;
   font-size: 0.85rem;
   outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--gold-primary);
 }
 
 .modal-body {
@@ -392,7 +406,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 12px 10px;
   border-bottom: 1px solid rgba(48, 54, 61, 0.5);
   cursor: pointer;
   border-radius: 6px;
