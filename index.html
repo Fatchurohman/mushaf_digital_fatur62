@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mushaf Digital - Mapping Tematik</title>
-  <link rel="stylesheet" href="style.css?v=16.0">
+  <link rel="stylesheet" href="style.css?v=20.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Naskh+Arabic:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Scheherazade+New:wght@600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
           <span class="dev-name">fatur62</span>
         </div>
 
-        <div class="visitor-badge" style="background: rgba(22, 27, 34, 0.8); border: 1px solid var(--border-color); padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--gold-light); display: flex; align-items: center; gap: 5px;">
+        <div class="visitor-badge" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--gold-light); display: flex; align-items: center; gap: 5px;">
           <span>👁️</span>
           <span id="visitor-count">...</span> Pengunjung
         </div>
@@ -60,9 +60,9 @@
           <option value="'Lateef', cursive">Lateef</option>
         </select>
 
-        <div class="font-size-control" style="display: flex; align-items: center; gap: 4px; background: rgba(22, 27, 34, 0.8); border: 1px solid var(--border-color, #30363d); border-radius: 6px; padding: 2px 6px;">
+        <div class="font-size-control" style="display: flex; align-items: center; gap: 4px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 2px 6px;">
           <button id="btn-font-decrease" type="button" title="Kecilkan Font" style="background: none; border: none; color: #fff; cursor: pointer; font-weight: bold; font-size: 0.9rem; padding: 2px 6px;">A-</button>
-          <span id="font-size-display" style="font-size: 0.75rem; color: var(--gold-light, #f0e6d2); min-width: 24px; text-align: center;">28px</span>
+          <span id="font-size-display" style="font-size: 0.75rem; color: var(--gold-light); min-width: 24px; text-align: center;">28px</span>
           <button id="btn-font-increase" type="button" title="Besarkan Font" style="background: none; border: none; color: #fff; cursor: pointer; font-weight: bold; font-size: 0.9rem; padding: 2px 6px;">A+</button>
         </div>
 
@@ -77,7 +77,7 @@
           <span>🔖</span>
           <span style="font-size: 0.8rem; font-weight: 600;">Lanjut Baca Terakhir</span>
         </button>
-        <button id="btn-open-notes" class="btn-bookmark" title="Catatan Digital" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 12px; cursor: pointer; background: rgba(212, 163, 115, 0.25); border-color: var(--gold-light);">
+        <button id="btn-open-notes" class="btn-bookmark" title="Catatan Digital" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 12px; cursor: pointer; background: rgba(212, 175, 55, 0.2); border-color: var(--gold-primary);">
           <span>📝</span>
           <span style="font-size: 0.8rem; font-weight: 600;">Catatan Digital</span>
         </button>
@@ -126,7 +126,7 @@
         <h3 id="modal-mapping-title">Peta Kandungan (Mapping Tematik)</h3>
         <button id="btn-close-modal-mapping" class="btn-close">&times;</button>
       </div>
-      <div class="modal-body" style="padding: 16px; line-height: 1.6; color: #e0e0e0; font-size: 0.95rem;">
+      <div class="modal-body" style="padding: 16px; line-height: 1.6; color: var(--text-main); font-size: 0.95rem;">
         <p id="modal-mapping-content" style="margin: 0; white-space: pre-line; word-break: break-word;">
           <!-- Teks deskripsi lengkap diisi melalui JS -->
         </p>
@@ -177,12 +177,12 @@
   <div id="modal-alert-bookmark" class="modal-overlay hidden">
     <div class="modal-card modal-alert-card">
       <div class="alert-icon">🔖</div>
-      <h3 id="modal-alert-title" class="alert-title">MUSHAF DIGITAL</h3>
+      <h3 id="modal-alert-title" class="alert-title">FATUR MUSHAF DIGITAL</h3>
       <p id="modal-alert-message" class="alert-message"></p>
       <button id="btn-alert-ok" type="button" class="btn-alert-ok">Oke</button>
     </div>
   </div>
 
-  <script src="./app.js?v=15.0"></script>
+  <script src="./app.js?v=20.0"></script>
 </body>
 </html>
