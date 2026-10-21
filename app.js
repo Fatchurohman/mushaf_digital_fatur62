@@ -110,7 +110,7 @@ function getJuzNumber(surahId, ayahNum) {
 }
 
 // FUNGSI CUSTOM ALERT MODAL
-function showCustomAlert(message, title = 'MUSHAF DIGITAL') {
+function showCustomAlert(message, title = 'FATUR MUSHAF DIGITAL') {
   if (!modalAlertBookmark || !modalAlertMessage) return;
   if (modalAlertTitle) modalAlertTitle.textContent = title;
   modalAlertMessage.textContent = message;
