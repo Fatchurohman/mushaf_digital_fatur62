@@ -217,10 +217,17 @@ function initSearchVerseModal() {
 }
 
 // LOGIKA FITUR-FITUR MUSLIM (JADWAL, KIBLAT, DOA, KALENDER)
-let userLatitude = -6.2088; // Default Jakarta
-let userLongitude = 106.8456;
-let qiblaBearing = 295; // Derajat kiblat default WIB
+let userLatitude = -7.7693; // Default Sleman & Yogyakarta
+let userLongitude = 110.3777;
+let qiblaBearing = 295;
 let compassActive = false;
+let currentMaghribTimeStr = '17:45';
+
+const HIJRI_MONTH_NAMES_ID = [
+  "Muharram", "Safar", "Rabi'ul Awwal", "Rabi'ul Akhir",
+  "Jumadil Awwal", "Jumadil Akhir", "Rajab", "Sya'ban",
+  "Ramadhan", "Syawwal", "Dzulqa'dah", "Dzulhijjah"
+];
 
 const DOA_DATABASE = {
   wirid: [
@@ -269,7 +276,6 @@ function initMuslimTools() {
     btnOpenMuslimTools.addEventListener('click', () => {
       modalMuslimTools.classList.remove('hidden');
       loadPrayerTimes();
-      loadHijriCalendar();
       renderDoaList('wirid');
     });
   }
@@ -286,7 +292,6 @@ function initMuslimTools() {
     });
   }
 
-  // Navigasi Tab Fitur Muslim
   muslimTabs.forEach(btn => {
     btn.addEventListener('click', () => {
       muslimTabs.forEach(b => b.classList.remove('active'));
@@ -303,7 +308,6 @@ function initMuslimTools() {
     });
   });
 
-  // Tombol Refresh Lokasi
   const btnRefreshLoc = document.getElementById('btn-refresh-location');
   if (btnRefreshLoc) {
     btnRefreshLoc.addEventListener('click', () => {
@@ -311,7 +315,6 @@ function initMuslimTools() {
     });
   }
 
-  // Filter Doa
   const doaBtns = document.querySelectorAll('.doa-filter-btn');
   doaBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -332,7 +335,7 @@ async function loadPrayerTimes() {
   try {
     const today = new Date();
     const dateStr = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-    const url = `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${userLatitude}&longitude=${userLongitude}&method=11`; // Kemenag method 11
+    const url = `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${userLatitude}&longitude=${userLongitude}&method=11`;
     
     const res = await fetch(url);
     if (!res.ok) throw new Error("Gagal mengambil API jadwal");
@@ -348,17 +351,20 @@ async function loadPrayerTimes() {
       document.getElementById('time-maghrib').textContent = timings.Maghrib || '--:--';
       document.getElementById('time-isya').textContent = timings.Isha || '--:--';
 
+      currentMaghribTimeStr = timings.Maghrib || '17:45';
+
       if (cityLabel) cityLabel.textContent = `Koordinat: ${userLatitude.toFixed(2)}°, ${userLongitude.toFixed(2)}°`;
       if (dateLabel) {
         const gregorian = json?.data?.date?.readable || today.toLocaleDateString('id-ID');
-        const hijri = json?.data?.date?.hijri;
-        dateLabel.textContent = `${gregorian} (${hijri?.day} ${hijri?.month?.en} ${hijri?.year} H)`;
+        dateLabel.textContent = `${gregorian}`;
       }
 
       calculateQiblaBearing(userLatitude, userLongitude);
+      loadHijriCalendar(json?.data);
     }
   } catch (err) {
     if (cityLabel) cityLabel.textContent = "Jadwal Salat (Default Waktu Indonesia)";
+    loadHijriCalendar(null);
   }
 }
 
@@ -473,38 +479,93 @@ function renderDoaList(category) {
   `).join('');
 }
 
-// 4. Logika Kalender Hijriah & Puasa Sunnah
-function loadHijriCalendar() {
+// 4. Logika Kalender Hijriah & Otomatis Berganti Selepas Maghrib
+function checkIsAfterMaghrib() {
+  const now = new Date();
+  const [maghribHour, maghribMinute] = currentMaghribTimeStr.split(':').map(n => parseInt(n, 10));
+  if (isNaN(maghribHour) || isNaN(maghribMinute)) return false;
+
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const maghribMinutes = maghribHour * 60 + maghribMinute;
+  return currentMinutes >= maghribMinutes;
+}
+
+function loadHijriCalendar(apiData = null) {
   const hijriDisplay = document.getElementById('hijri-current-display');
   const masehiDisplay = document.getElementById('masehi-current-display');
   const fastingList = document.getElementById('fasting-reminders-list');
 
   const now = new Date();
+  const isAfterMaghrib = checkIsAfterMaghrib();
 
-  // Format Hijriah menggunakan Intl API bawaan browser modern
-  try {
-    const hijriFormatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic-umalqura', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-    if (hijriDisplay) hijriDisplay.textContent = hijriFormatter.format(now);
-  } catch (e) {
-    if (hijriDisplay) hijriDisplay.textContent = "Kalender Hijriah Aktif";
+  let hDay = null;
+  let hMonthName = '';
+  let hYear = null;
+
+  if (apiData?.date?.hijri) {
+    const rawHijri = apiData.date.hijri;
+    hDay = parseInt(rawHijri.day, 10);
+    const monthNum = parseInt(rawHijri.month?.number, 10);
+    hMonthName = HIJRI_MONTH_NAMES_ID[monthNum - 1] || rawHijri.month?.en || "Hijriah";
+    hYear = parseInt(rawHijri.year, 10);
+
+    // Pergantian hari saat waktu Maghrib telah tiba
+    if (isAfterMaghrib) {
+      hDay += 1;
+      if (hDay > 30) {
+        hDay = 1;
+        const nextMonthIndex = monthNum % 12;
+        hMonthName = HIJRI_MONTH_NAMES_ID[nextMonthIndex];
+        if (nextMonthIndex === 0) hYear += 1;
+      }
+    }
+  } else {
+    // Fallback hisab akurat Ummul Qura
+    const targetDate = new Date();
+    if (isAfterMaghrib) {
+      targetDate.setDate(targetDate.getDate() + 1);
+    }
+
+    try {
+      const parts = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+      }).formatToParts(targetDate);
+
+      let mNum = 1;
+      parts.forEach(p => {
+        if (p.type === 'day') hDay = parseInt(p.value, 10);
+        if (p.type === 'month') mNum = parseInt(p.value, 10);
+        if (p.type === 'year') hYear = parseInt(p.value, 10);
+      });
+      hMonthName = HIJRI_MONTH_NAMES_ID[mNum - 1] || "Hijriah";
+    } catch (e) {
+      hDay = 11;
+      hMonthName = "Jumadil Awwal";
+      hYear = 1448;
+    }
+  }
+
+  if (hijriDisplay) {
+    hijriDisplay.textContent = `${hDay} ${hMonthName} ${hYear} H`;
   }
 
   if (masehiDisplay) {
-    masehiDisplay.textContent = now.toLocaleDateString('id-ID', {
+    const masehiStr = now.toLocaleDateString('id-ID', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     });
+    const maghribInfo = isAfterMaghrib ? " • Masuk Malam (Ba'da Maghrib)" : "";
+    masehiDisplay.textContent = `${masehiStr}${maghribInfo}`;
   }
 
-  // Hitung jadwal puasa sunnah terdekat (Senin & Kamis)
+  // Hitung jadwal puasa sunnah terdekat
   if (fastingList) {
     const fastingItems = [];
+
     for (let i = 0; i < 7; i++) {
       const checkDate = new Date();
       checkDate.setDate(now.getDate() + i);
@@ -512,9 +573,17 @@ function loadHijriCalendar() {
       const dateName = checkDate.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' });
 
       if (dayNum === 1) {
-        fastingItems.push({ name: "Puasa Sunnah Senin", date: dateName, badge: i === 0 ? "Hari Ini" : "Akan Datang" });
+        fastingItems.push({ 
+          name: "Puasa Sunnah Senin", 
+          date: dateName, 
+          badge: (i === 0 && !isAfterMaghrib) ? "Hari Ini" : "Akan Datang" 
+        });
       } else if (dayNum === 4) {
-        fastingItems.push({ name: "Puasa Sunnah Kamis", date: dateName, badge: i === 0 ? "Hari Ini" : "Akan Datang" });
+        fastingItems.push({ 
+          name: "Puasa Sunnah Kamis", 
+          date: dateName, 
+          badge: (i === 0 && !isAfterMaghrib) ? "Hari Ini" : "Akan Datang" 
+        });
       }
     }
 
